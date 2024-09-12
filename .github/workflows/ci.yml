@@ -52,11 +52,3 @@ jobs:
 
       - name: Lint code for consistent style
         run: bin/rubocop -f github
-
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Coveralls GitHub Action
-        uses: coverallsapp/github-action@v2.3.0
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
