@@ -53,7 +53,7 @@ jobs:
       - name: Lint code for consistent style
         run: bin/rubocop -f github
 
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Coveralls GitHub Action
