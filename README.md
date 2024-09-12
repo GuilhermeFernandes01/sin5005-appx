@@ -5,9 +5,9 @@
 | NOME                                                                           |  Nº USP  |
 | ------------------------------------------------------------------------------ | :------: |
 | [Alécio A P Godoi](https://github.com/a-godoi)                                 |          |
-| Carol Thomaz                                                                   |          |
+| [Carol Thomaz](https://github.com/Carolinatho)                                 |          |
 | [Guilherme Fernandes Moraes da Silva](https://github.com/GuilhermeFernandes01) | 11295629 |
-| José Luiz Borin Junior                                                         |          |
+| [José Luiz Borin Junior](https://github.com/borinjrjose)                       | 10723670 |
 | [Leonardo Cunha dos Santos](https://github.com/LCDS2019)                       | 5965830  |
 
 # Projeto
@@ -19,6 +19,12 @@
 [![Code Climate](https://codeclimate.com/github/cloudfoundry/membrane.png)](https://codeclimate.com/github/GuilhermeFernandes01/sin5005-appx) </br>
 ![Github Actions](https://github.com/GuilhermeFernandes01/sin5005-appx/actions/workflows/ci.yml/badge.svg) </br>
 [![Coveralls](https://coveralls.io/repos/github/GuilhermeFernandes01/sin5005-appx/badge.svg)](https://coveralls.io/github/GuilhermeFernandes01/sin5005-appx)
+
+## Run locally
+
+```sh
+bin/rails server
+```
 
 ## Run tests
 
