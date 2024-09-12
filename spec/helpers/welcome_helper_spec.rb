@@ -10,6 +10,12 @@ require 'rails_helper'
 #     end
 #   end
 # end
+require 'rails_helper'
+
 RSpec.describe WelcomeHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "#some_helper_method" do
+    it "returns the expected result" do
+      expect(helper.some_helper_method).to eq("expected result")
+    end
+  end
 end
