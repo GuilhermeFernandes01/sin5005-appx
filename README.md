@@ -36,7 +36,7 @@ rake spec
 rake cucumber
 ```
 
-## Link Heroku
+## Heroku link
 ```sh
 https://sin5005-appx-71e28691d25d.herokuapp.com/up
 ```
