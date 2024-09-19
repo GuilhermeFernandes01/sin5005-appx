@@ -148,7 +148,7 @@ GEM
     ffi (1.17.0-x86_64-linux-musl)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    i18n (1.14.5)
+    i18n (1.14.6)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.0.1)
       actionpack (>= 6.0.0)
@@ -252,7 +252,7 @@ GEM
     rdoc (6.7.0)
       psych (>= 4.0.0)
     regexp_parser (2.9.2)
-    reline (0.5.9)
+    reline (0.5.10)
       io-console (~> 0.5)
     rspec-core (3.13.1)
       rspec-support (~> 3.13.0)
@@ -338,9 +338,8 @@ GEM
     tins (1.33.0)
       bigdecimal
       sync
-    turbo-rails (2.0.6)
+    turbo-rails (2.0.9)
       actionpack (>= 6.0.0)
-      activejob (>= 6.0.0)
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
