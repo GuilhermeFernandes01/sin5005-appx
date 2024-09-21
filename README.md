@@ -12,7 +12,7 @@
 
 # Projeto
 
-<img src="https://github.com/user-attachments/assets/3bb2d4d7-9e3d-467a-a7be-87c7f01c69aa" alt="logo" height="50">
+<img src="https://github.com/LCDS2019/sin5005-appx/blob/leo/public/EACH%20Pizzas2.png" alt="logo" height="80">
 
 **EACH Pizzas** é um aplicativo projetado para simplificar a administração de pizzarias, oferecendo ferramentas para gerenciar o cardápio, o estoque e os clientes, além de gerar relatórios detalhados. Com ele, os proprietários podem atualizar o cardápio, monitorar o estoque e analisar o desempenho de forma prática. Essa solução reduz custos e melhora a experiência do cliente, sendo essencial para pequenos empresários que buscam uma gestão mais eficiente e organizada.
 
