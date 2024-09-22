@@ -36,3 +36,6 @@
 
 # Ignore coverage
 /coverage
+
+# Ignore Cucumber report
+features_report.html

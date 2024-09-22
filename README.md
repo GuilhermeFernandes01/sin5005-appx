@@ -26,14 +26,34 @@
 bin/rails server
 ```
 
+## Run locally experimentation
+
+```sh
+bin/rails console
+```
+
 ## Run tests
 
 ```sh
 rake spec
 ```
 
+View the result:
+
+```sh
+coverage/index.html
+```
+
+<br>
+
 ```sh
 rake cucumber
+```
+
+View the result:
+
+```sh
+features_report.html
 ```
 
 ## Heroku link
