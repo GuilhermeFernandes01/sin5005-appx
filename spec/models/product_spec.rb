@@ -21,6 +21,12 @@ RSpec.describe Product, type: :model do
     expect(product.errors[:price]).to include "can't be empty"
   end
 
+  it "is has an invalid price" do
+    product = Product.new(name: "Pizza de Pepperoni", price: 0.00, category: "Pizza", require_ingredients: true)
+    expect(product).to_not be_valid
+    expect(product.errors[:price]).to include "must be greater than 0"
+  end
+
   it "is invalid without a category" do
     product = Product.new(name: "Pizza de Pepperoni", price: 40.99, require_ingredients: true)
     expect(product).to_not be_valid

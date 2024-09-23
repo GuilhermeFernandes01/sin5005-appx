@@ -19,3 +19,9 @@ Funcionalidade: Cadastro de Produtos
     Quando preencho o formulário ("Nome do produto", "Preço", "Categoria", "Requer ingredientes") com dados inválidos ("", "", "", "false")
     E clico no botão "Criar"
     Então devo ver erros de cadastro do produto
+
+  Cenário: cadastro com preço inválido
+    Dado que estou na página de cadastro de produto
+    Quando preencho o formulário ("Nome do produto", "Preço", "Categoria", "Requer ingredientes") com dados inválidos ("Pizza de Pepperoni", "0.00", "Pizza", "false")
+    E clico no botão "Criar"
+    Então devo ver o erro de preço do produto

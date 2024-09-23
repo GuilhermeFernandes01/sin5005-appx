@@ -48,5 +48,12 @@ Então('devo ver erros de cadastro do produto') do
 
   expect(page).to have_content("Name can't be empty")
   expect(page).to have_content("Price can't be empty")
+  expect(page).to have_content("Price is not a number")
   expect(page).to have_content("Category can't be empty")
+end
+
+Então('devo ver o erro de preço do produto') do
+  expect(page.status_code).to eq(422)
+
+  expect(page).to have_content("Price must be greater than 0")
 end
