@@ -12,18 +12,18 @@ RSpec.describe Product, type: :model do
   it "is invalid without a name" do
     product = Product.new(price: 40.99, category: "Pizza", require_ingredients: true)
     expect(product).to_not be_valid
-    expect(product.errors[:name]).to include "Name can't be blank"
+    expect(product.errors[:name]).to include "can't be empty"
   end
 
   it "is invalid without a price" do
     product = Product.new(name: "Pizza de Pepperoni", category: "Pizza", require_ingredients: true)
     expect(product).to_not be_valid
-    expect(product.errors[:price]).to include "Price can't be blank"
+    expect(product.errors[:price]).to include "can't be empty"
   end
 
   it "is invalid without a category" do
     product = Product.new(name: "Pizza de Pepperoni", price: 40.99, require_ingredients: true)
     expect(product).to_not be_valid
-    expect(product.errors[:category]).to include "Category can't be blank"
+    expect(product.errors[:category]).to include "can't be empty"
   end
 end

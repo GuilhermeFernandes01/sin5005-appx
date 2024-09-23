@@ -1,6 +1,16 @@
 <h1 id="page-heading">Novo Produto</h1>
 
 <%= form_with model: @product, id: "product-form" do |form| %>
+  <% if @product.errors.any? %>
+    <div>
+      <ul>
+        <% @product.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div>
     <%= form.label :name, "Nome do produto" %><br />
     <%= form.text_field :name %>
