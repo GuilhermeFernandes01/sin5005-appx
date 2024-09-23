@@ -4,7 +4,7 @@ RSpec.describe Cliente, type: :model do
   before do
     @cliente = Cliente.new(
       nome: 'Maria Antonieta',
-      telefone: '(11) 9 5448-8088',
+      telefone: '011954488088',
       email: 'maria_antonieta@email.com',
       endereco: 'Rua um, 2',
       observacoes: 'Cliente preferencial'
@@ -25,7 +25,7 @@ RSpec.describe Cliente, type: :model do
     @cliente.nome = ""
     expect(@cliente).not_to be_valid
   end
-  
+
   #########################################################
   it "não é válido sem telefone" do
     @cliente.telefone = nil
@@ -36,7 +36,7 @@ RSpec.describe Cliente, type: :model do
     @cliente.telefone = ""
     expect(@cliente).not_to be_valid
   end
-  
+
   #########################################################
   it "é válido sem email" do
     @cliente.email = nil
@@ -56,7 +56,7 @@ RSpec.describe Cliente, type: :model do
   end
 
   it "é válido sem observações como nil" do
-    @cliente.observacoes = nil 
+    @cliente.observacoes = nil
     expect(@cliente).to be_valid
   end
 end
