@@ -4,9 +4,18 @@ Rails.application.routes.draw do
   get "employees/new"
   resources :employees, only: [ :new, :create ]
 
+
+  get "/clientes", to: "clientes#index"
+  get "clientes/index"
+  get "clientes/new"
+  get "clientes/show"
+  resources :clientes
+
+
   get "/products/new", to: "products#new", as: "new_article"
   post "/products", to: "products#create"
   # resources :products, only: [ :new, :create ]
+
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
