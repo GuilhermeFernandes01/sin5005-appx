@@ -51,6 +51,10 @@ group :development do
   gem "web-console"
 end
 
+group :test do
+  gem 'rails-controller-testing'
+end
+
 # group :production, :development, :test do
 gem "cucumber-rails", require: false
 gem "rspec-rails"
