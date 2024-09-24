@@ -57,19 +57,24 @@ jobs:
     name: Coveralls
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
 
-      - name: Use Node.js 20.x
-        uses: actions/setup-node@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
         with:
-          node-version: 20.x
+          ruby-version: 3.3.4
 
-      - name: npm install, make test-coverage
+      - name: Install dependencies
         run: |
-          npm install
-          make test-coverage
+          gem install bundler
+          bundle install
 
-      - name: Coveralls
+      - name: Run tests with coverage
+        run: |
+          bundle exec rspec
+
+      - name: Upload coverage to Coveralls
         uses: coverallsapp/github-action@v2
         with:
           github-token: ${{ secrets.COVERALLS_REPO_TOKEN }}
+          coverage-path: coverage/.resultset.json
