@@ -1,0 +1,37 @@
+<h1 id="page-heading">Novo Produto</h1>
+
+<%= form_with model: @product, id: "product-form" do |form| %>
+  <% if @product.errors.any? %>
+    <div>
+      <ul>
+        <% @product.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, "Nome do produto" %><br />
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :price, "Preço" %><br />
+    <%= form.text_field :price %>
+  </div>
+  
+  <div>
+    <%= form.label :category, "Categoria" %><br />
+    <%= form.text_field :category %>
+  </div>
+
+  <div>
+    <%= form.check_box :require_ingredients %>
+    <%= form.label :require_ingredients, "Requer ingredientes" %>
+  </div>
+
+  <div>
+    <%= form.submit "Criar" %>
+  </div>
+<% end %>
