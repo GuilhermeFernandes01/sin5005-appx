@@ -7,7 +7,7 @@
 | [Alécio A P Godoi](https://github.com/a-godoi)                                 |          |
 | [Carol Thomaz](https://github.com/Carolinatho)                                 |          |
 | [Guilherme Fernandes Moraes da Silva](https://github.com/GuilhermeFernandes01) | 11295629 |
-| [José Luiz Borin Junior](https://github.com/borinjrjose)                       | 10723670 |
+| [José Luiz Borin Junior](https://github.com/joseborinr2u)                      | 10723670 |
 | [Leonardo Cunha dos Santos](https://github.com/LCDS2019)                       | 5965830  |
 
 # Projeto
@@ -26,14 +26,34 @@
 bin/rails server
 ```
 
+## Run locally experimentation
+
+```sh
+bin/rails console
+```
+
 ## Run tests
 
 ```sh
 rake spec
 ```
 
+View the result:
+
+```sh
+coverage/index.html
+```
+
+<br>
+
 ```sh
 rake cucumber
+```
+
+View the result:
+
+```sh
+features_report.html
 ```
 
 ## Heroku link
