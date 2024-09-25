@@ -14,13 +14,11 @@ class ClientesController < ApplicationController
     def create
       @cliente = Cliente.new(cliente_params)
       if @cliente.save
-        
         redirect_to clientes_path
       else
         render :new
       end
     end
-
 
     def edit
       @cliente = Cliente.find(params[:id])
@@ -30,7 +28,6 @@ class ClientesController < ApplicationController
     @cliente = Cliente.find(params[:id])
 
     if @cliente.update(cliente_params)
-      
       redirect_to clientes_path # Redireciona para a página de índice
     else
       render :edit # Renderiza a página de edição em caso de erro
