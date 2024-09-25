@@ -11,13 +11,13 @@ Scenario: Successfully create a new supplier registration
   And I fill "email" with "supplier@teste.com"
   And I fill "segment" with "Some Segment"
   And I fill "products" with "Product A"
-  And I submit the form
+  And I submit the supplier form
   Then I must see a success message
 
 
   Scenario: Fail to create a new supplier registration with invalid data
     Given I am on the create supplier registration page
     When I fill in the new supplier form with invalid data or blank
-    And I submit the form
+    And I submit the supplier form
     Then I must see error messages
     And I must see an alert message

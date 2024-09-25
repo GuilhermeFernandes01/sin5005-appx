@@ -6,7 +6,7 @@ When("I fill {string} with {string}") do |field, value|
   fill_in "supplier[#{field}]", with: value
 end
 
-When("I submit the form") do
+When("I submit the supplier form") do
   click_button "Criar Fornecedor"
 end
 

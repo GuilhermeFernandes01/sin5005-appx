@@ -10,7 +10,7 @@ RSpec.describe "Supplier", type: :request do
   describe "POST /supplier" do
     context "with valid parameters" do
       it "creates a new supplier" do
-        post supplier_index_path, params: { supplier: { name: 'Supplier 1', cnpj: '12345678000123', segment: 'Segment A', products: 'Product A' } }
+        post supplier_index_path, params: { supplier: { name: "Supplier 1", cnpj: "12345678000123", segment: "Segment A", products: "Product A" } }
         expect(response).to redirect_to(new_supplier_path)
         follow_redirect!
         expect(response.body).to include("Supplier was successfully created.")
