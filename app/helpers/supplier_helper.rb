@@ -1,5 +1,5 @@
 module SupplierHelper
   def format_products(products)
-    products.join(', ')
+    products.join(", ")
   end
 end

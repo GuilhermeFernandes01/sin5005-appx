@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.describe Cliente, type: :model do
   before do
     @cliente = Cliente.new(
-      nome: 'Maria Antonieta',
-      telefone: '011954488088',
-      email: 'maria_antonieta@email.com',
-      endereco: 'Rua um, 2',
-      observacoes: 'Cliente preferencial'
+      nome: "Maria Antonieta",
+      telefone: "011954488088",
+      email: "maria_antonieta@email.com",
+      endereco: "Rua um, 2",
+      observacoes: "Cliente preferencial"
     )
   end
 
