@@ -1,0 +1,32 @@
+<%= form_with(model: ingredient) do |form| %>
+  <% if ingredient.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(ingredient.errors.count, "error") %> prohibited this ingredient from being saved:</h2>
+
+      <ul>
+        <% ingredient.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :"Name", style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :"Unity Measure", style: "display: block" %>
+    <%= form.text_field :unityMeasure %>
+  </div>
+
+  <div>
+    <%= form.label :"Quantity Stock", style: "display: block" %>
+    <%= form.text_field :quantityStock %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

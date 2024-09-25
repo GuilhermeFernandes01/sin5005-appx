@@ -1,5 +1,6 @@
 
 Rails.application.routes.draw do
+  resources :ingredients
   get "/employees", to: "employees#index"
   get "employees/index"
   get "employees/new"
