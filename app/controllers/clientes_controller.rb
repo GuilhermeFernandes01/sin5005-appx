@@ -28,9 +28,9 @@ class ClientesController < ApplicationController
     @cliente = Cliente.find(params[:id])
 
     if @cliente.update(cliente_params)
-      redirect_to clientes_path # Redireciona para a página de índice
+      redirect_to clientes_path
     else
-      render :edit # Renderiza a página de edição em caso de erro
+      render :edit
     end
   end
 
