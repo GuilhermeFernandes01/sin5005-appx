@@ -1,8 +1,8 @@
 Dado("que eu estou na página de clientes") do
     visit clientes_path
-  end 
+  end
   Quando("eu clicar no botão {string}") do |botao|
-    click_link botao 
+    click_link botao
   end
   Quando("eu preencher o formulário com os seguintes dados:") do |table|
     dados = table.rows_hash
@@ -18,4 +18,3 @@ Dado("que eu estou na página de clientes") do
   Então("eu devo ver a mensagem {string}") do |mensagem|
     expect(page).to have_content(mensagem)
   end
-  
