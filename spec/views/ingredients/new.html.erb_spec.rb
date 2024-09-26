@@ -13,7 +13,6 @@ RSpec.describe "ingredients/new", type: :view do
     render
 
     assert_select "form[action=?][method=?]", ingredients_path, "post" do
-
       assert_select "input[name=?]", "ingredient[name]"
 
       assert_select "input[name=?]", "ingredient[unityMeasure]"
