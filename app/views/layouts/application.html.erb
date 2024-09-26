@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= content_for(:title) || "Appx" %></title>
+  <title><%= content_for(:title) || "Clientes" %></title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <%= csrf_meta_tags %>
@@ -9,28 +9,36 @@
 
   <%= yield :head %>
 
+  <%= favicon_link_tag 'favicon.png' %>
+
   <link rel="manifest" href="/manifest.json">
-  <link rel="icon" href="/icon.png" type="image/png">
-  <link rel="icon" href="/icon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="/icon.png">
+
+  <link rel="apple-touch-icon" href="<%= asset_path('favicon.png') %>">
+
+
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
+
   <%= javascript_importmap_tags %>
-  
 </head>
 
-<div class="logo-container">
-  <div class="logo">
-    <img src="<%= asset_path('logo.png') %>" alt="Logo">
-  </div>
-</div>
-
 <body>
+
+  <div class="logo-container">
+    <div class="logo">
+      <img src="<%= asset_path('favicon.png') %>" alt="Logo">
+    </div>
+  </div>
+
+
   <% flash.each do |type, msg| %>
-    <div>
+    <div class="flash <%= type %>">
       <%= msg %>
     </div>
   <% end %>
 
+
   <%= yield %>
+
 </body>
 </html>

@@ -1,47 +1,45 @@
-<h1>Editar Cliente</h1>
+<h1 style="text-align: center;">Editar Cliente</h1>
 
-<%= form_with(model: @cliente, local: true) do |form| %>
-  <% if @cliente.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@cliente.errors.count, "erro") %> proibiu este cliente de ser salvo:</h2>
-      <ul>
-        <% @cliente.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<div class="novo-cliente-form" style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+  <%= form_with(model: @cliente, local: true, class: 'formulario-cliente') do |form| %>
+    <% if @cliente.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@cliente.errors.count, "erro") %> impediram a atualização deste cliente:</h2>
+        <ul>
+          <% @cliente.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="campo-formulario">
+      <%= form.label :nome %><br>
+      <%= form.text_field :nome, class: 'input-cliente' %>
+    </div>
+
+    <div class="campo-formulario">
+      <%= form.label :telefone %><br>
+      <%= form.text_field :telefone, class: 'input-cliente' %>
+    </div>
+
+    <div class="campo-formulario">
+      <%= form.label :email %><br>
+      <%= form.email_field :email, class: 'input-cliente' %>
+    </div>
+
+    <div class="campo-formulario">
+      <%= form.label :endereco %><br>
+      <%= form.text_field :endereco, class: 'input-cliente' %>
+    </div>
+
+    <div class="campo-formulario">
+      <%= form.label :observacoes %><br>
+      <%= form.text_area :observacoes, class: 'input-cliente' %>
+    </div>
+
+    <div style="margin-top: 20px;">
+      <%= form.submit "Salvar", class: 'botao-submit' %>
     </div>
   <% end %>
 
-
-  <div>
-    <%= form.label :nome %>
-    <%= form.text_field :nome %>
-  </div>
-
-  <div>
-    <%= form.label :telefone %>
-    <%= form.text_field :telefone %>
-  </div>
-
-  <div>
-    <%= form.label :email %>
-    <%= form.email_field :email %>
-  </div>
-
-  <div>
-    <%= form.label :endereco %>
-    <%= form.text_field :endereco %>
-  </div>
-
-  <div>
-    <%= form.label :observacoes %>
-    <%= form.text_area :observacoes %>
-  </div>
-
-  <div>
-    <%= form.submit "Atualizar Cliente" %>
-  </div>
-<% end %>
-
-<br>
-<%= link_to 'Voltar', clientes_path %>

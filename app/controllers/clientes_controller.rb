@@ -14,7 +14,7 @@ class ClientesController < ApplicationController
     def create
       @cliente = Cliente.new(cliente_params)
       if @cliente.save
-        redirect_to @cliente, notice: "Cliente criado com sucesso."
+        redirect_to clientes_path
       else
         render :new
       end
@@ -24,22 +24,25 @@ class ClientesController < ApplicationController
       @cliente = Cliente.find(params[:id])
     end
 
-    def update
-      @cliente = Cliente.find(params[:id])
-      if @cliente.update(cliente_params)
-        redirect_to @cliente, notice: "Cliente atualizado com sucesso."
-      else
-        render :edit
-      end
+  def update
+    @cliente = Cliente.find(params[:id])
+
+    if @cliente.update(cliente_params)
+      redirect_to clientes_path
+    else
+      render :edit
     end
+  end
 
     def destroy
       @cliente = Cliente.find(params[:id])
-      @cliente.destroy
-      redirect_to clientes_path, notice: "Cliente excluído com sucesso."
-    rescue => e
-      puts "Erro ao excluir cliente: #{e.message}"
-      redirect_to clientes_path, alert: "Erro ao excluir cliente."
+      if @cliente.destroy
+        redirect_to clientes_path
+      else
+        redirect_to clientes_path
+      end
+    rescue ActiveRecord::RecordNotFound => e
+      redirect_to clientes_path
     end
 
     private

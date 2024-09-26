@@ -1,6 +1,16 @@
-<h1>Clientes</h1>
+<h1 style="text-align: center;">Clientes</h1>
 
-<table class="clientes-table">
+<% if flash[:notice] %>
+  <div class="flash-notice" style="text-align: center; margin-bottom: 20px;">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
+<div style="text-align: center;">
+  <%= link_to 'Novo cadastro', new_cliente_path, class: 'novo-cliente-link' %>
+</div>
+
+<table class="clientes-table" style="width: 100%; text-align: center;">
   <thead>
     <tr>
       <th>ID</th>
@@ -23,12 +33,9 @@
         <td><%= cliente.observacoes %></td>
         <td>
           <%= link_to 'Editar', edit_cliente_path(cliente) %>
-          <%= link_to 'Excluir', cliente_path(cliente), method: :delete, data: { confirm: 'Tem certeza que deseja excluir?' } %>
+          <%= button_to 'Excluir', cliente_path(cliente), method: :delete, data: { confirm: 'Tem certeza que deseja excluir?' }, class: 'btn btn-danger' %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-<%= link_to 'Novo Cliente', new_cliente_path %>
