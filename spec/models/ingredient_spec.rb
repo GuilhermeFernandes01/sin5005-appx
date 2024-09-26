@@ -20,4 +20,15 @@ RSpec.describe Ingredient, type: :model do
     expect(ingredient).to_not be_valid
     expect(ingredient.errors[:unityMeasure]).to include "can't be blank"
   end
+
+  it "is invalid quantityStock can't be blank" do
+    ingredient = Ingredient.new(name: "Água", unityMeasure: "l", quantityStock: nil)
+    expect(ingredient).to_not be_valid
+    expect(ingredient.errors[:quantityStock]).to include "can't be blank"
+  end
+
+  it "is invalid unityMeasure and quantityStock can't be blank" do
+    ingredient = Ingredient.new(name: "Água", unityMeasure: nil, quantityStock: nil)
+    expect(ingredient).to_not be_valid
+  end
 end
