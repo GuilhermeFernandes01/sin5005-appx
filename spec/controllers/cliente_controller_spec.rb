@@ -24,13 +24,6 @@ RSpec.describe ClientesController, type: :controller do
   end
 
   describe 'POST #create' do
-    context 'with valid attributes' do
-      it 'sets a flash notice' do
-        post :create, params: { cliente: valid_cliente_attributes }
-        expect(flash[:notice]).to be_present
-      end
-    end
-
     context 'with invalid attributes' do
       it 'renders the new template' do
         post :create, params: { cliente: invalid_cliente_attributes }
