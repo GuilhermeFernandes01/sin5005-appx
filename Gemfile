@@ -67,4 +67,6 @@ gem "coveralls_reborn", require: false
 gem "simplecov-lcov", require: false
 gem "selenium-webdriver"
 gem "database_cleaner-active_record"
+gem "bootstrap", "~> 5.3.3"
+gem "sassc-rails", "~> 2.1.2"
 # end
