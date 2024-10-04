@@ -41,7 +41,10 @@ class IngredientsController < ApplicationController
         format.html { redirect_to @ingredient, notice: "Ingredient was successfully updated." }
         format.json { render :show, status: :ok, location: @ingredient }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html do
+          flash[:alert] = "Failed to update ingredient."  # Adicione o flash de erro
+          render :edit, status: :unprocessable_entity
+        end
         format.json { render json: @ingredient.errors, status: :unprocessable_entity }
       end
     end

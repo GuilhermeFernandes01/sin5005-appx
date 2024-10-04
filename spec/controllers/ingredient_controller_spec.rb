@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe IngredientsController, type: :controller do
+  include FactoryBot::Syntax::Methods
   # Define um exemplo de ingrediente para usar nos testes
   let(:valid_ingredient_attributes) { { name: 'Tomate', unityMeasure: 'kg', quantityStock: 1000 } }
 
@@ -9,6 +10,9 @@ RSpec.describe IngredientsController, type: :controller do
 
   # Define exemplos de atributos inválidos para testes
   let(:invalid_ingredient_attributes) { { name: '', unityMeasure: nil, quantityStock: nil } }
+
+  let(:updated_ingredient_attributes) { { name: 'Cebola', unityMeasure: 'g', quantityStock: 500 } }
+  let(:ingredient) { create(:ingredient, valid_ingredient_attributes) }
 
   describe 'GET #index' do
     it 'assigns all ingredients to @ingredients' do
@@ -64,6 +68,72 @@ RSpec.describe IngredientsController, type: :controller do
         post :create, params: { ingredient: invalid_ingredient_attributes }
         expect(response).to render_template(:new)
       end
+    end
+  end
+
+  describe 'PUT #update' do
+    context 'with valid attributes' do
+      it 'updates the requested ingredient' do
+        put :update, params: { id: ingredient.id, ingredient: updated_ingredient_attributes }
+        ingredient.reload  # Recarrega o objeto da base de dados para verificar a atualização
+        expect(ingredient.name).to eq('Cebola')
+        expect(ingredient.unityMeasure).to eq('g')
+        expect(ingredient.quantityStock).to eq(500)
+      end
+
+      it 'redirects to the ingredient' do
+        put :update, params: { id: ingredient.id, ingredient: updated_ingredient_attributes }
+        expect(response).to redirect_to(ingredient)
+      end
+
+      it 'sets a flash notice' do
+        put :update, params: { id: ingredient.id, ingredient: updated_ingredient_attributes }
+        expect(flash[:notice]).to eq('Ingredient was successfully updated.')
+      end
+    end
+
+    context 'with invalid attributes' do
+      it 'does not update the ingredient' do
+        original_name = ingredient.name
+        put :update, params: { id: ingredient.id, ingredient: invalid_ingredient_attributes }
+        ingredient.reload
+        expect(ingredient.name).to eq(original_name)  # O nome não deve ser alterado
+      end
+
+      it 'renders the edit template' do
+        put :update, params: { id: ingredient.id, ingredient: invalid_ingredient_attributes }
+        expect(response).to render_template(:edit)
+      end
+
+      it 'sets a flash alert or error' do
+        put :update, params: { id: ingredient.id, ingredient: invalid_ingredient_attributes }
+        expect(flash[:alert]).to be_present
+      end
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    let!(:ingredient) { create(:ingredient) }  # Cria um ingrediente para ser destruído
+
+    it 'deletes the ingredient' do
+      expect {
+        delete :destroy, params: { id: ingredient.id }
+      }.to change(Ingredient, :count).by(-1)  # Verifica se o número de ingredientes diminui
+    end
+
+    it 'redirects to the ingredients index' do
+      delete :destroy, params: { id: ingredient.id }
+      expect(response).to redirect_to(ingredients_path)  # Verifica se redireciona corretamente
+    end
+
+    it 'sets a flash notice' do
+      delete :destroy, params: { id: ingredient.id }
+      expect(flash[:notice]).to be_present  # Verifica se uma mensagem de sucesso é definida
+    end
+
+    it 'responds with no content for JSON requests' do
+      delete :destroy, params: { id: ingredient.id }, format: :json
+      expect(response).to have_http_status(:no_content)  # Verifica se o status da resposta é 204 No Content
     end
   end
 end
