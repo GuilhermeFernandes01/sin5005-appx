@@ -4,13 +4,24 @@
 
 <h1>Ingredients</h1>
 
-<div id="ingredients">
-  <% @ingredients.each do |ingredient| %>
-    <%= render ingredient %>
-    <p>
-      <%= link_to "Show this ingredient", ingredient %>
-    </p>
-  <% end %>
-</div>
+<div class="p-5 m-auto" style="max-width:1440px">
+  <div class="d-flex w-full justify-content-end mb-4">
+    <div class="border p-2 d-flex justify-content-center align-items-center border-primary text-white" style="width: 200px">
+      <%= link_to "Adicionar ingrediente", new_ingredient_path %>
+    </div>
+  </div>
+  <table class="table" id="ingredients">
+    <thead>
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">Unidade de medida</th>
+        <th scope="col">Quantidade em estoque</th>
+        <th scope="col">Ver mais</th>
+      </tr>
+    </thead>
+    <% @ingredients.each do |ingredient| %>
+      <%= render ingredient %>
+    <% end %>
+  </div>
 
-<%= link_to "New ingredient", new_ingredient_path %>
+</div>

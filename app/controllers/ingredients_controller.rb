@@ -1,9 +1,9 @@
 class IngredientsController < ApplicationController
   before_action :set_ingredient, only: %i[ show edit update destroy ]
 
-  # GET /ingredients or /ingredients.json
+  # GET /ingredients, /ingredients.json, /ingredients?page=1&per_page=1
   def index
-    @ingredients = Ingredient.all
+    @ingredients = Ingredient.all.limit(per_page).offset(paginate_offset)
   end
 
   # GET /ingredients/1 or /ingredients/1.json

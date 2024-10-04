@@ -1,17 +1,15 @@
-<div id="<%= dom_id ingredient %>">
-  <p>
-    <strong>Name:</strong>
+<tr id="<%= dom_id ingredient %>" class="table">
+  <td>
     <%= ingredient.name %>
-  </p>
+  </td>
 
-  <p>
-    <strong>Unitymeasure:</strong>
+  <td>
     <%= ingredient.unityMeasure %>
-  </p>
-
-  <p>
-    <strong>Quantitystock:</strong>
+  </td>
+  <td>
     <%= ingredient.quantityStock %>
-  </p>
-
-</div>
+  </td>
+  <td>
+    <%= link_to "Show this ingredient", ingredient %>
+  </td>
+</tr>
