@@ -19,6 +19,8 @@
 [![Code Climate](https://codeclimate.com/github/cloudfoundry/membrane.png)](https://codeclimate.com/github/GuilhermeFernandes01/sin5005-appx) </br>
 ![Github Actions](https://github.com/GuilhermeFernandes01/sin5005-appx/actions/workflows/ci.yml/badge.svg) </br>
 [![Coveralls](https://coveralls.io/repos/github/GuilhermeFernandes01/sin5005-appx/badge.svg)](https://coveralls.io/github/GuilhermeFernandes01/sin5005-appx)
+Teste
+[![Coverage Status](https://coveralls.io/repos/github/GuilhermeFernandes01/sin5005-appx/badge.svg?branch=main)](https://coveralls.io/github/GuilhermeFernandes01/sin5005-appx?branch=main)
 
 ## Run locally
 
