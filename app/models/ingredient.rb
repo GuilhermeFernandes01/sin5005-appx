@@ -2,7 +2,8 @@ class Ingredient < ApplicationRecord
   validates :name, presence: true
   validates :unityMeasure, presence: true
   validates :quantityStock, presence: true, numericality: { greater_than: 0 }
-  validates :quantityStockMin, :quantityStockMax, presence: true, numericality: { only_integer: true }
+  validates :quantityStockMin, presence: true, numericality: { greater_than: 0 }
+  validates :quantityStockMax, presence: true, numericality: { greater_than: 0 }
   validate :validate_min_max_stock
 
   private

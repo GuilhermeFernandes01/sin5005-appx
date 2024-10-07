@@ -5,7 +5,9 @@ RSpec.describe "ingredients/show", type: :view do
     assign(:ingredient, Ingredient.create!(
       name: "Name",
       unityMeasure: "Unity Measure",
-      quantityStock: "9.99"
+      quantityStock: "9.99",
+      quantityStockMin: "9.99",
+      quantityStockMax: "9.99"
     ))
   end
 
