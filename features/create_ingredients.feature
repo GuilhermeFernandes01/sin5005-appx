@@ -1,19 +1,23 @@
 # language: pt
 
-Funcionalidade: Gerenciar Ingredientes
+Funcionalidade: Gerenciar Ingredientes # Iteração 1
 
   Como um funcionário da pizzaria
   eu quero poder ter um cadastro de ingredientes para controlar meu estoque. 
   O cadastro deve ter as seguintes informações: nome, unidade de medida e quantidade em estoque
   de forma que eu consiga cadastrar informações de ingredientes utilizados em pizzas e esfihas
 
+  Como um funcionário da pizzaria  # Iteração 2
+  eu quero controlar melhor o estoque de ingredientes. Sendo assim necessito que sejam acrescentadas a quantidade de estoque mínimo e a quantidade de estoque máximo.
+  de forma que** eu consiga estabelecer uma melhor quantidade atual de estoque de ingredientes.
+
   Cenário: Cadastrar um novo ingrediente
     Quando eu acesso a página de cadastro de ingredientes
     Então eu devo ver um formulário para cadastrar um novo ingrediente
     Quando eu preencho o formulário com:
-      | Name | Unity Measure | Quantity Stock |
-      | ---- | ------------- | -------------- |
-      | Queijo | g | 1000 |
+      | Name | Unity Measure | Quantity Stock | Quantity Stock Min | Quantity Stock Max | 
+      | ---- | ------------- | -------------- | ------------------ | ------------------ |
+      | Queijo | g | 1000 | 10 | 2000 |
     E eu clico no botão "Criar"
     Então eu devo ser redirecionado para a página que mostra o ingrediente cadastrado
     E eu devo ver a mensagem de sucesso "Ingredient was successfully created."
@@ -21,10 +25,10 @@ Funcionalidade: Gerenciar Ingredientes
 
   Cenário: Listar todos os ingredientes
     Dado que existem os seguintes ingredientes:
-      | Name | Unity Measure | Quantity Stock |
-      | Queijo | g | 1000 |
-      | Tomate | un | 50 |
-      | Massa | kg | 5 |
+      | Name | Unity Measure | Quantity Stock | Quantity Stock Min | Quantity Stock Max | 
+      | Queijo | g | 1000 | 10 | 2000 |
+      | Tomate | un | 50 | 10 | 500 |
+      | Massa | kg | 1000 | 20 | 2000 |
     Quando eu acesso a página de listagem de ingredientes
     Então eu devo ver uma lista com todos os ingredientes cadastrados
 
@@ -44,4 +48,3 @@ Funcionalidade: Gerenciar Ingredientes
     E pressionado o botão "Destroy this ingredient"
     Então deve ser mostrada a mensagem de sucesso "Ingredient was successfully destroyed."
     E eu não devo ver o ingrediente "Tomate" na lista de ingredientes
-
