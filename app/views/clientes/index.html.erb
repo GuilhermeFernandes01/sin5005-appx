@@ -8,9 +8,12 @@
 
 
 
+<div style="display: flex; justify-content: center; align-items: center;">
+  <h4 style="margin: 0;">Cadastrados: <%= @quantidade_clientes %></h4>
+  <h4 style="margin: 0; padding: 0 10px;">|</h4>
+  <h4 style="margin: 0;">Aniversariantes do Mês: <%= @clientes_mes_atual %></h4>
+</div>
 
-<h4 style="text-align: center;">Cadastrados: <%= @quantidade_clientes %></h4>
-<h4 style="text-align: center;">Aniversariantes do Mês: <%= @clientes_mes_atual %></h4>
 
 
 
@@ -42,7 +45,7 @@
         <td><%= cliente.telefone %></td>
         <td><%= cliente.email %></td>
         <td><%= cliente.endereco %></td>
-        <td><%= cliente.data_nascimento %></td>
+        <td><%= cliente.data_nascimento.strftime('%m/%d/%Y') if cliente.data_nascimento %></td>
         <td><%= cliente.observacoes %></td>
         <td>
           <%= link_to 'Editar', edit_cliente_path(cliente) %>

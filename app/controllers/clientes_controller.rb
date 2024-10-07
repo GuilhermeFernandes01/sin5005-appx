@@ -2,7 +2,7 @@ class ClientesController < ApplicationController
     def index
       @clientes = Cliente.all
       @quantidade_clientes = Cliente.count
-      @clientes_mes_atual = Cliente.where("strftime('%m', data_nascimento) = ?", Date.today.strftime('%m')).count
+      @clientes_mes_atual = Cliente.where("strftime('%m', data_nascimento) = ?", Date.today.strftime("%m")).count
     end
 
     def show
