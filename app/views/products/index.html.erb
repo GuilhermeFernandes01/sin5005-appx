@@ -1,0 +1,25 @@
+<h1>Produtos</h1>
+<%if @products.empty?%>
+  <p>Não há produtos cadastrados</p>
+<%else%>
+  <table>
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Preço</th>
+        <th>Categoria</th>
+        <th>Requer Ingredientes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @products.each do |product|%>
+        <tr>
+          <td><%= product.name %></td>
+          <td><%= product.price %></td>
+          <td><%= product.category %></td>
+          <td><%= product.require_ingredients %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
