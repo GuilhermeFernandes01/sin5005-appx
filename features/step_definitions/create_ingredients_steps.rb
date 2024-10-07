@@ -8,6 +8,8 @@ Então ('eu devo ver um formulário para cadastrar um novo ingrediente') do
   expect(page).to have_field('ingredient[name]')
   expect(page).to have_field('ingredient[unityMeasure]')
   expect(page).to have_field('ingredient[quantityStock]')
+  expect(page).to have_field('ingredient[quantityStockMin]')
+  expect(page).to have_field('ingredient[quantityStockMax]')
   expect(page).to have_button('commit')
 end
 
@@ -16,6 +18,8 @@ Quando ('eu preencho o formulário com:') do |table|
     fill_in 'ingredient[name]', with: row['Name']
     fill_in 'ingredient[unityMeasure]', with: row['Unity Measure']
     fill_in 'ingredient[quantityStock]', with: row['Quantity Stock']
+    fill_in 'ingredient[quantityStockMin]', with: row['Quantity Stock Min']
+    fill_in 'ingredient[quantityStockMax]', with: row['Quantity Stock Max']
   end
 end
 
@@ -32,10 +36,13 @@ Então ('eu devo ver a mensagem de sucesso {string}') do |string|
   expect(page).to have_content('Ingredient was successfully created.')
 end
 
+## Alterar daqui para baixo
 Então ('eu devo ver o ingrediente {string} na com a unidade {string} e a quantidade {string}') do |string, string2, string3|
   expect(page).to have_content('Queijo')
   expect(page).to have_content('g')
   expect(page).to have_content('1000')
+  expect(page).to have_content('10')
+  expect(page).to have_content('2000')
 end
 
 # Cenário: Listar todos os ingredientes
