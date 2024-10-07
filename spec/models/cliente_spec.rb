@@ -64,7 +64,7 @@ RSpec.describe Cliente, type: :model do
   context 'validações de data de nascimento' do
     it "é válido sem data de nascimento" do
       @cliente.data_nascimento = nil
-      expect(@cliente).to be_valid  
+      expect(@cliente).to be_valid
     end
 
     it "não é válido com data de nascimento futura" do

@@ -14,5 +14,4 @@ class Cliente < ApplicationRecord
     return if data_nascimento.nil?  # Ignorar se a data de nascimento não foi fornecida
     errors.add(:data_nascimento, "não pode ser uma data futura") if data_nascimento > Date.today
   end
-  
 end
