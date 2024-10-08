@@ -106,4 +106,39 @@ RSpec.describe ProductsController, type: :controller do
       end
     end
   end
+
+  describe "DELETE #destroy" do
+    let (:product) { instance_double(Product, id: 1, name: 'Pizza de Pepperoni', price: 40.99, category: 'Pizza', require_ingredients: true) }
+
+    before(:each) do
+      allow(Product).to receive(:find).and_return(product)
+
+      allow(product).to receive(:destroy).and_return(product)
+    end
+
+    it "calls Product.find with the proper params" do
+      delete :destroy, params: { id: 1 }
+
+      expect(Product).to have_received(:find).with('1')
+    end
+
+    it "assings the correct product" do
+      delete :destroy, params: { id: 1 }
+
+      expect(assigns(:product)).to eq(product)
+    end
+
+    it "should destroy the product" do
+      delete :destroy, params: { id: 1 }
+
+      expect(product).to have_received(:destroy)
+    end
+
+    it "should redirect to the root products page" do
+      delete :destroy, params: { id: 1 }
+
+      expect(response).to redirect_to(products_path)
+      expect(response.status).to eq(302)
+    end
+  end
 end

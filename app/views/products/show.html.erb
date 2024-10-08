@@ -2,3 +2,10 @@
 <p>Preço: <%= @product.price%></p>
 <p>Categoria: <%= @product.category%></p>
 <p>Requer ingredientes: <%= @product.require_ingredients ? "Sim" : "Não" %></p>
+<ul>
+  <li>
+    <%= link_to "Deletar", product_path(@product), data: {
+      turbo_method: :delete
+    }%>
+  </li>
+</ul>
