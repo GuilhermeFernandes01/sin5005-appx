@@ -68,6 +68,6 @@ class IngredientsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def ingredient_params
-      params.require(:ingredient).permit(:name, :unityMeasure, :quantityStock)
+      params.require(:ingredient).permit(:name, :unityMeasure, :quantityStock, :quantityStockMin, :quantityStockMax)
     end
 end
