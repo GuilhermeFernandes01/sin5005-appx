@@ -1,0 +1,7 @@
+<h1><%= @product.name%></h1>
+<p>Preço: <%= @product.price%></p>
+<p>Categoria: <%= @product.category%></p>
+<p>Requer ingredientes: <%= @product.require_ingredients ? "Sim" : "Não" %></p>
+<ul>
+<%= button_to "Editar", edit_product_path(@product), method: :get%>
+<%= button_to "Deletar", product_path(@product), method: :delete%>
