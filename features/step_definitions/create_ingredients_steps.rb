@@ -55,7 +55,9 @@ Quando ('eu acesso a página de listagem de ingredientes') do
 end
 
 Então ('eu devo ver uma lista com todos os ingredientes cadastrados') do
-  expect(page).to have_css('#ingredients > div', count: 3) # Verifica se há 3 divs dentro do elemento #ingredients
+  within "#ingredients tbody" do
+    expect(page).to have_selector('tr', count: 3)
+  end
 end
 
 # Cenário: Editar um ingrediente

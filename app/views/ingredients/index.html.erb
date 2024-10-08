@@ -4,13 +4,35 @@
 
 <h1>Ingredients</h1>
 
-<div id="ingredients">
-  <% @ingredients.each do |ingredient| %>
-    <%= render ingredient %>
-    <p>
-      <%= link_to "Show this ingredient", ingredient %>
-    </p>
-  <% end %>
+<%= link_to "New ingredient", new_ingredient_path %>
+
+<div class="container" id="ingredients">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Unity Measure</th>
+        <th>Quantity Stock</th>
+        <th>Quantity Stock Min</th>
+        <th>Quantity Stock Max</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @ingredients.each do |ingredient| %>
+        <tr>
+          <td><%= ingredient.id %></td>
+          <td><%= ingredient.name %></td>
+          <td><%= ingredient.unityMeasure %></td>
+          <td><%= ingredient.quantityStock %></td>
+          <td><%= ingredient.quantityStockMin %></td>
+          <td><%= ingredient.quantityStockMax %></td>
+          <td> <%= link_to "Show this ingredient", ingredient %> </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 
-<%= link_to "New ingredient", new_ingredient_path %>
+

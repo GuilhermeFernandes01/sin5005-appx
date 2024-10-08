@@ -1,15 +1,20 @@
 # language: pt
 
-Funcionalidade: Gerenciar Ingredientes # Iteração 1
+# Iteração 1
+Funcionalidade: Gerenciar Ingredientes 
 
   Como um funcionário da pizzaria
   eu quero poder ter um cadastro de ingredientes para controlar meu estoque. 
   O cadastro deve ter as seguintes informações: nome, unidade de medida e quantidade em estoque
   de forma que eu consiga cadastrar informações de ingredientes utilizados em pizzas e esfihas
 
-  Como um funcionário da pizzaria  # Iteração 2
+  Como um funcionário da pizzaria  # Iteração 2 - Ingredientes - Quantidade Mínima e Máxima de Estoque
   eu quero controlar melhor o estoque de ingredientes. Sendo assim necessito que sejam acrescentadas a quantidade de estoque mínimo e a quantidade de estoque máximo.
   de forma que** eu consiga estabelecer uma melhor quantidade atual de estoque de ingredientes.
+ 
+  Como um funcionário da pizzaria # Iteração 2 - Ingredientes - Visualização dos Ingredientes em Formato de Tabela
+  eu quero poder visualizar os dados dos ingredientes (ID, Name, Unity Measure, Quantity Stock, Quantity Stock Min,Quantity Stock Max) na rota inicial de ingredientes em formato de tabela
+  de forma que eu consiga ter uma melhor visualização dos ingredientes.
 
   Cenário: Cadastrar um novo ingrediente
     Quando eu acesso a página de cadastro de ingredientes
