@@ -10,6 +10,7 @@ Dado("que eu estou na página de clientes") do
     fill_in "Telefone", with: dados["Telefone"]
     fill_in "Email", with: dados["Email"]
     fill_in "Endereço", with: dados["Endereço"]
+    fill_in "Data_nascimento", with: dados["Data_nascimento"]
     fill_in "Observações", with: dados["Observações"]
   end
   Quando("eu clicar no botão {string}") do |botao|
