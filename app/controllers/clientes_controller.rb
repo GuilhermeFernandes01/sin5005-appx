@@ -1,6 +1,8 @@
 class ClientesController < ApplicationController
     def index
       @clientes = Cliente.all
+      @quantidade_clientes = Cliente.count
+      @clientes_mes_atual = Cliente.where("strftime('%m', data_nascimento) = ?", Date.today.strftime("%m")).count
     end
 
     def show
@@ -24,15 +26,15 @@ class ClientesController < ApplicationController
       @cliente = Cliente.find(params[:id])
     end
 
-  def update
-    @cliente = Cliente.find(params[:id])
+    def update
+      @cliente = Cliente.find(params[:id])
 
-    if @cliente.update(cliente_params)
-      redirect_to clientes_path
-    else
-      render :edit
+      if @cliente.update(cliente_params)
+        redirect_to clientes_path
+      else
+        render :edit
+      end
     end
-  end
 
     def destroy
       @cliente = Cliente.find(params[:id])
@@ -45,9 +47,10 @@ class ClientesController < ApplicationController
       redirect_to clientes_path
     end
 
+
     private
 
     def cliente_params
-      params.require(:cliente).permit(:nome, :telefone, :email, :endereco, :observacoes)
+      params.require(:cliente).permit(:nome, :telefone, :email, :endereco, :data_nascimento, :observacoes)
     end
 end

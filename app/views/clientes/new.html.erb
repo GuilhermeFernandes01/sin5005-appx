@@ -31,7 +31,12 @@
 
     <div class="campo-formulario">
       <%= form.label :endereco %><br>
-      <%= form.text_field :endereço, class: 'input-cliente' %>
+      <%= form.text_field :endereco, class: 'input-cliente' %>
+    </div>
+
+    <div class="field">
+      <%= form.label :data_nascimento, "Data de Nascimento" %><br>
+      <%= form.date_field :data_nascimento %><br>
     </div>
 
     <div class="campo-formulario">

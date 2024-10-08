@@ -6,19 +6,23 @@ RSpec.describe "ingredients/index", type: :view do
       Ingredient.create!(
         name: "Name",
         unityMeasure: "Unity Measure",
-        quantityStock: "9.99"
+        quantityStock: "9.99",
+        quantityStockMin: "9.99",
+        quantityStockMax: "9.99"
       ),
       Ingredient.create!(
         name: "Name",
         unityMeasure: "Unity Measure",
-        quantityStock: "9.99"
+        quantityStock: "9.99",
+        quantityStockMin: "9.99",
+        quantityStockMax: "9.99"
       )
     ])
   end
 
   it "renders a list of ingredients" do
     render
-    cell_selector = 'div>p'
+    cell_selector = 'tr>td'
     assert_select cell_selector, text: Regexp.new("Name".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("Unity Measure".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("9.99".to_s), count: 2

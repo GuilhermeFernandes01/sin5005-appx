@@ -33,6 +33,11 @@
       <%= form.text_field :endereco, class: 'input-cliente' %>
     </div>
 
+    <div class="field">
+      <%= form.label :data_nascimento, "input-cliente" %>
+      <%= form.date_field :data_nascimento %>
+    </div>
+
     <div class="campo-formulario">
       <%= form.label :observacoes %><br>
       <%= form.text_area :observacoes, class: 'input-cliente' %>

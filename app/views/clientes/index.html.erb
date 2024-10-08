@@ -6,18 +6,33 @@
   </div>
 <% end %>
 
+
+
+<div style="display: flex; justify-content: center; align-items: center;">
+  <h4 style="margin: 0;">Cadastrados: <%= @quantidade_clientes %></h4>
+  <h4 style="margin: 0; padding: 0 10px;">|</h4>
+  <h4 style="margin: 0;">Aniversariantes do Mês: <%= @clientes_mes_atual %></h4>
+</div>
+
+
+
+
+
 <div style="text-align: center;">
   <%= link_to 'Novo cadastro', new_cliente_path, class: 'novo-cliente-link' %>
 </div>
 
 <table class="clientes-table" style="width: 100%; text-align: center;">
+
+
   <thead>
     <tr>
       <th>ID</th>
       <th>Nome</th>
       <th>Telefone</th>
-      <th>Email</th>
+      <th>E-mail</th>
       <th>Endereço</th>
+      <th>Data de nascimento</th>
       <th>Observações</th>
       <th>Ações</th>
     </tr>
@@ -30,6 +45,7 @@
         <td><%= cliente.telefone %></td>
         <td><%= cliente.email %></td>
         <td><%= cliente.endereco %></td>
+        <td><%= cliente.data_nascimento.strftime('%m/%d/%Y') if cliente.data_nascimento %></td>
         <td><%= cliente.observacoes %></td>
         <td>
           <%= link_to 'Editar', edit_cliente_path(cliente) %>
