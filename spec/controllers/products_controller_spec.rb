@@ -40,6 +40,34 @@ RSpec.describe ProductsController, type: :controller do
     end
   end
 
+  describe "GET #show" do
+    let! (:mockProduct) { instance_double(Product, id: 1, name: 'Pizza de Pepperoni', price: 40.99, category: 'Pizza', require_ingredients: true) }
+
+    context "valid product" do
+      before(:each) do
+        allow(Product).to receive(:find).and_return(mockProduct)
+      end
+
+      it "calls Product.find with the correct param" do
+        get :show, params: { id: 1 }
+
+        expect(Product).to have_received(:find).with('1')
+      end
+
+      it "assigns the correct product" do
+        get :show, params: { id: 1 }
+
+        expect(assigns(:product)).to eq(mockProduct)
+      end
+
+      it "renders the show template" do
+        get :show, params: { id: 1 }
+
+        expect(response).to render_template(:show)
+      end
+    end
+  end
+
   describe "GET #new" do
     it "assigns a new product to @product" do
       get :new
