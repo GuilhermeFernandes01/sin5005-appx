@@ -2,8 +2,8 @@
 
 Funcionalidade: Listar Produtos
   Como um cliente da pizzaria
-  eu quero poder ver todos os produtos cadastrados
-  de forma que eu possa poder saber quais produtos a pizzaria oferece para fazer o meu pedido
+  eu quero poder ver todos os produtos cadastrados com suas informações (Nome, Preço, Categoria, Requer Ingrediente)
+  de forma que eu possa saber quais produtos a pizzaria oferece para fazer o meu pedido
 
   Cenário: produtos existentes
     Dado que possuo alguns produtos cadastrados:

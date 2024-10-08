@@ -107,6 +107,112 @@ RSpec.describe ProductsController, type: :controller do
     end
   end
 
+  describe "GET #edit" do
+    let! (:product) { instance_double(Product, id: 1, name: 'Pizza de Pepperoni', price: 40.99, category: 'Pizza', require_ingredients: true) }
+
+    before(:each) do
+      allow(Product).to receive(:find).and_return(product)
+    end
+
+    it "calls Product.find with the proper params" do
+      get :edit, params: { id: 1 }
+
+      expect(Product).to have_received(:find).with('1')
+    end
+
+    it "assigns the correct product" do
+      get :edit, params: { id: 1 }
+
+      expect(assigns(:product)).to eq(product)
+    end
+
+    it "should render the edit template" do
+      get :edit, params: { id: 1 }
+
+      expect(response).to render_template(:edit)
+      expect(response.status).to eq(200)
+    end
+  end
+
+  describe "PATCH #update" do
+    let! (:product) { instance_double(Product, id: 1, name: 'Pizza de Pepperoni', price: 40.99, category: 'Pizza', require_ingredients: true) }
+
+    before(:each) do
+      allow(Product).to receive(:find).and_return(product)
+
+      allow(product).to receive(:to_model).and_return(product)
+      allow(product).to receive(:model_name).and_return(Product.model_name)
+      allow(product).to receive(:persisted?).and_return(true)
+    end
+
+    context "with valid data" do
+      before(:each) do
+        allow(product).to receive(:update).and_return(true)
+      end
+
+      it "calls Product.find with the proper params" do
+        patch :update, params: { id: 1, product: { name: 'Água', price: "1.99", category: 'Bebidas', require_ingredients: "false" } }
+
+        expect(Product).to have_received(:find).with('1')
+      end
+
+      it "assigns the correct product" do
+        product_params = { name: 'Água', price: "1.99", category: 'Bebidas', require_ingredients: "false" }
+        patch :update, params: { id: 1, product: product_params }
+
+        expect(assigns(:product)).to eq(product)
+      end
+
+      it "receives the new data" do
+        product_params = { name: 'Água', price: "1.99", category: 'Bebidas', require_ingredients: "false" }
+        patch :update, params: { id: 1, product: product_params }
+
+        expect(product).to have_received(:update).with(ActionController::Parameters.new(product_params).permit(:name, :price, :category, :require_ingredients))
+      end
+
+      it "redirects to the product path" do
+        product_params = { name: 'Água', price: "1.99", category: 'Bebidas', require_ingredients: "false" }
+        patch :update, params: { id: 1, product: product_params }
+
+        expect(response).to redirect_to(product_path(product))
+      end
+    end
+
+    context "with invalid data" do
+      before(:each) do
+        allow(product).to receive(:update).and_return(false)
+      end
+
+      it "calls Product.find with the proper params" do
+        patch :update, params: { id: 1, product: { name: "", price: "", category: 'Bebidas', require_ingredients: "false" } }
+
+        expect(Product).to have_received(:find).with('1')
+      end
+
+      it "assigns the correct product" do
+        product_params = { name: "", price: "", category: 'Bebidas', require_ingredients: "false" }
+        patch :update, params: { id: 1, product: product_params }
+
+        expect(assigns(:product)).to eq(product)
+      end
+
+      it "receives the new data" do
+        product_params = { name: "", price: "", category: 'Bebidas', require_ingredients: "false" }
+        patch :update, params: { id: 1, product: product_params }
+
+        expect(product).to have_received(:update).with(ActionController::Parameters.new(product_params).permit(:name, :price, :category, :require_ingredients))
+      end
+
+      it "redirects to the product path" do
+        product_params = { name: "", price: "", category: 'Bebidas', require_ingredients: "false" }
+        patch :update, params: { id: 1, product: product_params }
+
+        expect(response).to render_template(:edit)
+        expect(response.status).to eq(422)
+      end
+    end
+  end
+
   describe "DELETE #destroy" do
     let (:product) { instance_double(Product, id: 1, name: 'Pizza de Pepperoni', price: 40.99, category: 'Pizza', require_ingredients: true) }
 
