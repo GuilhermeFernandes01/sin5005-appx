@@ -5,7 +5,9 @@ RSpec.describe "ingredients/edit", type: :view do
     Ingredient.create!(
       name: "MyString",
       unityMeasure: "MyString",
-      quantityStock: "9.99"
+      quantityStock: "9.99",
+      quantityStockMin: "10",
+      quantityStockMax: "2000",
     )
   }
 
@@ -22,6 +24,10 @@ RSpec.describe "ingredients/edit", type: :view do
       assert_select "input[name=?]", "ingredient[unityMeasure]"
 
       assert_select "input[name=?]", "ingredient[quantityStock]"
+
+      assert_select "input[name=?]", "ingredient[quantityStockMin]"
+
+      assert_select "input[name=?]", "ingredient[quantityStockMax]"
     end
   end
 end

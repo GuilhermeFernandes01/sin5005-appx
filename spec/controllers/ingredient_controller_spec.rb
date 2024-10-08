@@ -3,15 +3,15 @@ require 'rails_helper'
 RSpec.describe IngredientsController, type: :controller do
   include FactoryBot::Syntax::Methods
   # Define um exemplo de ingrediente para usar nos testes
-  let(:valid_ingredient_attributes) { { name: 'Tomate', unityMeasure: 'kg', quantityStock: 1000 } }
+  let(:valid_ingredient_attributes) { { name: 'Tomate', unityMeasure: 'kg', quantityStock: 1000, quantityStockMin: 10, quantityStockMax: 2000 } }
 
   # Cria um ingrediente válido para testes
   let(:valid_ingredient) { create(:ingredient, valid_ingredient_attributes) }
 
   # Define exemplos de atributos inválidos para testes
-  let(:invalid_ingredient_attributes) { { name: '', unityMeasure: nil, quantityStock: nil } }
+  let(:invalid_ingredient_attributes) { { name: '', unityMeasure: nil, quantityStock: nil, quantityStockMin: nil, quantityStockMax: nil } }
 
-  let(:updated_ingredient_attributes) { { name: 'Cebola', unityMeasure: 'g', quantityStock: 500 } }
+  let(:updated_ingredient_attributes) { { name: 'Cebola', unityMeasure: 'g', quantityStock: 500, quantityStockMin: 20, quantityStockMax: 3000 } }
   let(:ingredient) { create(:ingredient, valid_ingredient_attributes) }
 
   describe 'GET #index' do
@@ -79,6 +79,8 @@ RSpec.describe IngredientsController, type: :controller do
         expect(ingredient.name).to eq('Cebola')
         expect(ingredient.unityMeasure).to eq('g')
         expect(ingredient.quantityStock).to eq(500)
+        expect(ingredient.quantityStockMin).to eq(20)
+        expect(ingredient.quantityStockMax).to eq(3000)
       end
 
       it 'redirects to the ingredient' do
@@ -134,6 +136,31 @@ RSpec.describe IngredientsController, type: :controller do
     it 'responds with no content for JSON requests' do
       delete :destroy, params: { id: ingredient.id }, format: :json
       expect(response).to have_http_status(:no_content)  # Verifica se o status da resposta é 204 No Content
+    end
+  end
+
+  describe 'validations quantitys' do
+    it 'is invalid if quantityStockMin is greater than quantityStockMax' do
+      ingredient = Ingredient.new(
+        name: 'Tomate',
+        unityMeasure: 'kg',
+        quantityStock: 1000,
+        quantityStockMin: 200,  # Valor maior
+        quantityStockMax: 100   # Valor menor
+      )
+      expect(ingredient).not_to be_valid
+      expect(ingredient.errors[:quantityStockMin]).to include("não pode ser maior que o estoque máximo")
+    end
+
+    it 'is valid if quantityStockMin is less than or equal to quantityStockMax' do
+      ingredient = Ingredient.new(
+        name: 'Cenoura',
+        unityMeasure: 'kg',
+        quantityStock: 500,
+        quantityStockMin: 100,
+        quantityStockMax: 200
+      )
+      expect(ingredient).to be_valid  # Deve ser válido
     end
   end
 end
