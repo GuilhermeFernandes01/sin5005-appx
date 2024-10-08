@@ -19,7 +19,7 @@ class ProductsController < ApplicationController
       return
     end
 
-    redirect_to "/products/new"
+    redirect_to @product
   end
 
   def edit

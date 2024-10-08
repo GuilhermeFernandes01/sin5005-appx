@@ -85,12 +85,24 @@ RSpec.describe ProductsController, type: :controller do
   describe "POST #create" do
     context "with valid attributes" do
       before do
+        allow(Product).to receive(:new).and_return(product)
+
         allow(product).to receive(:save).and_return(true)
+        allow(product).to receive(:to_model).and_return(product)
+        allow(product).to receive(:model_name).and_return(Product.model_name)
+        allow(product).to receive(:persisted?).and_return(true)
       end
 
-      it "redirects to the root path" do
-        post :create, params: { product: { name: "Pizza de Pepperoni", price: 40.99, category: "Pizza", require_ingredients: true } }
-        expect(response).to redirect_to("/products/new")
+      it "calls Product.new with the proper params" do
+        product_params = { name: "Pizza de Pepperoni", price: "40.99", category: "Pizza", require_ingredients: "true" }
+        post :create, params: { product: product_params }
+
+        expect(Product).to have_received(:new).with(ActionController::Parameters.new(product_params).permit(:name, :price, :category, :require_ingredients))
+      end
+
+      it "redirects to the product path" do
+        post :create, params: { product: { name: "Pizza de Pepperoni", price: "40.99", category: "Pizza", require_ingredients: "true" } }
+        expect(response).to redirect_to(product_path(product))
       end
     end
 
