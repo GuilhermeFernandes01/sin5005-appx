@@ -4,6 +4,7 @@ class Supplier < ApplicationRecord
   validates :phone, format: { with: /\A\(\d{2}\) \d{4,5}-\d{4}\z/, message: "must follow the format (XX) XXXX-XXXX or (XX) XXXXX-XXXX" }, allow_blank: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP, message: "is invalid" }, allow_blank: true
   validates :segment, presence: true
+  #validates :code, presence: true, uniqueness: true unless Rails.env.test?
   validates :code, presence: true, uniqueness: true
 
   before_validation :set_code, on: :create

@@ -3,6 +3,10 @@ class SupplierController < ApplicationController
     @supplier = Supplier.new
   end
 
+  def index
+    @supplier = Supplier.all
+  end
+
   def create
     @supplier = Supplier.new(supplier_params)
     if @supplier.save
