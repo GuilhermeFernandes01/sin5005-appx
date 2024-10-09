@@ -15,6 +15,10 @@ RSpec.describe IngredientsController, type: :controller do
   let(:ingredient) { create(:ingredient, valid_ingredient_attributes) }
 
   describe 'GET #index' do
+    let!(:ingredient) { create(:ingredient) } # Usando FactoryBot para criar um ingrediente válido
+    let!(:ingredient_menor) { create(:ingredient, quantityStock: 5, quantityStockMin: 10) }
+    let!(:ingredient_maior) { create(:ingredient, quantityStock: 15, quantityStockMin: 10) }
+
     it 'assigns all ingredients to @ingredients' do
       get :index
       expect(assigns(:ingredients)).to eq(Ingredient.all)
@@ -23,6 +27,22 @@ RSpec.describe IngredientsController, type: :controller do
     it 'renders the index template' do
       get :index
       expect(response).to render_template(:index)
+    end
+
+    context "using filter 'menor_estoque_min'" do
+      it 'returns ingredients with quantityStock less or equal than quantityStockMin' do
+        get :index, params: { filter: 'menor_estoque_min' }
+        expect(assigns(:ingredients)).to include(ingredient_menor)
+        expect(assigns(:ingredients)).not_to include(ingredient_maior)
+      end
+    end
+
+    context "using filter 'maior_estoque_min'" do
+      it 'returns ingredients with quantityStock greater than quantityStockMin' do
+        get :index, params: { filter: 'maior_estoque_min' }
+        expect(assigns(:ingredients)).to include(ingredient_maior)
+        expect(assigns(:ingredients)).not_to include(ingredient_menor)
+      end
     end
   end
 
