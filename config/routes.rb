@@ -1,15 +1,25 @@
 
 Rails.application.routes.draw do
   resources :ingredients
+
   get "/employees", to: "employees#index"
-  get "employees/index"
-  get "employees/new"
-  resources :employees, only: [ :new, :create ]
+  get "/employees/new", to: "employees#new"
+  get "/employees/:id", to: "employees#show"
+  get "/employees/:id/edit", to: "employees#edit"
+  put "/employees/:id", to: "employees#update"
+  patch "/employees/:id/fire", to: "employees#fire", as: "fire_employee"
 
-
+  resources :employees, only: [
+    :index,
+    :show,
+    :new,
+    :create,
+    :edit,
+    :update,
+    :destroy
+  ]
 
   resources :clientes
-
 
   get "/products/new", to: "products#new", as: "new_article"
   post "/products", to: "products#create"

@@ -1,51 +1,5 @@
-<h1>New employee</h1>
-<%= form_with model: @employee do |f| %>
-  <% if @employee.errors.any? %>
-    <div>
-      <ul>
-        <% @employee.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<h1>Novo funcionário</h1>
 
-  <div>
-    <%= f.label :name, "Nome completo" %><br>
-    <%= f.text_field :name %>
-  </div>
-
-  <div>
-    <%= f.label :salary, "Salário (R$)" %><br>
-    <%= f.text_field :salary %>
-  </div>
-
-  <div>
-    <%= f.label :position, "Cargo" %><br>
-    <%= f.text_field :position %>
-  </div>
-
-  <div>
-    <%= f.label :admission_date, "Data de admissão" %><br>
-    <%= f.text_field :admission_date %>
-  </div>
-
-  <div>
-    <%= f.label :birth_date, "Data de nascimento" %><br>
-    <%= f.text_field :birth_date %>
-  </div>
-
-  <div>
-    <%= f.label :password, "Senha" %><br>
-    <%= f.password_field :password %>
-  </div>
-
-  <div>
-    <%= f.label :password_confirmation, "Confirmação da senha" %><br>
-    <%= f.password_field :password_confirmation %>
-  </div>
-
-  <p>
-    <%= f.submit "Criar funcionário" %>
-  </p>
-<% end %>
+<div class="formulario">
+  <%= render "form_new_employee" %>
+</div>

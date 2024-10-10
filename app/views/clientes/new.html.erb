@@ -1,8 +1,8 @@
-<h1 style="text-align: center;">Novo Cliente</h1>
+<h1>Novo Cliente</h1>
 
-<div class="novo-cliente-form" style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
-  <%= form_with(model: @cliente, local: true, class: 'formulario-cliente') do |form| %>
-    
+<div class="formulario">
+  <%= form_with(model: @cliente, local: true) do |form| %>
+
     <% if @cliente.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@cliente.errors.count, "erro") %> impediram o salvamento deste cliente:</h2>
@@ -14,24 +14,24 @@
       </div>
     <% end %>
 
-    <div class="campo-formulario">
+    <div>
       <%= form.label :nome %><br>
-      <%= form.text_field :nome, class: 'input-cliente' %>
+      <%= form.text_field :nome %>
     </div>
 
-    <div class="campo-formulario">
+    <div>
       <%= form.label :telefone %><br>
-      <%= form.text_field :telefone, class: 'input-cliente' %>
+      <%= form.text_field :telefone %>
     </div>
 
-    <div class="campo-formulario">
+    <div>
       <%= form.label :email %><br>
-      <%= form.email_field :email, class: 'input-cliente' %>
+      <%= form.email_field :email %>
     </div>
 
-    <div class="campo-formulario">
+    <div>
       <%= form.label :endereco %><br>
-      <%= form.text_field :endereco, class: 'input-cliente' %>
+      <%= form.text_field :endereco %>
     </div>
 
     <div class="field">
@@ -39,13 +39,13 @@
       <%= form.date_field :data_nascimento %><br>
     </div>
 
-    <div class="campo-formulario">
+    <div>
       <%= form.label :observacoes %><br>
-      <%= form.text_area :observacoes, class: 'input-cliente' %>
+      <%= form.text_area :observacoes %>
     </div>
 
-    <div style="margin-top: 20px;">
-      <%= form.submit "Salvar", class: 'botao-submit' %>
+    <div>
+      <%= form.submit "Salvar" %>
     </div>
 
   <% end %>

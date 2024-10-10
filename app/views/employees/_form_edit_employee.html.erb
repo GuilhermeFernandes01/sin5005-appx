@@ -1,0 +1,30 @@
+<%= form_with model: @employee do |f| %>
+  <div>
+    <%= f.label :name, "Nome completo" %><br>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :salary, "Salário (R$)" %><br>
+    <%= f.text_field :salary %>
+  </div>
+
+  <div>
+    <%= f.label :position, "Cargo" %><br>
+    <%= f.text_field :position %>
+  </div>
+
+  <div>
+    <%= f.label :admission_date, "Data de admissão" %><br>
+    <%= f.text_field :admission_date %>
+  </div>
+
+  <div>
+    <%= f.label :birth_date, "Data de nascimento" %><br>
+    <%= f.text_field :birth_date %>
+  </div>
+
+  <p>
+    <%= f.submit "Atualizar funcionário" %>
+  </p>
+<% end %>

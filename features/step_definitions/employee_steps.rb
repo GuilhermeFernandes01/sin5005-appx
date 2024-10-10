@@ -71,7 +71,7 @@ When("I submit the form") do
 end
 
 Then("I should see a success message") do
-  expect(page).to have_content("Employee was successfully created.")
+  expect(page).to have_content("Funcionário foi criado com sucesso.")
 end
 
 Then("I should see the new employee in the employee list") do

@@ -1,0 +1,12 @@
+<% content_for :title, "Editando funcionário employee" %>
+
+<div class="formulario">
+  <%= render "form_edit_employee", employee: @employee  %>
+</div>
+
+<br>
+
+<div>
+  <%= link_to "Exibir funcionário", employee_path %> |
+  <%= link_to "Voltar para funcionários", employees_path %>
+</div>
