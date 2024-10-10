@@ -1,0 +1,29 @@
+<h1>Fornecedores Cadastrados</h1>
+
+
+<table>
+ <thead>
+   <tr>
+     <th>Código</th>
+     <th>Nome</th>
+     <th>CNPJ</th>
+     <th>Telefone</th>
+     <th>Email</th>
+     <th>Segmento</th>
+     <th>Produtos</th>
+   </tr>
+ </thead>
+ <tbody>
+   <% @supplier.each do |supplier| %>
+     <tr>
+       <td><%= supplier.code %></td>
+       <td><%= supplier.name %></td>
+       <td><%= supplier.cnpj %></td>
+       <td><%= format_phone(supplier.phone) %></td>
+       <td><%= supplier.email %></td>
+       <td><%= supplier.segment %></td>
+       <td><%= supplier.products %></td>
+     </tr>
+   <% end %>
+ </tbody>
+</table>
