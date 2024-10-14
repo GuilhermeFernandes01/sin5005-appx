@@ -12,9 +12,16 @@ class Supplier < ApplicationRecord
   private
 
   def set_code
-    max_code = Supplier.maximum(:code) || "0"
-    new_code = max_code.to_i + 1
-    self.code = "SUP#{new_code.to_s.rjust(3, '0')}"
+    existing_supplier = Supplier.find_by(cnpj: self.cnpj)
+    if existing_supplier
+      self.code = existing_supplier.code
+    else
+      Supplier.transaction do
+        max_code = Supplier.maximum(:code) || "SUP000"
+        new_number = max_code.gsub("SUP", "").to_i + 1
+        self.code = "SUP#{new_number.to_s.rjust(3, '0')}"
+      end
+    end
   end
 
   private
