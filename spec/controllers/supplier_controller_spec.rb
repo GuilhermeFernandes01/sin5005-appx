@@ -23,7 +23,7 @@ RSpec.describe SupplierController, type: :controller do
          post :create, params: { supplier: {
            name: 'Supplier 1',
            cnpj: '12345678000199',
-           phone: '(11) 99999-9999', # Telefone no formato correto
+           phone: '(11) 99999-9999',
            email: 'supplier@example.com',
            segment: 'Segment A',
            products: 'Product A'

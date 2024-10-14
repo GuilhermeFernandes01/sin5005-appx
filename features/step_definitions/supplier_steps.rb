@@ -53,9 +53,9 @@ end
   expect(page).to have_css('table')
  end
 
- Then('the table should contain  {string}, {string}, {string}, {string}, {string} and {string}') do |name, cnpj, phone, email, segment, products|
+ Then('the table should contain {string}, {string}, {string}, {string}, {string}, {string} and {string}') do |code, name, cnpj, phone, email, segment, products|
   within 'table' do
-    # expect(page).to have_content(code)
+    expect(page).to have_content(code)
     expect(page).to have_content(name)
     expect(page).to have_content(cnpj)
     expect(page).to have_content(phone)
