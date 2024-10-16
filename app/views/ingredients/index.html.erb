@@ -4,7 +4,23 @@
 
 <h1>Ingredients</h1>
 
-<%= link_to "New ingredient", new_ingredient_path %>
+<div class="container">
+  <%= form_with url: ingredients_path, method: :get, local: true, class: "form-inline row mb-3" do %>
+    <div class="col-auto">
+      <label for="ingredient-name" class="col-form-label">Filter by Name:</label>
+    </div>
+    <div class="col-auto">
+      <input type="text" id="ingredient-name" name="name" class="form-control" placeholder="Ingredient">
+    </div>
+    <div class="col-auto">
+      <%= submit_tag "Filter", class: "btn btn-primary" %>
+    </div>
+    <div class="col-auto">
+      <%= link_to "New ingredient", new_ingredient_path %>
+    </div>
+  <% end %>
+</div>
+
 
 <div class="container" id="ingredients">
   <%= link_to "All Ingredients", ingredients_path, class: "btn btn-primary #{params[:filter].blank? ? 'active' : ''}" %>
