@@ -7,7 +7,10 @@
 <%= link_to "New ingredient", new_ingredient_path %>
 
 <div class="container" id="ingredients">
-  <table class="table table-striped">
+  <%= link_to "All Ingredients", ingredients_path, class: "btn btn-primary #{params[:filter].blank? ? 'active' : ''}" %>
+  <%= link_to "Less Than Stock Min", ingredients_path(filter: "menor_estoque_min"), class: "btn btn-primary #{params[:filter] == 'menor_estoque_min' ? 'active' : ''}" %>
+  <%= link_to "Greater Than Stock Min", ingredients_path(filter: "maior_estoque_min"), class: "btn btn-primary #{params[:filter] == 'maior_estoque_min' ? 'active' : ''}" %>
+  <table id="ingredients-list" class="table table-striped">
     <thead>
       <tr>
         <th>ID</th>
@@ -19,7 +22,7 @@
         <th>Actions</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="ingredient-table-body">
       <% @ingredients.each do |ingredient| %>
         <tr>
           <td><%= ingredient.id %></td>

@@ -4,6 +4,13 @@ class IngredientsController < ApplicationController
   # GET /ingredients or /ingredients.json
   def index
     @ingredients = Ingredient.all
+
+    # Filtros
+    if params[:filter] == "menor_estoque_min"
+      @ingredients = Ingredient.where("quantityStock <= quantityStockMin")
+    elsif params[:filter] == "maior_estoque_min"
+      @ingredients = Ingredient.where("quantityStock > quantityStockMin")
+    end
   end
 
   # GET /ingredients/1 or /ingredients/1.json
