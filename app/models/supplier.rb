@@ -10,14 +10,16 @@ class Supplier < ApplicationRecord
   validate :products_are_present_and_unique
 
   private
-
   def set_code
     existing_supplier = Supplier.find_by(cnpj: self.cnpj)
+
     if existing_supplier
       self.code = existing_supplier.code
     else
+      # Inicia uma transação para garantir a atomicidade
       Supplier.transaction do
         max_code = Supplier.maximum(:code) || "SUP000"
+        # Extrai o número do código existente e incrementa
         new_number = max_code.gsub("SUP", "").to_i + 1
         self.code = "SUP#{new_number.to_s.rjust(3, '0')}"
       end
