@@ -67,7 +67,7 @@ RSpec.describe IngredientsController, type: :controller do
         expect(assigns(:ingredients)).to include(ingredient_1)
         expect(assigns(:ingredients)).not_to include(ingredient_2)  # "Queijo" não deve ser incluído
       end
-  
+
       it 'returns all ingredients if the name filter is not present' do
         get :index
         expect(assigns(:ingredients)).to include(ingredient_1, ingredient_2)
