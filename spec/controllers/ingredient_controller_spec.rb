@@ -46,6 +46,35 @@ RSpec.describe IngredientsController, type: :controller do
     end
   end
 
+  describe 'GET #index filter by name' do
+    let!(:ingredient_1) { create(:ingredient, name: 'Leite') }
+    let!(:ingredient_2) { create(:ingredient, name: 'Queijo') }
+
+    it 'assigns all ingredients to @ingredients' do
+      get :index
+      expect(assigns(:ingredients)).to eq(Ingredient.all)
+    end
+
+    context 'with name filter' do
+      it 'filters ingredients by name' do
+        get :index, params: { name: 'Leite' }
+        expect(assigns(:ingredients)).to include(ingredient_1)
+        expect(assigns(:ingredients)).not_to include(ingredient_2)
+      end
+
+      it 'filters ingredients by partial name match' do
+        get :index, params: { name: 'Lei' }  # Buscando "Lei" como parte de "Leite"
+        expect(assigns(:ingredients)).to include(ingredient_1)
+        expect(assigns(:ingredients)).not_to include(ingredient_2)  # "Queijo" não deve ser incluído
+      end
+  
+      it 'returns all ingredients if the name filter is not present' do
+        get :index
+        expect(assigns(:ingredients)).to include(ingredient_1, ingredient_2)
+      end
+    end
+  end
+
   describe 'GET #new' do
     it 'assigns a new ingredient to @ingredient' do
       get :new
