@@ -28,7 +28,7 @@ Given("I am on the create supplier registration page") do
  end
 
  Then("I must see an alert message") do
-  expect(page).to have_selector('h1', text: "Supplier Registration")
+  expect(page).to have_selector('h1', text: "Cadastro de Fornecedores")
  end
 
  # List
