@@ -41,16 +41,16 @@ Given("I am on the create supplier registration page") do
  end
 
  When('I visit the suppliers listing page') do
-  visit supplier_path
+  visit suppliers_path
  end
 
  Then('I should see a table with supplier information') do
   expect(page).to have_css('table')
  end
 
- Then('the table should contain  {string}, {string}, {string}, {string}, {string} and {string}') do |name, cnpj, phone, email, segment, products|
+ Then('the table should contain {string}, {string}, {string}, {string}, {string}, {string} and {string}') do |code, name, cnpj, phone, email, segment, products|
   within 'table' do
-    # expect(page).to have_content(code)
+    expect(page).to have_content(code)
     expect(page).to have_content(name)
     expect(page).to have_content(cnpj)
     expect(page).to have_content(phone)
@@ -58,19 +58,20 @@ Given("I am on the create supplier registration page") do
     expect(page).to have_content(segment)
     expect(page).to have_content(products)
   end
- end
+end
+
 
  Then('I should see supplier {string}') do |supplier|
   expect(page).to have_content(supplier)
  end
 
  # Delete
- When('I delete the supplier {string}') do |supplier_name|
+ When("I press the button {string} from {string}") do |button_text, supplier_name|
   within('table') do
     supplier_row = find('tr', text: supplier_name)
-    supplier_row.click_link 'Excluir'
+    supplier_row.click_button("Excluir")
   end
- end
+end
 
  Then('I should no longer see {string} in the suppliers list') do |supplier_name|
   expect(page).not_to have_content(supplier_name)
