@@ -30,7 +30,7 @@
   <div>
       <% @ingredients.each do |ingredient| %>
         <div>
-          <%= check_box_tag 'ingredient_ids[]', ingredient.id, @product.ingredients.include?(ingredient) %>
+          <%= check_box_tag 'ingredient_ids[]', ingredient.id, @product.ingredients.include?(ingredient), id: "ingredient_ids_#{ingredient.id}" %>
           <%= label_tag "ingredient_ids_#{ingredient.id}", ingredient.name %>
         </div>
       <% end %>
