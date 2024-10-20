@@ -70,18 +70,35 @@ describe "GET #index" do
   end
 end
 
-
- let!(:supplier) { Supplier.create!(name: 'Supplier Test', cnpj: '12345678901234', phone: '(11) 1234-5678', email: 'supplier@test.com', segment: 'cheese', products: 'Product A', code: 'SUP001') }
+let!(:supplier) { Supplier.create!(name: 'Supplier Test', cnpj: '12345678901234', phone: '(11) 1234-5678', email: 'supplier@test.com', segment: 'cheese', products: 'Product A', code: 'SUP001') }
 
  describe 'DELETE #destroy' do
-   it 'deletes the supplier and redirects to index' do
-     expect {
-       delete :destroy, params: { id: supplier.id }
-     }.to change(Supplier, :count).by(-1)
-     expect(response).to redirect_to(suppliers_path)
-     expect(flash[:notice]).to eq("Supplier was successfully deleted.")
-   end
- end
+  context 'when the supplier is successfully deleted' do
+    it 'deletes the supplier and redirects to index' do
+      expect {
+        delete :destroy, params: { id: supplier.id }
+      }.to change(Supplier, :count).by(-1)
+      expect(response).to redirect_to(suppliers_path)
+      expect(flash[:notice]).to eq("Supplier was successfully deleted.")
+    end
+  end
+
+  context 'when the supplier cannot be deleted' do
+    before do
+      allow_any_instance_of(Supplier).to receive(:destroy).and_return(false)
+    end
+
+    it 'does not delete the supplier and redirects back with an error message' do
+      expect {
+        delete :destroy, params: { id: supplier.id }
+      }.not_to change(Supplier, :count)
+
+      expect(response).to redirect_to (suppliers_path)
+      expect(flash[:alert]).to eq("Supplier could not be deleted.")
+    end
+  end
+end
+
 
   describe 'PATCH #update' do
     context 'with valid attributes' do

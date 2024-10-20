@@ -1,5 +1,5 @@
 class SuppliersController < ApplicationController
-  before_action :set_supplier, only: [ :show, :update, :edit ]
+  before_action :set_supplier, only: [ :show, :update, :edit, :destroy ]
 
   def new
     @supplier = Supplier.new
@@ -27,7 +27,7 @@ class SuppliersController < ApplicationController
       redirect_to suppliers_path
     else
       flash[:alert] = "Supplier could not be deleted."
-      redirect_back(fallback_location: suppliers_index_path)
+      redirect_back(fallback_location: suppliers_path)
     end
   end
 
