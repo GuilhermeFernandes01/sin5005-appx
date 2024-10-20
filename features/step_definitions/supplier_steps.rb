@@ -80,3 +80,53 @@ end
  Then('I should see a message saying {string}') do |message|
   expect(page).to have_content(message)
  end
+
+# Edit/Update
+When("I click 'Ver' for {string}") do |supplier_name|
+  within('table') do
+    supplier_row = find('tr', text: supplier_name)
+    click_link("Ver", match: :first)
+  end
+end
+
+Then("I should be on the show page for {string}") do |supplier_name|
+  supplier = Supplier.find_by(name: supplier_name)
+  expect(page).to have_current_path(supplier_path(supplier)) if supplier
+end
+
+Then("I click {string}") do |button_text|
+  click_link("Editar")
+end
+
+When("I am on the edit page from {string}") do |supplier_name|
+  supplier = Supplier.find_by(name: supplier_name)
+  expect(page).to have_current_path(edit_supplier_path(supplier)) if supplier
+end
+
+When("I edit the name to {string}, phone to {string}, email to {string}, segment to {string}, and products to {string}") do |name, phone, email, segment, products|
+  fill_in "supplier[name]", with: name
+  fill_in "supplier[phone]", with: phone
+  fill_in "supplier[email]", with: email
+  fill_in "supplier[segment]", with: segment
+  fill_in "supplier[products]", with: products
+end
+
+When("I click on the {string} button to confirm the new information") do |button_text|
+  click_button "Salvar"
+end
+
+
+Then("I should see {string} on the show page") do |supplier_name|
+  expect(page).to have_content(supplier_name)
+end
+
+Then("I should see the updated details for phone, email, segment, and products") do
+  expect(page).to have_content("(11) 98765-4321")
+  expect(page).to have_content("modified@example.com")
+  expect(page).to have_content("Modified Segment")
+  expect(page).to have_content("Modified Products")
+end
+
+Then("I should see a link to go back to the suppliers list") do
+  expect(page).to have_link("Retornar para a Lista de Fornecedores", href: suppliers_path)
+end

@@ -1,0 +1,39 @@
+<h1>Informações do Fornecedor</h1>
+
+<% if flash[:notice] %>
+  <div class="alert alert-success"><%= flash[:notice] %></div>
+<% elsif flash.now[:alert] %>
+  <div class="alert alert-danger"><%= flash.now[:alert] %></div>
+<% end %>
+
+<p>
+  <strong>Nome:</strong>
+  <%= @supplier.name %>
+</p>
+<p>
+  <strong>CNPJ:</strong>
+  <%= @supplier.cnpj %>
+</p>
+<p>
+  <strong>Telefone:</strong>
+  <%= @supplier.phone %>
+</p>
+<p>
+  <strong>Email:</strong>
+  <%= @supplier.email %>
+</p>
+<p>
+  <strong>Segmento:</strong>
+  <%= @supplier.segment %>
+</p>
+<p>
+  <strong>Produtos:</strong>
+  <%= @supplier.products %>
+</p>
+
+<%= button_to 'Excluir', supplier_path(@supplier), method: :delete, data: { confirm: 'Você tem certeza?' } %>
+<%= link_to 'Editar', edit_supplier_path(@supplier), class: 'btn btn-primary' %>
+
+<p>
+<%= link_to 'Retornar para a Lista de Fornecedores', suppliers_path %>
+<p>
