@@ -4,6 +4,15 @@ Given('que possuo alguns produtos cadastrados:') do |table|
   end
 end
 
+Given('que os produtos possuem os seguintes ingredientes:') do |table|
+  table.hashes.each do |product_ingredient|
+    product = Product.find_by!(name: product_ingredient['product_name'])
+    ingredient = Ingredient.find_by!(name: product_ingredient['ingredient_name'])
+
+    product.ingredients << ingredient
+  end
+end
+
 Given('estou na página de produtos') do
   visit '/products'
 end

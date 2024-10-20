@@ -2,16 +2,10 @@ Given('clico no botão editar') do
   click_button('Editar')
 end
 
-Given('atualizo as informações do produto \({string}, {string}, {string}, {string}) para \({string}, {float}, {string}, {string})') do |name_field, price_field, category_field, require_ingredients_field, new_name, new_price, new_category, new_require_ingredients|
+Given('atualizo as informações do produto \({string}, {string}, {string}) para \({string}, {float}, {string})') do |name_field, price_field, category_field, new_name, new_price, new_category|
   fill_in name_field, with: new_name
   fill_in price_field, with: new_price
   fill_in category_field, with: new_category
-
-  if new_require_ingredients == "true"
-    check require_ingredients_field
-  else
-    uncheck require_ingredients_field
-  end
 end
 
 Then('devo ver as informações novas do produto \({string}, {float}, {string}, {string})') do |expected_name, expected_price, expected_category, expected_require_ingredients|
@@ -21,16 +15,10 @@ Then('devo ver as informações novas do produto \({string}, {float}, {string}, 
   expect(page).to have_content(expected_require_ingredients == "true" ? "Sim" : "Não")
 end
 
-When('atualizo as informações do produto \({string}, {string}, {string}, {string}) para \({string}, {string}, {string}, {string})') do |name_field, price_field, category_field, require_ingredients_field, new_name, new_price, new_category, new_require_ingredients|
+When('atualizo as informações do produto \({string}, {string}, {string}) para \({string}, {string}, {string})') do |name_field, price_field, category_field, new_name, new_price, new_category|
   fill_in name_field, with: new_name
   fill_in price_field, with: new_price
   fill_in category_field, with: new_category
-
-  if new_require_ingredients == "true"
-    check require_ingredients_field
-  else
-    uncheck require_ingredients_field
-  end
 end
 
 Then('devo ver os erros de edição de produto {string}, {string}, {string}, {string}') do |error1, error2, error3, error4|
