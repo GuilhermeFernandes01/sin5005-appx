@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get "employees/new"
   resources :employees, only: [ :new, :create ]
 
-
+  resources :suppliers
 
   resources :clientes
 
@@ -29,7 +29,4 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  get "/supplier/new", to: "supplier#new"
-  post "/supplier", to: "supplier#create"
-  resources :supplier
 end
