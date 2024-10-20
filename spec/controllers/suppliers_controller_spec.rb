@@ -101,5 +101,47 @@ end
         expect(flash[:notice]).to eq("Supplier was successfully updated.")
       end
     end
+
+    context 'with invalid attributes' do
+      it 'does not update the supplier' do
+        patch :update, params: { id: supplier.id, supplier: { name: nil, email: 'invalidemail' } }
+        supplier.reload
+        expect(supplier.name).not_to eq(nil)
+      end
+
+      it 'renders the edit template again' do
+        patch :update, params: { id: supplier.id, supplier: { name: nil, email: 'invalidemail' } }
+        expect(response).to render_template(:edit)
+      end
+
+      it 'sets a flash message' do
+        patch :update, params: { id: supplier.id, supplier: { name: nil } }
+        expect(flash[:alert]).to eq("Supplier could not be updated, please consider the informations sent")
+      end
+    end
+  end
+
+  describe 'GET #show' do
+    it 'assigns the requested supplier to @supplier' do
+      get :show, params: { id: supplier.id }
+      expect(assigns(:supplier)).to eq(supplier)
+    end
+
+    it 'renders the show template' do
+      get :show, params: { id: supplier.id }
+      expect(response).to render_template(:show)
+    end
+  end
+
+  describe 'GET #edit' do
+    it 'assigns the requested supplier to @supplier' do
+      get :edit, params: { id: supplier.id }
+      expect(assigns(:supplier)).to eq(supplier)
+    end
+
+    it 'renders the edit template' do
+      get :edit, params: { id: supplier.id }
+      expect(response).to render_template(:edit)
+    end
   end
 end

@@ -26,4 +26,22 @@ end
      expect(helper.format_supplier_name(supplier)).to eq("Supplier Test (SUP_TXX0)")
    end
  end
+
+  describe "#format_phone" do
+    it "formats a 10-digit phone number correctly" do
+      expect(helper.format_phone("1198765432")).to eq("(11) 9876-5432")
+    end
+
+    it "formats an 11-digit phone number correctly" do
+      expect(helper.format_phone("11987654321")).to eq("(11) 98765-4321")
+    end
+
+    it "returns the original input for non-10/11-digit numbers" do
+      expect(helper.format_phone("123456")).to eq("123456")
+    end
+
+    it "ignores non-digit characters" do
+      expect(helper.format_phone("(11) 98765-4321")).to eq("(11) 98765-4321")
+    end
+  end
 end
