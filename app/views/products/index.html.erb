@@ -17,7 +17,7 @@
           <td><%= link_to product.name, product %></td>
           <td><%= product.price %></td>
           <td><%= product.category %></td>
-          <td><%= product.require_ingredients %></td>
+          <td><%= product.require_ingredients? %></td>
         </tr>
       <% end %>
     </tbody>
