@@ -21,6 +21,8 @@ Funcionalidade: Listar Produtos
       | Pizza de Pepperoni | Queijo             |
     E estou na página de produtos
     Então devo ver esses produtos "Pizza de Pepperoni" e "Água" listados
+    E devo ver o produto "Pizza de Pepperoni" com "Requer Ingredientes" sendo "true"
+    E devo ver o produto "Água" com "Requer Ingredientes" sendo "false"
 
   Cenário: sem produtos
     Dado que não possuo produtos cadastrados

@@ -29,3 +29,13 @@ Then('devo ver a mensagem {string} sem a tabela') do |string|
   expect(page).to have_selector("table", count: 0)
   expect(page).to have_content(string)
 end
+
+Then('devo ver o produto {string} com {string} sendo {string}') do |product_name, column_name, column_value|
+  within('table') do
+    row = find('tr', text: product_name)
+
+    column_index = find('thead tr').all('th').map(&:text).index(column_name)
+
+    expect(row.all('td')[column_index].text).to eq(column_value)
+  end
+end

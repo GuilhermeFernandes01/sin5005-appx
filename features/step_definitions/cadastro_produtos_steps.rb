@@ -30,13 +30,18 @@ When('clico no botão {string}') do |button|
   click_button button
 end
 
-Then('devo ter cadastrado o produto \({string}, {float}, {string}, {string})') do |name, price, category, require_ingredients|
+Then('devo ter cadastrado o produto \({string}, {float}, {string}, {string}) com os ingredientes:') do |name, price, category, require_ingredients, ingredients|
   product = Product.find_by(name: name)
 
   expect(product).to_not be_nil
   expect(product.price).to eq(price)
   expect(product.category).to eq(category)
   expect(product.require_ingredients?).to eq(require_ingredients == "true")
+
+  expected_ingredients = ingredients.hashes.map { |row| row['Ingredient'] }
+  actual_ingredients = product.ingredients.pluck(:name)
+
+  expect(actual_ingredients).to match_array(expected_ingredients)
 end
 
 When('preencho o formulário \({string}, {string}, {string}) com dados inválidos \({string}, {string}, {string})') do |name_field, price_field, category_field, name_value, price_value, category_value|

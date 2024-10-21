@@ -20,7 +20,24 @@ Funcionalidade: Cadastro de Produtos
       | Pepperoni  |
       | Queijo     |
     E clico no botão "Criar"
-    Então devo ter cadastrado o produto ("Pizza de Pepperoni", 40.00, "Pizza", "true")
+    Então devo ter cadastrado o produto ("Pizza de Pepperoni", 40.00, "Pizza", "true") com os ingredientes:
+      | Ingredient |
+      | Pepperoni  |
+      | Queijo     |
+
+  Cenário: cadastro válido sem ingredientes
+    Dado que possuo alguns ingredientes cadastrados:
+      | name       | unityMeasure  | quantityStock  | quantityStockMin   | quantityStockMax   |
+      | Queijo     | kg            | 10             | 20                 | 1000               |
+      | Pepperoni  | unity         | 100            | 10                 | 1500               |
+      | Tomate     | kg            | 25             | 30                 | 1800               |
+    E que estou na página de cadastro de produto
+    Quando preencho o campo nome "Nome do produto" com "Água"
+    E preencho o campo preço "Preço" com "1.99"
+    E preencho o campo categoria "Categoria" com "Bebidas"
+    E clico no botão "Criar"
+    Então devo ter cadastrado o produto ("Água", 1.99, "Bebidas", "false") com os ingredientes:
+      | Ingredient |
 
   Cenário: cadastro inválido
     Dado que estou na página de cadastro de produto
