@@ -15,28 +15,16 @@ end
 
 describe 'POST #create' do
   context 'with valid attributes' do
+    let(:supplier_attributes) { attributes_for(:supplier) }
+
     it 'creates a new supplier' do
       expect {
-        post :create, params: { supplier: {
-          name: 'Supplier 1',
-          cnpj: '12345678000199',
-          phone: '(11) 99999-9999',
-          email: 'supplier@example.com',
-          segment: 'Segment A',
-          products: 'Product A'
-        } }
+        post :create, params: { supplier: supplier_attributes }
       }.to change(Supplier, :count).by(1)
     end
 
     it 'redirects to the supplier index path' do
-      post :create, params: { supplier: {
-        name: 'Supplier 1',
-        cnpj: '12345678000199',
-        phone: '(11) 99999-9999',
-        email: 'supplier@example.com',
-        segment: 'Segment A',
-        products: 'Product A'
-      } }
+      post :create, params: { supplier: supplier_attributes }
       expect(response).to redirect_to(new_supplier_path)
       expect(flash[:notice]).to eq("Supplier was successfully created.")
     end
@@ -57,22 +45,78 @@ describe 'POST #create' do
   end
 end
 
-describe "GET #index" do
-  let!(:supplier1) { instance_double("Supplier", id: 1, name: 'Supplier 1', cnpj: '12345678901234', phone: '(11) 2345-6789', email: 'supplier1@test.com', segment: 'cheese', products: 'products', code: 'TET001') }
-  let!(:supplier2) { instance_double("Supplier", id: 2, name: 'Supplier 2', cnpj: '23456789012345', phone: '(11) 2345-6788', email: 'supplier2@test.com', segment: 'sauce', products: 'other products', code: 'TET002') }
-  before do
-    allow(Supplier).to receive(:all).and_return([ supplier1, supplier2 ])
-  end
+  describe 'GET #index' do
+  let!(:supplier1) { Supplier.create!(name: 'Supplier One', cnpj: '12345678901200', phone: '(11) 2345-6789', email: 'supplier1@test.com', segment: 'Segment A', products: 'Product A', code: 'SUP001') }
+  let!(:supplier2) { Supplier.create!(name: 'Supplier Two', cnpj: '23456789012345', phone: '(11) 2345-6788', email: 'supplier2@test.com', segment: 'Segment B', products: 'Product B', code: 'SUP002') }
+  let!(:supplier3) { Supplier.create!(name: 'Supplier Three', cnpj: '34567890123456', phone: '(11) 2345-6787', email: 'supplier3@test.com', segment: 'Segment A', products: 'Product C', code: 'SUP003') }
 
-  it "assigns all suppliers as @suppliers" do
-    get :index
-    expect(assigns(:suppliers)).to match_array([ supplier1, supplier2 ])
-  end
-end
+    context 'when no search parameter is provided' do
+      it "assigns all suppliers as @suppliers" do
+        get :index
+        expect(assigns(:suppliers)).to match_array([ supplier1, supplier2, supplier3 ])
+      end
+    end
 
-let!(:supplier) { Supplier.create!(name: 'Supplier Test', cnpj: '12345678901234', phone: '(11) 1234-5678', email: 'supplier@test.com', segment: 'cheese', products: 'Product A', code: 'SUP001') }
+    context 'when searching by code' do
+      it 'returns suppliers matching the code' do
+        get :index, params: { search_by_code: 'SUP001' }
+        expect(assigns(:suppliers)).to match_array([ supplier1 ])
+      end
+    end
+
+    context 'when searching by name' do
+      it 'returns suppliers matching the name' do
+        get :index, params: { search_by_name: 'Supplier One' }
+        expect(assigns(:suppliers)).to match_array([ supplier1 ])
+      end
+    end
+
+    context 'when searching by segment' do
+      it 'returns suppliers matching the segment' do
+        get :index, params: { search_by_segment: 'Segment A' }
+        expect(assigns(:suppliers)).to match_array([ supplier1, supplier3 ])
+      end
+    end
+
+    context 'when searching by products' do
+      it 'returns suppliers matching the products' do
+        get :index, params: { search_by_products: 'Product A' }
+        expect(assigns(:suppliers)).to match_array([ supplier1 ])
+      end
+    end
+
+    context 'with search parameters' do
+      let(:valid_params) do
+        {
+          search_by_code: 'SUP001',
+          search_by_name: 'Supplier One',
+          search_by_segment: 'Segment A',
+          search_by_products: 'Product A'
+        }
+      end
+
+      let(:invalid_params) do
+        {
+          search_by_code: 'SUP001',
+          search_by_name: 'Supplier One',
+          invalid_param: 'Invalid'
+        }
+      end
+
+      it 'permits valid search parameters' do
+        get :index, params: valid_params
+        expect(controller.send(:search_params)).to include(:search_by_code, :search_by_name, :search_by_segment, :search_by_products)
+      end
+
+      it 'does not permit invalid parameters' do
+        get :index, params: invalid_params
+        expect(controller.send(:search_params)).not_to include(:invalid_param)
+      end
+    end
+  end
 
  describe 'DELETE #destroy' do
+  let!(:supplier) { create(:supplier) }
   context 'when the supplier is successfully deleted' do
     it 'deletes the supplier and redirects to index' do
       expect {
@@ -99,8 +143,8 @@ let!(:supplier) { Supplier.create!(name: 'Supplier Test', cnpj: '12345678901234'
   end
 end
 
-
   describe 'PATCH #update' do
+    let!(:supplier) { create(:supplier) }
     context 'with valid attributes' do
       it 'updates the supplier' do
         patch :update, params: { id: supplier.id, supplier: { name: 'Updated Supplier', phone: '(11) 09876-5431', email: 'updated@test.com', segment: 'Segment B', products: 'Product B' } }
@@ -139,6 +183,7 @@ end
   end
 
   describe 'GET #show' do
+    let!(:supplier) { create(:supplier) }
     it 'assigns the requested supplier to @supplier' do
       get :show, params: { id: supplier.id }
       expect(assigns(:supplier)).to eq(supplier)
@@ -151,6 +196,7 @@ end
   end
 
   describe 'GET #edit' do
+    let!(:supplier) { create(:supplier) }
     it 'assigns the requested supplier to @supplier' do
       get :edit, params: { id: supplier.id }
       expect(assigns(:supplier)).to eq(supplier)
