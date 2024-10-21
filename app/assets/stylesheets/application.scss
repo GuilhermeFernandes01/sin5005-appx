@@ -13,10 +13,10 @@ h1 {
 }
 
 .clientes-table {
-    width: 100%; 
-    border-collapse: collapse;  
-    margin: 20px auto; 
-    max-width: 800px;  
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px auto;
+    max-width: 800px;
 }
 
 .clientes-table th, .clientes-table td {
@@ -39,15 +39,15 @@ h1 {
 
 .logo-container {
     display: flex;
-    justify-content: center; 
-    align-items: center; 
+    justify-content: center;
+    align-items: center;
     margin: 20px 0;
 }
 
 .logo img {
     width: 100px;
     height: auto;
-    align-items: center; 
+    align-items: center;
 }
 
 .novo-cliente-link, .botao-submit, .voltar-link {
@@ -106,14 +106,14 @@ h1 {
     align-items: center;
     flex-direction: column;
 }
-  
+
 /* Estilização dos campos do formulário */
 .campo-formulario {
     margin-bottom: 15px;
     text-align: left;
     width: 100%;
 }
-  
+
 /* Estilização dos inputs */
 .input-cliente {
     width: 100%;
@@ -122,7 +122,7 @@ h1 {
     border: 1px solid #ccc;
     font-size: 16px;
 }
-  
+
 /* Estilização do botão de voltar */
 .voltar-link {
     text-decoration: none;
@@ -140,13 +140,13 @@ h1 {
     width: 100%; /* Largura total da tabela */
     border-collapse: collapse; /* Colapsa as bordas da tabela */
   }
-  
+
   .clientes-table th {
     text-align: center; /* Centraliza o texto nos cabeçalhos */
     background-color: #f2f2f2; /* Cor de fundo opcional para cabeçalhos */
     padding: 5px; /* Preenchimento opcional */
   }
-  
+
   .clientes-table td {
     text-align: center; /* Centraliza o texto nas células da tabela */
     padding: 5px; /* Preenchimento opcional */
@@ -160,11 +160,11 @@ h1 {
     border: 1px solid #ccc; /* Borda padrão */
     border-radius: 4px; /* Bordas arredondadas */
   }
-  
+
   .input-email {
     width: 800px; /* Largura específica para o campo de email */
   }
-  
+
   .input-endereco {
     width: 800px; /* Largura específica para o campo de endereço */
   }
