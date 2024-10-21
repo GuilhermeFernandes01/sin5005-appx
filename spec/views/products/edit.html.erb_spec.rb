@@ -45,6 +45,14 @@ RSpec.describe "products/edit.html.erb", type: :view do
           expect(form).to have_button("Salvar")
         end
       end
+
+      it "should show the ingredients" do
+        render
+
+        expect(rendered).to have_selector("label", text: "Pepperoni")
+        expect(rendered).to have_selector("label", text: "Queijo")
+        expect(rendered).to have_selector("label", text: "Tomate")
+      end
     end
 
     context "with errors after trying to save" do
