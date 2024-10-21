@@ -32,4 +32,19 @@ RSpec.describe Product, type: :model do
     expect(product).to_not be_valid
     expect(product.errors[:category]).to include "can't be empty"
   end
+
+  describe "#require_ingredients?" do
+    let!(:product) { create(:product) }
+    let!(:ingredient) { create(:ingredient) }
+
+    it "returns true if it has ingredients" do
+      product.ingredients << ingredient
+
+      expect(product.require_ingredients?).to be true
+    end
+
+    it "returns false if it has no ingredients" do
+      expect(product.require_ingredients?).to be false
+    end
+  end
 end
