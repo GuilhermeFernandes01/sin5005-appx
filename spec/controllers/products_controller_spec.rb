@@ -98,11 +98,13 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe "POST #create" do
-    let(:product) { create(:product, :pizza_pepperoni) }
+    let!(:product) { create(:product, :pizza_pepperoni) }
+    let!(:ingredients) { [ pepperoni_ingredient, cheese_ingredient, tomato_ingredient ] }
 
     context "with valid attributes" do
-      before do
+      before(:each) do
         allow(Product).to receive(:new).and_return(product)
+        allow(Ingredient).to receive(:all).and_return(ingredients)
       end
 
       it "calls Product.new with the proper params" do
@@ -110,6 +112,37 @@ RSpec.describe ProductsController, type: :controller do
         post :create, params: { product: product_params }
 
         expect(Product).to have_received(:new).with(ActionController::Parameters.new(product_params).permit(:name, :price, :category))
+      end
+
+      it "calls #update_product_ingredients" do
+        expect(controller).to receive(:update_product_ingredients)
+
+        product_params = { name: "Pizza de Pepperoni", price: "40.99", category: "Pizza" }
+        post :create, params: { product: product_params }
+      end
+
+      context "with ingredient_ids" do
+        let!(:assign_ingredients) { [ pepperoni_ingredient, cheese_ingredient ] }
+
+        before(:each) do
+          allow(Ingredient).to receive(:find).and_return(assign_ingredients)
+        end
+
+        it "should have assigned the correct ingredients to the product" do
+          product_params = { name: "Pizza de Pepperoni", price: "40.99", category: "Pizza" }
+          post :create, params: { product: product_params, ingredient_ids: assign_ingredients.map(&:id) }
+
+          expect(assigns(:product).ingredients).to match_array(assign_ingredients)
+        end
+      end
+
+      context "without ingredient_ids" do
+        it "should have no ingredients" do
+          product_params = { name: "Água", price: "1.99", category: "Bebidas" }
+          post :create, params: { product: product_params }
+
+          expect(assigns(:product).ingredients).to be_empty
+        end
       end
 
       it "redirects to the product path" do
@@ -121,6 +154,13 @@ RSpec.describe ProductsController, type: :controller do
     context "with invalid attributes" do
       before do
         allow(product).to receive(:save).and_return(false)
+        allow(Ingredient).to receive(:all).and_return(ingredients)
+      end
+
+      it "assigns the ingredients" do
+        post :create, params: { product: { name: "" } }
+
+        expect(assigns(:ingredients)).to match_array(ingredients)
       end
 
       it "renders the new template with the unprocessable entity status" do
@@ -166,6 +206,7 @@ RSpec.describe ProductsController, type: :controller do
 
   describe "PATCH #update" do
     let! (:product) { create(:product, :pizza_pepperoni) }
+    let!(:ingredients) { [ pepperoni_ingredient, cheese_ingredient, tomato_ingredient ] }
 
     before(:each) do
       allow(Product).to receive(:find).and_return(product)
@@ -180,6 +221,34 @@ RSpec.describe ProductsController, type: :controller do
         patch :update, params: { id: 1, product: { name: 'Água', price: "1.99", category: 'Bebidas' } }
 
         expect(Product).to have_received(:find).with('1')
+      end
+
+      it "calls #update_product_ingredients" do
+        expect(controller).to receive(:update_product_ingredients)
+
+        patch :update, params: { id: 1, product: { name: 'Água', price: "1.99", category: 'Bebidas' } }
+      end
+
+      context "with ingredient_ids" do
+        let!(:assign_ingredients) { [ pepperoni_ingredient, cheese_ingredient ] }
+
+        before(:each) do
+          allow(Ingredient).to receive(:find).and_return(assign_ingredients)
+        end
+
+        it "should have assigned the correct ingredients to the product" do
+          patch :update, params: { id: 1, product: { name: 'Pizza de Pepperoni', price: "40.99", category: 'Pizza' }, ingredient_ids: assign_ingredients.map(&:id) }
+
+          expect(assigns(:product).ingredients).to match_array(assign_ingredients)
+        end
+      end
+
+      context "without ingredient_ids" do
+        it "should have no ingredients" do
+          patch :update, params: { id: 1, product: { name: 'Água', price: "1.99", category: 'Bebidas' } }
+
+          expect(assigns(:product).ingredients).to be_empty
+        end
       end
 
       it "assigns the correct product" do
