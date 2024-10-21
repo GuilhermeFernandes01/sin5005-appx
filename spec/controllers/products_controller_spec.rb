@@ -1,12 +1,10 @@
 require "rails_helper"
 
 RSpec.describe ProductsController, type: :controller do
-  let(:product) { instance_double(Product) }
-
   describe "GET #index" do
     context "there are registered products" do
-      let (:product1) { instance_double(Product, name: 'Pizza de Pepperoni', price: 40.99, category: 'Pizza', require_ingredients: true) }
-      let (:product2) { instance_double(Product, name: 'Água', price: 1.99, category: 'Bebidas', require_ingredients: false) }
+      let (:product1) { create(:product, :pizza_pepperoni) }
+      let (:product2) { create(:product, :water) }
 
       before(:each) do
         allow(Product).to receive(:all).and_return([ product1, product2 ])
@@ -41,7 +39,7 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe "GET #show" do
-    let! (:mockProduct) { instance_double(Product, id: 1, name: 'Pizza de Pepperoni', price: 40.99, category: 'Pizza', require_ingredients: true) }
+    let! (:mockProduct) { create(:product, :pizza_pepperoni) }
 
     context "valid product" do
       before(:each) do
@@ -83,21 +81,18 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe "POST #create" do
+    let(:product) { create(:product, :pizza_pepperoni) }
+
     context "with valid attributes" do
       before do
         allow(Product).to receive(:new).and_return(product)
-
-        allow(product).to receive(:save).and_return(true)
-        allow(product).to receive(:to_model).and_return(product)
-        allow(product).to receive(:model_name).and_return(Product.model_name)
-        allow(product).to receive(:persisted?).and_return(true)
       end
 
       it "calls Product.new with the proper params" do
-        product_params = { name: "Pizza de Pepperoni", price: "40.99", category: "Pizza", require_ingredients: "true" }
+        product_params = { name: "Pizza de Pepperoni", price: "40.99", category: "Pizza" }
         post :create, params: { product: product_params }
 
-        expect(Product).to have_received(:new).with(ActionController::Parameters.new(product_params).permit(:name, :price, :category, :require_ingredients))
+        expect(Product).to have_received(:new).with(ActionController::Parameters.new(product_params).permit(:name, :price, :category))
       end
 
       it "redirects to the product path" do
@@ -112,7 +107,7 @@ RSpec.describe ProductsController, type: :controller do
       end
 
       it "renders the new template with the unprocessable entity status" do
-        post :create, params: { product: { require_ingredients: false } }
+        post :create, params: { product: { name: "" } }
         expect(response).to render_template(:new)
         expect(response.status).to eq(422)
       end
@@ -120,7 +115,7 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe "GET #edit" do
-    let! (:product) { instance_double(Product, id: 1, name: 'Pizza de Pepperoni', price: 40.99, category: 'Pizza', require_ingredients: true) }
+    let! (:product) { create(:product, :pizza_pepperoni) }
 
     before(:each) do
       allow(Product).to receive(:find).and_return(product)
@@ -147,14 +142,10 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe "PATCH #update" do
-    let! (:product) { instance_double(Product, id: 1, name: 'Pizza de Pepperoni', price: 40.99, category: 'Pizza', require_ingredients: true) }
+    let! (:product) { create(:product, :pizza_pepperoni) }
 
     before(:each) do
       allow(Product).to receive(:find).and_return(product)
-
-      allow(product).to receive(:to_model).and_return(product)
-      allow(product).to receive(:model_name).and_return(Product.model_name)
-      allow(product).to receive(:persisted?).and_return(true)
     end
 
     context "with valid data" do
@@ -163,27 +154,27 @@ RSpec.describe ProductsController, type: :controller do
       end
 
       it "calls Product.find with the proper params" do
-        patch :update, params: { id: 1, product: { name: 'Água', price: "1.99", category: 'Bebidas', require_ingredients: "false" } }
+        patch :update, params: { id: 1, product: { name: 'Água', price: "1.99", category: 'Bebidas' } }
 
         expect(Product).to have_received(:find).with('1')
       end
 
       it "assigns the correct product" do
-        product_params = { name: 'Água', price: "1.99", category: 'Bebidas', require_ingredients: "false" }
+        product_params = { name: 'Água', price: "1.99", category: 'Bebidas' }
         patch :update, params: { id: 1, product: product_params }
 
         expect(assigns(:product)).to eq(product)
       end
 
       it "receives the new data" do
-        product_params = { name: 'Água', price: "1.99", category: 'Bebidas', require_ingredients: "false" }
+        product_params = { name: 'Água', price: "1.99", category: 'Bebidas' }
         patch :update, params: { id: 1, product: product_params }
 
-        expect(product).to have_received(:update).with(ActionController::Parameters.new(product_params).permit(:name, :price, :category, :require_ingredients))
+        expect(product).to have_received(:update).with(ActionController::Parameters.new(product_params).permit(:name, :price, :category))
       end
 
       it "redirects to the product path" do
-        product_params = { name: 'Água', price: "1.99", category: 'Bebidas', require_ingredients: "false" }
+        product_params = { name: 'Água', price: "1.99", category: 'Bebidas' }
         patch :update, params: { id: 1, product: product_params }
 
         expect(response).to redirect_to(product_path(product))
@@ -196,27 +187,27 @@ RSpec.describe ProductsController, type: :controller do
       end
 
       it "calls Product.find with the proper params" do
-        patch :update, params: { id: 1, product: { name: "", price: "", category: 'Bebidas', require_ingredients: "false" } }
+        patch :update, params: { id: 1, product: { name: "", price: "", category: 'Bebidas' } }
 
         expect(Product).to have_received(:find).with('1')
       end
 
       it "assigns the correct product" do
-        product_params = { name: "", price: "", category: 'Bebidas', require_ingredients: "false" }
+        product_params = { name: "", price: "", category: 'Bebidas' }
         patch :update, params: { id: 1, product: product_params }
 
         expect(assigns(:product)).to eq(product)
       end
 
       it "receives the new data" do
-        product_params = { name: "", price: "", category: 'Bebidas', require_ingredients: "false" }
+        product_params = { name: "", price: "", category: 'Bebidas' }
         patch :update, params: { id: 1, product: product_params }
 
-        expect(product).to have_received(:update).with(ActionController::Parameters.new(product_params).permit(:name, :price, :category, :require_ingredients))
+        expect(product).to have_received(:update).with(ActionController::Parameters.new(product_params).permit(:name, :price, :category))
       end
 
       it "redirects to the product path" do
-        product_params = { name: "", price: "", category: 'Bebidas', require_ingredients: "false" }
+        product_params = { name: "", price: "", category: 'Bebidas' }
         patch :update, params: { id: 1, product: product_params }
 
         expect(response).to render_template(:edit)
@@ -226,7 +217,7 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe "DELETE #destroy" do
-    let (:product) { instance_double(Product, id: 1, name: 'Pizza de Pepperoni', price: 40.99, category: 'Pizza', require_ingredients: true) }
+    let (:product) { create(:product, :pizza_pepperoni) }
 
     before(:each) do
       allow(Product).to receive(:find).and_return(product)

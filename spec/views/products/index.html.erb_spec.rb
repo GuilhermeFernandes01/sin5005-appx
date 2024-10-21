@@ -2,18 +2,10 @@ require "rails_helper"
 
 RSpec.describe "products/index.html.erb", type: :view do
   describe "with registered products" do
-    let (:product1) { instance_double(Product, id: 1, name: 'Pizza de Pepperoni', price: 40.99, category: 'Pizzas', require_ingredients: true) }
-    let (:product2) { instance_double(Product, id: 2, name: 'Água', price: 1.99, category: 'Bebidas', require_ingredients: false) }
+    let (:product1) { create(:product, :pizza_pepperoni) }
+    let (:product2) { create(:product, :water) }
 
     before(:each) do
-      allow(product1).to receive(:to_model).and_return(product1)
-      allow(product1).to receive(:model_name).and_return(Product.model_name)
-      allow(product1).to receive(:persisted?).and_return(true)
-
-      allow(product2).to receive(:to_model).and_return(product2)
-      allow(product2).to receive(:model_name).and_return(Product.model_name)
-      allow(product2).to receive(:persisted?).and_return(true)
-
       mockedProducts = [
         product1,
         product2
