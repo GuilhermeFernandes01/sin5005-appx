@@ -6,6 +6,8 @@ class Ingredient < ApplicationRecord
   validates :quantityStockMax, presence: true, numericality: { greater_than: 0 }
   validate :validate_min_max_stock
 
+  has_and_belongs_to_many :products
+
   private
 
   def validate_min_max_stock

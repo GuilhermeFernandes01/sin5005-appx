@@ -2,12 +2,14 @@ require 'rails_helper'
 
 RSpec.describe "products/new.html.erb", type: :view do
   let(:product) do
-    instance_double(Product)
+    create(:product)
   end
 
   let(:errors) do
     instance_double(ActiveModel::Errors)
   end
+
+  let(:pepperoni) { create(:ingredient, :pepperoni) }
 
   before do
     allow(product).to receive(:to_model).and_return(product)
@@ -17,6 +19,7 @@ RSpec.describe "products/new.html.erb", type: :view do
     allow(product).to receive(:errors).and_return(errors)
 
     assign(:product, product)
+    assign(:ingredients, [ pepperoni ])
   end
 
   describe "when I am on the new product page" do
@@ -40,10 +43,15 @@ RSpec.describe "products/new.html.erb", type: :view do
           expect(form).to have_field("Nome do produto")
           expect(form).to have_field("Preço")
           expect(form).to have_field("Categoria")
-          expect(form).to have_field("Requer ingredientes")
 
           expect(form).to have_button("Criar")
         end
+      end
+
+      it "should show the ingredients" do
+        render
+
+        expect(rendered).to have_selector("label", text: "Pepperoni")
       end
     end
 
