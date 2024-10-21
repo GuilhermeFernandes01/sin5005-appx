@@ -44,64 +44,76 @@ describe 'POST #create' do
     end
   end
 end
-describe "GET #index" do
+
+  describe 'GET #index' do
   let!(:supplier1) { Supplier.create!(name: 'Supplier One', cnpj: '12345678901200', phone: '(11) 2345-6789', email: 'supplier1@test.com', segment: 'Segment A', products: 'Product A', code: 'SUP001') }
   let!(:supplier2) { Supplier.create!(name: 'Supplier Two', cnpj: '23456789012345', phone: '(11) 2345-6788', email: 'supplier2@test.com', segment: 'Segment B', products: 'Product B', code: 'SUP002') }
   let!(:supplier3) { Supplier.create!(name: 'Supplier Three', cnpj: '34567890123456', phone: '(11) 2345-6787', email: 'supplier3@test.com', segment: 'Segment A', products: 'Product C', code: 'SUP003') }
 
-  it "assigns all suppliers as @suppliers when no search parameter is provided" do
-    get :index
-    expect(assigns(:suppliers)).to match_array([ supplier1, supplier2, supplier3 ])
+    context 'when no search parameter is provided' do
+      it "assigns all suppliers as @suppliers" do
+        get :index
+        expect(assigns(:suppliers)).to match_array([ supplier1, supplier2, supplier3 ])
+      end
+    end
+
+    context 'when searching by code' do
+      it 'returns suppliers matching the code' do
+        get :index, params: { search_by_code: 'SUP001' }
+        expect(assigns(:suppliers)).to match_array([ supplier1 ])
+      end
+    end
+
+    context 'when searching by name' do
+      it 'returns suppliers matching the name' do
+        get :index, params: { search_by_name: 'Supplier One' }
+        expect(assigns(:suppliers)).to match_array([ supplier1 ])
+      end
+    end
+
+    context 'when searching by segment' do
+      it 'returns suppliers matching the segment' do
+        get :index, params: { search_by_segment: 'Segment A' }
+        expect(assigns(:suppliers)).to match_array([ supplier1, supplier3 ])
+      end
+    end
+
+    context 'when searching by products' do
+      it 'returns suppliers matching the products' do
+        get :index, params: { search_by_products: 'Product A' }
+        expect(assigns(:suppliers)).to match_array([ supplier1 ])
+      end
+    end
+
+    context 'with search parameters' do
+      let(:valid_params) do
+        {
+          search_by_code: 'SUP001',
+          search_by_name: 'Supplier One',
+          search_by_segment: 'Segment A',
+          search_by_products: 'Product A'
+        }
+      end
+
+      let(:invalid_params) do
+        {
+          search_by_code: 'SUP001',
+          search_by_name: 'Supplier One',
+          invalid_param: 'Invalid'
+        }
+      end
+
+      it 'permits valid search parameters' do
+        get :index, params: valid_params
+        expect(controller.send(:search_params)).to include(:search_by_code, :search_by_name, :search_by_segment, :search_by_products)
+      end
+
+      it 'does not permit invalid parameters' do
+        get :index, params: invalid_params
+        expect(controller.send(:search_params)).not_to include(:invalid_param)
+      end
+    end
   end
-
-  context 'when searching by code' do
-    it 'returns suppliers matching the code' do
-      get :index, params: { search_by_code: 'SUP001' }
-      expect(assigns(:suppliers)).to match_array([ supplier1 ])
-    end
-
-    it 'returns all suppliers when no code is provided' do
-      get :index
-      expect(assigns(:suppliers)).to match_array([ supplier1, supplier2, supplier3 ])
-    end
-  end
-
-  context 'when searching by name' do
-    it 'returns suppliers matching the name' do
-      get :index, params: { search_by_name: 'Supplier One' }
-      expect(assigns(:suppliers)).to match_array([ supplier1 ])
-    end
-
-    it 'returns all suppliers when no name is provided' do
-      get :index
-      expect(assigns(:suppliers)).to match_array([ supplier1, supplier2, supplier3 ])
-    end
-  end
-
-  context 'when searching by segment' do
-    it 'returns suppliers matching the segment' do
-      get :index, params: { search_by_segment: 'Segment A' }
-      expect(assigns(:suppliers)).to match_array([ supplier1, supplier3 ])
-    end
-
-    it 'returns all suppliers when no segment is provided' do
-      get :index
-      expect(assigns(:suppliers)).to match_array([ supplier1, supplier2, supplier3 ])
-    end
-  end
-
-  context 'when searching by products' do
-    it 'returns suppliers matching the products' do
-      get :index, params: { search_by_products: 'Product A' }
-      expect(assigns(:suppliers)).to match_array([ supplier1 ])
-    end
-
-    it 'returns all suppliers when no product is provided' do
-      get :index
-      expect(assigns(:suppliers)).to match_array([ supplier1, supplier2, supplier3 ])
-    end
-  end
-end
 
  describe 'DELETE #destroy' do
   let!(:supplier) { create(:supplier) }
