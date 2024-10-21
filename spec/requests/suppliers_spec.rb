@@ -50,4 +50,45 @@ end
       expect(response.body).to include("Supplier was successfully updated.")
     end
   end
-end
+
+    describe "GET /suppliers" do
+      let!(:supplier1) { Supplier.create!(code: 'SUP001', name: 'Supplier One', cnpj: "12345678000121", phone: '(11) 12345-7890', email: 'supplier1@test.com', segment: 'Segment A', products: 'Product A') }
+      let!(:supplier2) { Supplier.create!(code: 'SUP002', name: 'Supplier Two', cnpj: "12345678000122", phone: '(11) 12345-7890', email: 'supplier1@test.com', segment: 'Segment B', products: 'Product B') }
+      let!(:supplier3) { Supplier.create!(code: 'SUP003', name: 'Supplier Three', cnpj: "12345678000123", phone: '(11) 12345-7890', email: 'supplier1@test.com', segment: 'Segment A', products: 'Product C') }
+
+      context 'when no search parameters are provided' do
+        it 'returns all suppliers' do
+          get suppliers_path
+          expect(assigns(:suppliers)).to match_array([ supplier1, supplier2, supplier3 ])
+        end
+      end
+
+      context 'when searching by code' do
+        it 'returns suppliers matching the code' do
+          get suppliers_path, params: { search_by_code: 'SUP001' }
+          expect(assigns(:suppliers)).to match_array([ supplier1 ])
+        end
+      end
+
+      context 'when searching by name' do
+        it 'returns suppliers matching the name' do
+          get suppliers_path, params: { search_by_name: 'Supplier Two' }
+          expect(assigns(:suppliers)).to match_array([ supplier2 ])
+        end
+      end
+
+      context 'when searching by segment' do
+        it 'returns suppliers matching the segment' do
+          get suppliers_path, params: { search_by_segment: 'Segment A' }
+          expect(assigns(:suppliers)).to match_array([ supplier1, supplier3 ])
+        end
+      end
+
+      context 'when searching by products' do
+        it 'returns suppliers matching the products' do
+          get suppliers_path, params: { search_by_products: 'Product B' }
+          expect(assigns(:suppliers)).to match_array([ supplier2 ])
+        end
+      end
+    end
+  end

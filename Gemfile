@@ -58,6 +58,8 @@ group :test do
   gem "rails-controller-testing"
 end
 
+gem "capybara-screenshot", group: :test
+
 # group :production, :development, :test do
 # Use Postgres as the database for Active Record in production environment
 gem "pg"

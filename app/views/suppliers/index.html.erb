@@ -1,38 +1,59 @@
 <h1>Fornecedores Cadastrados</h1>
-<%if @suppliers.empty?%>
+<br>
+<%= form_tag suppliers_path, method: :get, class: "search-form" do %>
+<br>
+  <%= label_tag :search_by_code, "Buscar por código" %>
+  <%= text_field_tag :search_by_code, params[:search_by_code], placeholder: "Digite o código", class: "search-input" %>
+
+  <%= label_tag :search_by_name, "Buscar por Nome" %>
+  <%= text_field_tag :search_by_name, params[:search_by_name], placeholder: "Digite o nome", class: "search-input" %>
+
+  <%= label_tag :search_by_segment, "Buscar por Segmento" %>
+  <%= text_field_tag :search_by_segment, params[:search_by_segment], placeholder: "Digite o segmento", class: "search-input" %>
+
+    <%= label_tag :search_by_products, "Buscar por Produtos" %>
+  <%= text_field_tag :search_by_products, params[:search_by_products], placeholder: "Digite um produto", class: "search-input" %>
+
+  <%= submit_tag "Filtrar", class: "search-button" %>
+  <br>
+<%= link_to "Limpar Filtro", suppliers_path, class: 'btn btn-primary' %>
+  <br>
+<% end %>
+<br>
+<br>
+<% if @suppliers.empty? %>
   <p>Não há Fornecedores cadastrados</p>
-<%else%>
-<table>
-<thead>
-  <tr>
-    <th>Código</th>
-    <th>Nome</th>
-    <th>CNPJ</th>
-    <th>Telefone</th>
-    <th>Email</th>
-    <th>Segmento</th>
-    <th>Produtos</th>
-  </tr>
-</thead>
-<tbody>
-  <% @suppliers.each do |supplier| %>
-    <tr>
-      <td><%= supplier.code %></td>
-      <td><%= supplier.name %></td>
-      <td><%= supplier.cnpj %></td>
-      <td><%= format_phone(supplier.phone) %></td>
-      <td><%= supplier.email %></td>
-      <td><%= supplier.segment %></td>
-      <td><%= supplier.products %></td>
-      <td>
-      <td>
-          <%= button_to 'Excluir', supplier_path(supplier), method: :delete, id: "delete_supplier_#{supplier.id}", data: { confirm: 'Você tem certeza?' } %>
-        </td>
-      <td>
-          <%= link_to 'Ver', supplier_path(supplier), class: 'btn btn-primary' %>
-      </td>
-    </tr>
-  <% end %>
-</tbody>
-</table>
+<% else %>
+  <table>
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Nome</th>
+        <th>CNPJ</th>
+        <th>Telefone</th>
+        <th>Email</th>
+        <th>Segmento</th>
+        <th>Produtos</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @suppliers.each do |supplier| %>
+        <tr>
+          <td><%= supplier.code %></td>
+          <td><%= supplier.name %></td>
+          <td><%= supplier.cnpj %></td>
+          <td><%= format_phone(supplier.phone) %></td>
+          <td><%= supplier.email %></td>
+          <td><%= supplier.segment %></td>
+          <td><%= supplier.products %></td>
+          <td>
+            <%= button_to 'Excluir', supplier_path(supplier), method: :delete, data: { confirm: 'Você tem certeza?' } %>
+          </td>
+          <td>
+            <%= link_to 'Ver', supplier_path(supplier), class: 'btn btn-primary' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% end %>

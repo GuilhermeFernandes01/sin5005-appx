@@ -130,3 +130,49 @@ end
 Then("I should see a link to go back to the suppliers list") do
   expect(page).to have_link("Retornar para a Lista de Fornecedores", href: suppliers_path)
 end
+
+# Filter
+Given("there are suppliers with various codes, names, segments, and products") do
+  Supplier.create!(code: 'SUP001', name: 'Supplier One', cnpj: '11111111111111', phone: '(11) 1234-5678', email: 'supplier1@test.com', segment: 'Segment A', products: 'Product A')
+  Supplier.create!(code: 'SUP002', name: 'Supplier Two', cnpj: '11111111111112', phone: '(11) 1234-5678', email: 'supplier1@test.com', segment: 'Segment B', products: 'Product B')
+  Supplier.create!(code: 'SUP003', name: 'Supplier Three', cnpj: '11111111111113', phone: '(11) 1234-5678', email: 'supplier1@test.com', segment: 'Segment A', products: 'Product C')
+end
+
+When("I search with {string}") do |terms|
+  terms.split(', ').each do |term|
+    term = term.strip
+    case term
+    when /^SUP\d+$/
+      fill_in 'search_by_code', with: term
+    when /Supplier/
+      fill_in 'search_by_name', with: term
+    when /Segment/
+      fill_in 'search_by_segment', with: term
+    when /Product/
+      fill_in 'search_by_products', with: term
+    else
+      raise "Termo desconhecido: #{term}"
+    end
+  end
+  click_button "Filtrar"
+end
+
+Then("I should see {string} on Listing Page") do |string|
+  expect(page).to have_content(string.strip)
+end
+
+When("I clean the search bar") do
+  click_link "Limpar Filtro"
+end
+
+Then("I should see the Listing Page with all Suppliers") do
+  expect(page).to have_content("Fornecedores Cadastrados")
+end
+
+Given("I am on the suppliers listing page") do
+  visit suppliers_path
+end
+
+Then("I should see the message {string}") do |message|
+  expect(page).to have_content(message)
+end
