@@ -1,6 +1,12 @@
 require "rails_helper"
 
 RSpec.describe ProductsController, type: :controller do
+  let!(:generic_product) { create(:product) }
+  let!(:generic_ingredient) { create(:ingredient) }
+  let!(:pepperoni_ingredient) { create(:ingredient, :pepperoni) }
+  let!(:cheese_ingredient) { create(:ingredient, :cheese) }
+  let!(:tomato_ingredient) { create(:ingredient, :tomato) }
+
   describe "GET #index" do
     context "there are registered products" do
       let (:product1) { create(:product, :pizza_pepperoni) }
@@ -67,10 +73,21 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe "GET #new" do
+    before(:each) do
+      allow(Ingredient).to receive(:all).and_return([ generic_ingredient ])
+    end
+
     it "assigns a new product to @product" do
       get :new
 
       expect(assigns(:product)).to be_a_new(Product)
+    end
+
+    it "assigns all the ingredients to @ingredients" do
+      get :new
+
+      expect(Ingredient).to have_received(:all)
+      expect(assigns(:ingredients)).to match_array([ generic_ingredient ])
     end
 
     it "renders the new template" do
@@ -115,10 +132,9 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe "GET #edit" do
-    let! (:product) { create(:product, :pizza_pepperoni) }
-
     before(:each) do
-      allow(Product).to receive(:find).and_return(product)
+      allow(Product).to receive(:find).and_return(generic_product)
+      allow(Ingredient).to receive(:all).and_return([ generic_ingredient ])
     end
 
     it "calls Product.find with the proper params" do
@@ -130,7 +146,14 @@ RSpec.describe ProductsController, type: :controller do
     it "assigns the correct product" do
       get :edit, params: { id: 1 }
 
-      expect(assigns(:product)).to eq(product)
+      expect(assigns(:product)).to eq(generic_product)
+    end
+
+    it "assigns all the ingredients to @ingredients" do
+      get :edit, params: { id: 1 }
+
+      expect(Ingredient).to have_received(:all)
+      expect(assigns(:ingredients)).to match_array([ generic_ingredient ])
     end
 
     it "should render the edit template" do
@@ -248,6 +271,63 @@ RSpec.describe ProductsController, type: :controller do
 
       expect(response).to redirect_to(products_path)
       expect(response.status).to eq(302)
+    end
+  end
+
+  describe "#product_params" do
+    it "permits valid params" do
+      valid_params = ActionController::Parameters.new({ product: { name: 'Product A', price: 100, category: 'Category A' } })
+
+      controller.params = valid_params
+      expect(controller.send(:product_params)).to eq(valid_params[:product].permit(:name, :price, :category))
+    end
+
+    it "doesn't permit invalid params" do
+      invalid_params = ActionController::Parameters.new({ product: { name: 'Product B', price: 100, category: 'Category B', invalid: 'Invalid' } })
+
+      controller.params = invalid_params
+      expect(controller.send(:product_params)).to eq(invalid_params[:product].permit(:name, :price, :category))
+    end
+  end
+
+  describe "#update_product_ingredients" do
+    before(:each) do
+      controller.instance_variable_set(:@product, generic_product)
+    end
+
+    context "with ingredient_ids provided" do
+      let!(:ingredient_ids) { [ pepperoni_ingredient.id, cheese_ingredient.id ] }
+
+      before(:each) do
+        allow(Ingredient).to receive(:find).and_return([ pepperoni_ingredient, cheese_ingredient ])
+        allow(controller).to receive(:params).and_return({ ingredient_ids: ingredient_ids })
+      end
+
+      it "should update the @product ingredients" do
+        controller.send(:update_product_ingredients)
+
+        expect(Ingredient).to have_received(:find).with(ingredient_ids)
+        expect(assigns(:product).ingredients).to match_array([ pepperoni_ingredient, cheese_ingredient ])
+      end
+    end
+
+    context "without ingredient_ids provided" do
+      before(:each) do
+        allow(controller).to receive(:params).and_return({})
+        assigns(:product).ingredients << generic_ingredient
+      end
+
+      it "should call clear on the @product ingredients" do
+        expect(assigns(:product).ingredients).to receive(:clear)
+
+        controller.send(:update_product_ingredients)
+      end
+
+      it "should leave the @products ingredients empty" do
+        controller.send(:update_product_ingredients)
+
+        expect(assigns(:product).ingredients).to be_empty
+      end
     end
   end
 end
