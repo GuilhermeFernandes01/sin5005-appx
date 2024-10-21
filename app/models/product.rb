@@ -6,6 +6,6 @@ class Product < ApplicationRecord
   has_and_belongs_to_many :ingredients
 
   def require_ingredients?
-    return ingredients.any?
+    ingredients.any?
   end
 end
