@@ -61,8 +61,32 @@ RSpec.describe "suppliers/index.html.erb", type: :view do
   end
 
   it "displays the clear filter button" do
-      render
-      expect(rendered).to have_link("Limpar Filtro", href: suppliers_path)
-      expect(rendered).to have_css("a.btn.btn-primary", text: "Limpar Filtro")
+    render
+    expect(rendered).to have_link("Limpar Filtro", href: suppliers_path)
+    expect(rendered).to have_css("a.btn.btn-primary", text: "Limpar Filtro")
+  end
+
+  context "when flash messages are present" do
+    context "when flash notice is present" do
+      before do
+        flash[:notice] = "Supplier was successfully deleted."
+        render
+      end
+
+      it "displays the success message" do
+        expect(rendered).to have_selector("div.alert.alert-success", text: "Supplier was successfully deleted.")
+      end
     end
+
+    context "when flash alert is present" do
+      before do
+        flash[:alert] = "Supplier could not be deleted."
+        render
+      end
+
+      it "displays the error message" do
+        expect(rendered).to have_selector("div.alert.alert-danger", text: "Supplier could not be deleted.")
+      end
+    end
+  end
 end

@@ -35,14 +35,23 @@ class SuppliersController < ApplicationController
 
   def destroy
     @supplier = Supplier.find(params[:id])
-    if @supplier.destroy
-      flash[:notice] = "Supplier was successfully deleted."
-      redirect_to suppliers_path
-    else
-      flash[:alert] = "Supplier could not be deleted."
-      redirect_back(fallback_location: suppliers_path)
+    logger.debug "Confirm parameter: #{params[:confirm]}"
+
+    if params[:confirm] == "true"
+      if @supplier.destroy
+        flash[:notice] = "Supplier was successfully deleted."
+      else
+        flash[:alert] = "Supplier deletion failed."
+      end
     end
+
+    logger.debug "Flash notice: #{flash[:notice]}"
+    logger.debug "Flash alert: #{flash[:alert]}"
+    redirect_to suppliers_path
   end
+
+
+
 
   def show
     @supplier = Supplier.find(params[:id])
