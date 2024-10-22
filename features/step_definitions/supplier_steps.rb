@@ -73,13 +73,35 @@ end
   end
 end
 
+When("I confirm the deletion") do
+  page.accept_confirm("Você tem certeza que deseja excluir este fornecedor?")
+end
+
  Then('I should no longer see {string} in the suppliers list') do |supplier_name|
   expect(page).not_to have_content(supplier_name)
  end
 
- Then('I should see a message saying {string}') do |message|
-  expect(page).to have_content(message)
- end
+ Then('I should see a message saying "Supplier was successfully deleted."') do
+  expect(page).to have_content("Supplier was successfully deleted.")
+end
+
+Then('I should see {string} in the supplier show') do |supplier_name|
+  expect(page).to have_content(supplier_name)
+end
+
+ When("I don't confirm the deletion") do
+  page.driver.browser.switch_to.alert.dismiss
+end
+
+
+Then('I should see {string} in the suppliers list') do |supplier_name|
+  expect(page).to have_content(supplier_name)
+end
+
+Then('I should see a message saying "Supplier deletion was cancelled."') do
+  expect(page).to have_content("Supplier deletion was cancelled.")
+end
+
 
 # Edit/Update
 When("I click 'Ver' for {string}") do |supplier_name|

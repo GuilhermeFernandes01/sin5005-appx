@@ -1,4 +1,9 @@
 <h1>Fornecedores Cadastrados</h1>
+<% if flash[:notice] %>
+  <div class="alert alert-success"><%= flash[:notice] %></div>
+<% elsif flash[:alert] %>
+  <div class="alert alert-danger"><%= flash[:alert] %></div>
+<% end %>
 <br>
 <%= form_tag suppliers_path, method: :get, class: "search-form" do %>
 <br>
@@ -47,7 +52,7 @@
           <td><%= supplier.segment %></td>
           <td><%= supplier.products %></td>
           <td>
-            <%= button_to 'Excluir', supplier_path(supplier), method: :delete, data: { confirm: 'Você tem certeza?' } %>
+            <%= button_to 'Excluir', supplier_path(supplier), method: :delete, data: { confirm: 'Você tem certeza que deseja excluir este fornecedor?' }, class: 'btn btn-danger' %>
           </td>
           <td>
             <%= link_to 'Ver', supplier_path(supplier), class: 'btn btn-primary' %>
