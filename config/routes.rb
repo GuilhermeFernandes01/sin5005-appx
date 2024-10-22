@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     :destroy
   ]
 
+  resources :suppliers
+
   resources :clientes
 
 
@@ -40,7 +42,4 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  get "/supplier/new", to: "supplier#new"
-  post "/supplier", to: "supplier#create"
-  resources :supplier
 end

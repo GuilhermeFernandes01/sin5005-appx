@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "products/show.html.erb", type: :view do
-  let(:product1) { instance_double(Product, id: 1, name: "Pizza de Pepperoni", price: 40.99, category: "Pizza", require_ingredients: true) }
-  let(:product2) { instance_double(Product, id: 2, name: "Água", price: 1.99, category: "Bebida", require_ingredients: false) }
+  let(:product1) { create(:product, :pizza_pepperoni) }
+  let(:product2) { create(:product, :water) }
 
   describe "with a registered product" do
     it "should render the product1's informations" do
@@ -11,7 +11,7 @@ RSpec.describe "products/show.html.erb", type: :view do
       render
 
       expect(rendered).to have_selector("h1", text: "Pizza de Pepperoni")
-      expect(rendered).to have_selector("p", text: "Preço: 40.99")
+      expect(rendered).to have_selector("p", text: "Preço: 39.99")
       expect(rendered).to have_selector("p", text: "Categoria: Pizza")
       expect(rendered).to have_selector("p", text: "Requer ingredientes: Sim")
     end

@@ -110,6 +110,10 @@ div.formulario input[type="submit"]:hover {
   width: 100px;
   height: auto;
   align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
 }
 
 .novo-cliente-link {
@@ -148,6 +152,33 @@ div.formulario input[type="submit"]:hover {
   flex-direction: column;
 }
 
+/* Estilização dos campos do formulário */
+.campo-formulario {
+    margin-bottom: 15px;
+    text-align: left;
+    width: 100%;
+}
+
+/* Estilização dos inputs */
+.input-cliente {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+/* Estilização do botão de voltar */
+.voltar-link {
+  text-decoration: none;
+  color: white; /* Muda a cor do texto para branco */
+}
+
+/* Remove o sublinhado ao passar o mouse */
+.voltar-link:hover {
+  text-decoration: none; /* Garante que o sublinhado não apareça */
+}
+
 .clientes-table {
   width: 100%; /* Largura total da tabela */
   border-collapse: collapse; /* Colapsa as bordas da tabela */
@@ -163,4 +194,19 @@ div.formulario input[type="submit"]:hover {
   text-align: center; /* Centraliza o texto nas células da tabela */
   padding: 5px; /* Preenchimento opcional */
   border: 1px solid #ddd; /* Borda para as células */
+}
+
+.input-cliente {
+  width: 300px; /* Largura padrão para todos os campos de entrada */
+  padding: 5px; /* Preenchimento padrão */
+  border: 1px solid #ccc; /* Borda padrão */
+  border-radius: 4px; /* Bordas arredondadas */
+}
+
+.input-email {
+  width: 800px; /* Largura específica para o campo de email */
+}
+
+.input-endereco {
+  width: 800px; /* Largura específica para o campo de endereço */
 }
