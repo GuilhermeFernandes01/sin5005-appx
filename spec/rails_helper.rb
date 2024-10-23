@@ -3,7 +3,7 @@ require 'spec_helper'
 require 'capybara/rspec'
 require 'selenium-webdriver'
 
-Capybara.register_driver :selenium do |app| #Testes de features que dependem de Js
+Capybara.register_driver :selenium do |app| # Testes de features que dependem de Js
   Capybara::Selenium::Driver.new(app, browser: :chrome)
 end
 

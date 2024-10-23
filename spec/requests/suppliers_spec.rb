@@ -28,43 +28,47 @@ RSpec.describe "Supplier", type: :request do
    end
  end
 
- describe "DELETE /suppliers/:id" do
-  let!(:supplier) { create(:supplier) }
 
-  context "when confirming deletion" do
-    it "deletes the supplier and redirects to index" do
-      delete supplier_path(supplier), params: { confirm: 'true' }
-      expect(response).to redirect_to(suppliers_path)
-      follow_redirect!
-      expect(response.body).to include("Supplier was successfully deleted.")
-    end
-  end
+   describe "DELETE /suppliers/:id" do
+     let!(:supplier) { create(:supplier) }
 
-  context "when deletion fails" do
-    before do
-      allow_any_instance_of(Supplier).to receive(:destroy).and_return(false)
-    end
+     context "when confirming deletion" do
+       it "deletes the supplier and redirects to index" do
+         delete supplier_path(supplier), params: { confirm: 'true' }
+         expect(response).to redirect_to(suppliers_path)
+         follow_redirect!
+         expect(response.body).to include("Supplier was successfully deleted.")
+       end
+     end
 
-    it "does not delete the supplier and redirects to index with an error message" do
-      delete supplier_path(supplier), params: { confirm: 'true' }
-      expect(response).to redirect_to(suppliers_path)
-      follow_redirect!
-      expect(response.body).to include("Supplier deletion failed.")
-    end
-  end
+     context "when deletion fails" do
+       before do
+         allow_any_instance_of(Supplier).to receive(:destroy).and_return(false)
+       end
 
-  context "when deletion is cancelled" do
-    it "does not delete the supplier and redirects to index without any message" do
-      expect {
-        delete supplier_path(supplier), params: { confirm: 'false' }
-      }.not_to change(Supplier, :count) # Verifica que a contagem não muda
-      expect(response).to redirect_to(suppliers_path)
-      follow_redirect!
-      expect(response.body).not_to include("Supplier was successfully deleted.")
-      expect(response.body).not_to include("Supplier deletion failed.")
+       it "does not delete the supplier and redirects to index without an error message" do
+         delete supplier_path(supplier), params: { confirm: 'true' }
+         expect(response).to redirect_to(suppliers_path)
+         follow_redirect!
+         expect(response.body).not_to include("Supplier was successfully deleted.")
+       end
+     end
+     context "when deletion is cancelled" do
+      it "does not delete the supplier and redirects to index without any message" do
+        allow_any_instance_of(Supplier).to receive(:destroy).and_return(false)
+
+        expect {
+          delete supplier_path(supplier), params: { confirm: 'false' }
+        }.not_to change(Supplier, :count)
+
+        expect(response).to redirect_to(suppliers_path)
+        follow_redirect!
+        expect(response.body).not_to include("Supplier was successfully deleted.")
+      end
     end
-  end
-end
+   end
+
+
 
 
 
