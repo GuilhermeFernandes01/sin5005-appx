@@ -136,9 +136,6 @@ end
       end
     end
 
-
-
-
   describe 'PATCH #update' do
     let!(:supplier) { create(:supplier) }
     context 'with valid attributes' do

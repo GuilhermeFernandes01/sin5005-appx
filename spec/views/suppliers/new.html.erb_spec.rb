@@ -15,4 +15,21 @@ RSpec.describe "suppliers/new.html.erb", type: :view do
     expect(rendered).to have_field("supplier[segment]")
     expect(rendered).to have_field("supplier[products]")
   end
+
+  it "displays a success flash message" do
+    flash[:notice] = "Supplier was successfully created."
+    render
+    expect(rendered).to have_css('.alert-success', text: 'Supplier was successfully created.')
+  end
+
+  it "displays an alert flash message" do
+    flash.now[:alert] = "There was an error."
+    render
+    expect(rendered).to have_css('.alert-danger', text: 'There was an error.')
+  end
+
+  it "has a link to return to the suppliers index" do
+    render
+    expect(rendered).to have_link('Retornar para a Lista de Fornecedores', href: suppliers_path)
+  end
 end
