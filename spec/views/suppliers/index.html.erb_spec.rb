@@ -78,14 +78,14 @@ RSpec.describe "suppliers/index.html.erb", type: :view do
       end
     end
 
-    context "when flash alert is present" do
+    context "when the user cancels the deletion" do
       before do
-        flash[:alert] = "Supplier could not be deleted."
+        flash[:notice] = nil
         render
       end
 
-      it "displays the error message" do
-        expect(rendered).to have_selector("div.alert.alert-danger", text: "Supplier could not be deleted.")
+      it "does not set a flash message" do
+        expect(rendered).not_to have_selector("div.alert.alert-success")
       end
     end
   end

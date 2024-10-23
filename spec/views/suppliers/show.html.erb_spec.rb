@@ -42,4 +42,28 @@ RSpec.describe "suppliers/show.html.erb", type: :view do
   it "has a link to return to the supplier list" do
     expect(rendered).to have_link('Retornar para a Lista de Fornecedores', href: suppliers_path)
   end
+
+  context "when flash messages are present" do
+    context "when flash notice is present" do
+      before do
+        flash[:notice] = "Supplier was successfully deleted."
+        render
+      end
+
+      it "displays the success message" do
+        expect(rendered).to have_selector("div.alert.alert-success", text: "Supplier was successfully deleted.")
+      end
+    end
+
+    context "when the user cancels the deletion" do
+      before do
+        flash[:notice] = nil
+        render
+      end
+
+      it "does not set a flash message" do
+        expect(rendered).not_to have_selector("div.alert.alert-success")
+      end
+    end
+ end
 end
