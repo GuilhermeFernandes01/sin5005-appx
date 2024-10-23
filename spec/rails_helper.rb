@@ -3,9 +3,10 @@ require 'spec_helper'
 require 'capybara/rspec'
 require 'selenium-webdriver'
 
-Capybara.register_driver :selenium do |app| # Testes de features que dependem de Js
-  Capybara::Selenium::Driver.new(app, browser: :chrome)
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: Selenium::WebDriver::Chrome::Options.new(args: ['headless', 'disable-gpu', 'no-sandbox', 'disable-dev-shm-usage']))
 end
+
 
 Capybara.javascript_driver = :selenium
 
