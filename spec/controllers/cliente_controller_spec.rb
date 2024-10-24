@@ -4,12 +4,12 @@ require 'rails_helper'
 RSpec.describe ClientesController, type: :controller do
   # Define um exemplo de cliente para usar nos testes
   let(:valid_cliente_attributes) { { nome: "Abc 123", telefone: 9999, email: "teste@gmai.com", endereco: "Abcd 12", observacoes: "Abc" } }
-  
+
   # Cria clientes válidos para testes
   let!(:cliente1) { create(:cliente, nome: "João Silva", telefone: "123456789", email: "joao@example.com", endereco: "Rua A, 123", data_nascimento: "1990-01-01") }
 
   let!(:cliente2) { create(:cliente, nome: "Maria Oliveira", telefone: "987654321", email: "maria@example.com", endereco: "Rua B, 456", data_nascimento: "1985-05-05") }
-  
+
 
   # Define exemplos de atributos inválidos para testes
   let(:invalid_cliente_attributes) { { nome: "", telefone: 9999, email: "testegmai.com", endereco: "Abcd 12", observacoes: "Abc" } }

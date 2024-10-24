@@ -1,5 +1,4 @@
 class ClientesController < ApplicationController
-
     def index
       if params[:search].present?
         @clientes = Cliente.where("nome LIKE ?", "%#{params[:search]}%")
