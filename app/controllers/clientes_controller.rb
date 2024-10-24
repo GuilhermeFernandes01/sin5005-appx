@@ -1,7 +1,11 @@
 class ClientesController < ApplicationController
     def index
-      @clientes = Cliente.all
-      @quantidade_clientes = Cliente.count
+      if params[:search].present?
+        @clientes = Cliente.where("nome LIKE ?", "%#{params[:search]}%")
+      else
+        @clientes = Cliente.all
+      end
+      @quantidade_clientes = @clientes.count
       @clientes_mes_atual = Cliente.where("strftime('%m', data_nascimento) = ?", Date.today.strftime("%m")).count
     end
 
