@@ -1,5 +1,5 @@
 class EmployeesController < ApplicationController
-  before_action :set_employee, only: [:show, :edit, :update, :fire]
+  before_action :set_employee, only: [ :show, :edit, :update, :fire ]
 
   def index
     @employees = Employee.all
@@ -54,6 +54,6 @@ class EmployeesController < ApplicationController
   def set_employee
     @employee = Employee.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    render partial: 'employees/employee_not_found', status: :not_found
+    render partial: "employees/employee_not_found", status: :not_found
   end
 end
