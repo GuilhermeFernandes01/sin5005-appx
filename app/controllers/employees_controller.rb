@@ -1,10 +1,11 @@
 class EmployeesController < ApplicationController
+  before_action :set_employee, only: [:show, :edit, :update, :fire]
+
   def index
     @employees = Employee.all
   end
 
   def show
-    @employee = Employee.find_by(id: params[:id])
   end
 
   def new
@@ -12,12 +13,9 @@ class EmployeesController < ApplicationController
   end
 
   def edit
-    @employee = Employee.find(params[:id])
   end
 
   def update
-    @employee = Employee.find(params[:id])
-
     if @employee.update(employee_params)
       redirect_to employees_path
     else
@@ -38,8 +36,6 @@ class EmployeesController < ApplicationController
   end
 
   def fire
-    @employee = Employee.find_by(id: params[:id])
-
     if @employee && @employee.update(dismissal_date: Time.current)
       flash[:success] = "Funcionário demitido com sucesso."
       redirect_to @employee
@@ -51,5 +47,13 @@ class EmployeesController < ApplicationController
 
   def employee_params
     params.require(:employee).permit(:name, :salary, :position, :password, :password_confirmation, :admission_date, :birth_date)
+  end
+
+  private
+
+  def set_employee
+    @employee = Employee.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    render partial: 'employees/employee_not_found', status: :not_found
   end
 end

@@ -1,19 +1,15 @@
-<% if @employee %>
-  <div>
-    <%= render @employee %>
-  </div>
+<div>
+  <%= render @employee %>
+</div>
 
-  <div>
-    <%= link_to "Editar funcionário", edit_employee_path(@employee) %> |
-    <%= link_to "Voltar para funcionários", employees_path %>
+<div>
+  <%= link_to "Editar funcionário", edit_employee_path(@employee) %> |
+  <%= link_to "Voltar para funcionários", employees_path %>
 
-    <br />
-    <br />
+  <br />
+  <br />
 
-    <% if @employee.dismissal_date.nil? %>
-      <%= button_to "Demitir este funcionário", fire_employee_path(@employee), method: :patch, data: { confirm: "Tem certeza de que deseja demitir este funcionário?" }, name: "fire_employee" %>
-    <% end %>
-  </div>
-<% else %>
-  <%= render 'employee_not_found' %>
-<% end %>
+  <% if @employee.dismissal_date.nil? %>
+    <%= button_to "Demitir este funcionário", fire_employee_path(@employee), method: :patch, data: { confirm: "Tem certeza de que deseja demitir este funcionário?" }, name: "fire_employee" %>
+  <% end %>
+</div>
