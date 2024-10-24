@@ -15,4 +15,4 @@ Feature: Create a new employee
     When I fill in the new employee form with invalid data
     And I submit the form
     Then I should see error messages
-    And I should see an alert message "Employee not created"
+    And I should see an alert message "Não foi possível criar o funcionário."

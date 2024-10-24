@@ -2,109 +2,154 @@
 @import "bootstrap";
 
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
-    text-align: center; /* Centraliza o texto */
-    color: #cf1111; /* Cor do texto */
+  text-align: center; /* Centraliza o texto */
+  color: #cf1111; /* Cor do texto */
+}
+
+div.formulario {
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+div.formulario > form {
+  width: 50%;
+}
+
+form > div {
+  margin-bottom: 15px;
+  text-align: left;
+  width: 100%;
+}
+
+form input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+div.formulario input[type="submit"] {
+  display: inline-block;
+  margin: 5px 0;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+}
+
+div.formulario input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.formulario .label-checkbox-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.formulario .label-checkbox-group input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  display: inline-block;
+  cursor: pointer;
 }
 
 .clientes-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px auto;
-    max-width: 800px;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px auto;
+  max-width: 800px;
 }
 
 .clientes-table th, .clientes-table td {
-    border: 1px solid #675f5f;
-    text-align: left;
-    padding: 4px;
+  border: 1px solid #675f5f;
+  text-align: left;
+  padding: 4px;
 }
 
 .clientes-table th {
-    background-color: #f2f2f2;
+  background-color: #f2f2f2;
 }
 
 .clientes-table tr:nth-child(even) {
-    background-color: #f9f9f9;
+  background-color: #f9f9f9;
 }
 
 .clientes-table tr:hover {
-    background-color: #f1f1f1;
+  background-color: #f1f1f1;
 }
 
 .logo-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
 }
 
 .logo img {
-    width: 100px;
-    height: auto;
-    align-items: center;
+  width: 100px;
+  height: auto;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
 }
 
-.novo-cliente-link, .botao-submit, .voltar-link {
-    display: inline-block; /* Para que a centralização funcione com text-align */
-    margin: 5px 0; /* Adiciona um espaço acima e abaixo do link */
-    padding: 10px 20px; /* Tamanho do botão */
-    background-color: #4CAF50; /* Cor de fundo verde */
-    color: white; /* Cor do texto */
-    text-decoration: none; /* Remove o sublinhado */
-    border-radius: 5px; /* Bordas arredondadas */
-    text-align: center; /* Centraliza o texto */
-    border: none; /* Remove borda padrão */
-    cursor: pointer; /* Muda o cursor para indicar que é um botão */
+.novo-cliente-link {
+  display: inline-block; /* Para que a centralização funcione com text-align */
+  margin: 5px 0; /* Adiciona um espaço acima e abaixo do link */
+  padding: 10px 20px; /* Tamanho do botão */
+  background-color: #4CAF50; /* Cor de fundo verde */
+  color: white; /* Cor do texto */
+  text-decoration: none; /* Remove o sublinhado */
+  border-radius: 5px; /* Bordas arredondadas */
+  text-align: center; /* Centraliza o texto */
+  border: none; /* Remove borda padrão */
+  cursor: pointer; /* Muda o cursor para indicar que é um botão */
 }
 
-.novo-cliente-link:hover, .botao-submit:hover, .voltar-link:hover {
-    background-color: #45a049; /* Cor de fundo ao passar o mouse */
-}
-
-.flash-messages {
-    position: relative;
-    margin: 10px;
-    padding: 10px;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    text-align: center; /* Centraliza mensagens */
-}
-
-.flash-message.notice {
-    background-color: #d4edda;
-    color: #155724;
-    border-color: #c3e6cb;
-}
-
-.flash-message.alert {
-    background-color: #f8d7da;
-    color: #721c24;
-    border-color: #f5c6cb;
+.novo-cliente-link:hover {
+  background-color: #45a049; /* Cor de fundo ao passar o mouse */
 }
 
 .flash-notice {
-    background-color: #d4edda; /* Cor de fundo verde claro */
-    color: #155724; /* Cor do texto verde escuro */
-    padding: 10px; /* Espaçamento interno */
-    border: 1px solid #c3e6cb; /* Borda verde */
-    border-radius: 5px; /* Bordas arredondadas */
-    margin-bottom: 20px; /* Espaçamento abaixo */
+  background-color: #d4edda; /* Cor de fundo verde claro */
+  color: #155724; /* Cor do texto verde escuro */
+  padding: 10px; /* Espaçamento interno */
+  border: 1px solid #c3e6cb; /* Borda verde */
+  border-radius: 5px; /* Bordas arredondadas */
+  margin-bottom: 20px; /* Espaçamento abaixo */
 }
 
 /* Estilização para centralizar o formulário */
-.novo-cliente-form, .editar-cliente-form {
-    width: 50%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.editar-cliente-form {
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 /* Estilização dos campos do formulário */
@@ -116,55 +161,52 @@ h1 {
 
 /* Estilização dos inputs */
 .input-cliente {
-    width: 100%;
-    padding: 8px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    font-size: 16px;
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 16px;
 }
 
 /* Estilização do botão de voltar */
 .voltar-link {
-    text-decoration: none;
-    color: white; /* Muda a cor do texto para branco */
+  text-decoration: none;
+  color: white; /* Muda a cor do texto para branco */
 }
 
 /* Remove o sublinhado ao passar o mouse */
 .voltar-link:hover {
-    text-decoration: none; /* Garante que o sublinhado não apareça */
+  text-decoration: none; /* Garante que o sublinhado não apareça */
 }
 
-
-
 .clientes-table {
-    width: 100%; /* Largura total da tabela */
-    border-collapse: collapse; /* Colapsa as bordas da tabela */
-  }
+  width: 100%; /* Largura total da tabela */
+  border-collapse: collapse; /* Colapsa as bordas da tabela */
+}
 
-  .clientes-table th {
-    text-align: center; /* Centraliza o texto nos cabeçalhos */
-    background-color: #f2f2f2; /* Cor de fundo opcional para cabeçalhos */
-    padding: 5px; /* Preenchimento opcional */
-  }
+.clientes-table th {
+  text-align: center; /* Centraliza o texto nos cabeçalhos */
+  background-color: #f2f2f2; /* Cor de fundo opcional para cabeçalhos */
+  padding: 5px; /* Preenchimento opcional */
+}
 
-  .clientes-table td {
-    text-align: center; /* Centraliza o texto nas células da tabela */
-    padding: 5px; /* Preenchimento opcional */
-    border: 1px solid #ddd; /* Borda para as células */
-  }
+.clientes-table td {
+  text-align: center; /* Centraliza o texto nas células da tabela */
+  padding: 5px; /* Preenchimento opcional */
+  border: 1px solid #ddd; /* Borda para as células */
+}
 
+.input-cliente {
+  width: 300px; /* Largura padrão para todos os campos de entrada */
+  padding: 5px; /* Preenchimento padrão */
+  border: 1px solid #ccc; /* Borda padrão */
+  border-radius: 4px; /* Bordas arredondadas */
+}
 
-  .input-cliente {
-    width: 300px; /* Largura padrão para todos os campos de entrada */
-    padding: 5px; /* Preenchimento padrão */
-    border: 1px solid #ccc; /* Borda padrão */
-    border-radius: 4px; /* Bordas arredondadas */
-  }
+.input-email {
+  width: 800px; /* Largura específica para o campo de email */
+}
 
-  .input-email {
-    width: 800px; /* Largura específica para o campo de email */
-  }
-
-  .input-endereco {
-    width: 800px; /* Largura específica para o campo de endereço */
-  }
+.input-endereco {
+  width: 800px; /* Largura específica para o campo de endereço */
+}

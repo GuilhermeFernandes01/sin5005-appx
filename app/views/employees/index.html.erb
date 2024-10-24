@@ -10,6 +10,7 @@
         Data de demissão: <%= format_date(employee.dismissal_date) %><br>
       <% end %>
       Data de nascimento: <%= format_date(employee.birth_date) %>
+      <%= link_to "Exibir funcionário", employee %>
     </li>
     <br />
   <% end %>

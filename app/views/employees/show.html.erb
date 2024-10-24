@@ -1,0 +1,15 @@
+<div>
+  <%= render @employee %>
+</div>
+
+<div>
+  <%= link_to "Editar funcionário", edit_employee_path(@employee) %> |
+  <%= link_to "Voltar para funcionários", employees_path %>
+
+  <br />
+  <br />
+
+  <% if @employee.dismissal_date.nil? %>
+    <%= button_to "Demitir este funcionário", fire_employee_path(@employee), method: :patch, data: { confirm: "Tem certeza de que deseja demitir este funcionário?" }, name: "fire_employee" %>
+  <% end %>
+</div>
