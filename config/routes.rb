@@ -1,5 +1,7 @@
 
 Rails.application.routes.draw do
+  root "home#index"
+  get "home/index", to: "home#index"
   resources :ingredients
 
   get "/employees", to: "employees#index"
