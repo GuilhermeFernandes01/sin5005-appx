@@ -1,44 +1,51 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title><%= content_for(:title) || "Clientes" %></title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
+  <head>
+    <title>Each Pizzas</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
-  <%= yield :head %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbo-track': 'reload', defer: true %>
+  </head>
 
-  <%= favicon_link_tag 'favicon.png' %>
+  <body>
+    <nav id="menu-home" class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <!-- Logo com imagem favicon.png -->
+        <a class="navbar-brand" href="/">
+          <%= image_tag 'favicon.png', alt: 'Logo', size: '30x30' %> Each Pizzas
+        </a>
 
-  <link rel="manifest" href="/manifest.json">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-  <link rel="apple-touch-icon" href="<%= asset_path('favicon.png') %>">
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <!-- Opções do Menu -->
+            <li class="nav-item">
+              <%= link_to 'Clientes', clientes_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Empregados', employees_path , class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Fornecedores', suppliers_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Ingredientes', ingredients_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Produtos', products_path, class: 'nav-link' %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-
-  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-
-
-  <%= javascript_importmap_tags %>
-</head>
-
-<body>
-
-  <div class="logo-container">
-    <div class="logo">
-      <img src="<%= asset_path('favicon.png') %>" alt="Logo">
+    <div class="container">
+      <%= yield %>
     </div>
-  </div>
-
-
-  <% flash.each do |type, msg| %>
-    <div class="alert alert-<%= type %>">
-      <%= msg %>
-    </div>
-  <% end %>
-
-
-  <%= yield %>
-
-</body>
+  </body>
 </html>
