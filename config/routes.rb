@@ -2,6 +2,7 @@
 Rails.application.routes.draw do
   resources :ingredients
 
+
   get "/employees", to: "employees#index"
   get "/employees/new", to: "employees#new"
   get "/employees/:id", to: "employees#show"
@@ -19,8 +20,8 @@ Rails.application.routes.draw do
     :destroy
   ]
 
+  root "home#index"
   resources :suppliers
-
   resources :clientes
 
 
