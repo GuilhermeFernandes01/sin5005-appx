@@ -30,6 +30,7 @@ SimpleCov.start 'rails' do
       c.single_report_path = 'coverage/lcov.info'
     end
     formatter SimpleCov::Formatter::LcovFormatter
+    SimpleCov.minimum_coverage 90
   end
   add_filter %w[version.rb initializer.rb]
 end
