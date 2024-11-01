@@ -77,7 +77,7 @@ When("I confirm the deletion") do
   page.accept_confirm("Você tem certeza que deseja excluir este fornecedor?")
 end
 
- Then('I should no longer see {string} in the suppliers list') do |supplier_name|
+ Then('I should no longer see {string} in the suppliers list page') do |supplier_name|
   expect(page).not_to have_content(supplier_name)
  end
 

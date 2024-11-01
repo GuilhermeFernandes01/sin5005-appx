@@ -8,7 +8,7 @@ Feature: Delete a supplier
     When I visit the suppliers listing page
     And I press the button "Excluir" from "Supplier 1"
     And I confirm the deletion
-    Then I should no longer see "Supplier 1" in the suppliers list
+    Then I should no longer see "Supplier 1" in the suppliers list page
     And I should see a message saying "Supplier was successfully deleted."
 
   Scenario 2: Successfully delete a supplier from show Page
