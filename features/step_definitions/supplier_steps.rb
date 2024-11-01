@@ -85,7 +85,7 @@ end
   expect(page).to have_content("Supplier was successfully deleted.")
 end
 
-Then('I should see {string} in the supplier show') do |supplier_name|
+Then('I should see {string} in the supplier show page') do |supplier_name|
   expect(page).to have_content(supplier_name)
 end
 
