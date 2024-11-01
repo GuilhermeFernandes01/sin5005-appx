@@ -7,7 +7,16 @@
 
 require "cucumber/rails"
 require "capybara/cucumber"
+require "selenium-webdriver"
 World(Capybara::DSL)
+
+# Configuração do Capybara para usar Selenium com Chrome
+Capybara.register_driver :selenium_chrome do |app|
+  Capybara::Selenium::Driver.new(app, browser: :chrome)
+end
+
+# Define o driver JavaScript padrão para o Capybara
+Capybara.javascript_driver = :selenium_chrome
 
 # By default, any exception happening in your Rails application will bubble up
 # to Cucumber so that your scenario will fail. This is a different from how

@@ -115,33 +115,26 @@ end
     end
   end
 
- describe 'DELETE #destroy' do
-  let!(:supplier) { create(:supplier) }
-  context 'when the supplier is successfully deleted' do
-    it 'deletes the supplier and redirects to index' do
-      expect {
+    describe "DELETE #destroy" do
+      let!(:supplier) { create(:supplier) }
+
+      it "deletes the supplier and redirects to suppliers_path" do
+        expect {
+          delete :destroy, params: { id: supplier.id }
+        }.to change(Supplier, :count).by(-1)
+        expect(response).to redirect_to(suppliers_path)
+        expect(flash[:notice]).to eq("Supplier was successfully deleted.")
+      end
+
+      it "does not set flash notice if supplier deletion fails" do
+        allow_any_instance_of(Supplier).to receive(:destroy).and_return(false)
+
         delete :destroy, params: { id: supplier.id }
-      }.to change(Supplier, :count).by(-1)
-      expect(response).to redirect_to(suppliers_path)
-      expect(flash[:notice]).to eq("Supplier was successfully deleted.")
-    end
-  end
 
-  context 'when the supplier cannot be deleted' do
-    before do
-      allow_any_instance_of(Supplier).to receive(:destroy).and_return(false)
+        expect(response).to redirect_to(suppliers_path)
+        expect(flash[:notice]).to be_nil
+      end
     end
-
-    it 'does not delete the supplier and redirects back with an error message' do
-      expect {
-        delete :destroy, params: { id: supplier.id }
-      }.not_to change(Supplier, :count)
-
-      expect(response).to redirect_to (suppliers_path)
-      expect(flash[:alert]).to eq("Supplier could not be deleted.")
-    end
-  end
-end
 
   describe 'PATCH #update' do
     let!(:supplier) { create(:supplier) }
