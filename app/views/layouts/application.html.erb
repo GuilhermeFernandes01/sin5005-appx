@@ -59,10 +59,12 @@
   </nav>
 
   <div class="logo-container">
-    <div class="logo">
-      <img src="<%= asset_path('favicon.png') %>" alt="Logo">
-    </div>
+  <div class="logo">
+    <img src="<%= asset_path('favicon.png') %>" alt="Logo"
+         style="<%= controller_name == 'home' ? 'width: 250px; height: auto;' : 'width: 50px; height: auto;' %>">
   </div>
+</div>
+
 
 
   <% flash.each do |type, msg| %>
