@@ -31,6 +31,8 @@ SimpleCov.start 'rails' do
     end
     formatter SimpleCov::Formatter::LcovFormatter
     SimpleCov.minimum_coverage 90
+    SimpleCov.maximum_coverage_drop 1
+
   end
   add_filter %w[version.rb initializer.rb]
 end
