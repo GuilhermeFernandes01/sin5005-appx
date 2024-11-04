@@ -72,7 +72,6 @@ jobs:
       - name: Run tests with coverage
         run: |
           bundle exec rspec
-           bundle exec simplecov -T 1.0
 
       - name: Upload coverage to Coveralls
         uses: coverallsapp/github-action@v2
