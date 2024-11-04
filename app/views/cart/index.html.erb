@@ -1,0 +1,14 @@
+<h1>Seu Carrinho</h1>
+<% if @cart.items.empty? %>
+  <p>Seu carrinho está vazio.</p>
+<% else %>
+  <ul>
+    <% @cart.items.each do |product| %>
+      <li>
+        <%= product.name %> - <%= number_to_currency(product.price) %>
+        <%= link_to 'Remover', remove_product_cart_path(product_id: product.id), method: :delete %>
+      </li>
+    <% end %>
+  </ul>
+  <h2>Total: <%= number_to_currency(@cart.total_price) %></h2>
+<% end %>

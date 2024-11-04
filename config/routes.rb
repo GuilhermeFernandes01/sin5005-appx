@@ -29,6 +29,10 @@ Rails.application.routes.draw do
   # post "/products", to: "products#create"
   resources :products
 
+  resources :cart, only: [ :index ]
+  post "add_product/:product_id", to: "cart#add_product", as: "add_product_cart"
+  delete "remove_product/:product_id", to: "cart#remove_product", as: "remove_product_cart"
+
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
