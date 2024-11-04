@@ -3,5 +3,6 @@
 <p>Categoria: <%= @product.category%></p>
 <p>Requer ingredientes: <%= @product.require_ingredients? ? "Sim" : "Não" %></p>
 <ul>
+<%= button_to "Adicionar ao Carrinho", add_product_cart_path(@product.id), method: :post %>
 <%= button_to "Editar", edit_product_path(@product), method: :get%>
 <%= button_to "Deletar", product_path(@product), method: :delete%>
