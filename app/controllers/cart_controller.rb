@@ -27,7 +27,8 @@ class CartController < ApplicationController
       return
     end
 
-    @cart.items.delete(product)
+    index = @cart.items.index(product)
+    @cart.items.delete_at(index) if index
 
     session[:cart] = @cart.items.map(&:id)
 
