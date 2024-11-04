@@ -14,7 +14,6 @@ class CartController < ApplicationController
 
     @cart.items << product
 
-    # Test this
     session[:cart] = @cart.items.map(&:id)
 
     redirect_to cart_index_path, notice: "#{product.name} foi adicionado ao carrinho."
@@ -30,7 +29,6 @@ class CartController < ApplicationController
 
     @cart.items.delete(product)
 
-    # Test this
     session[:cart] = @cart.items.map(&:id)
 
     redirect_to cart_index_path, notice: "#{product.name} foi removido do carrinho."
@@ -41,7 +39,6 @@ class CartController < ApplicationController
   def set_cart
     @cart = Cart.new
 
-    # Test this
     if session[:cart]
       session[:cart].each do |product_id|
         @cart.items << Product.find(product_id)
