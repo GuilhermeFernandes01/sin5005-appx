@@ -1,19 +1,19 @@
 class ClientesController < ApplicationController
-    def index
-      if params[:search].present?
-        @clientes = Cliente.where("nome LIKE ?", "%#{params[:search]}%")
-      else
-        @clientes = Cliente.all
-      end
-      @quantidade_clientes = @clientes.count
-      # @clientes_mes_atual = Cliente.where("strftime('%m', data_nascimento) = ?", Date.today.strftime("%m")).count
-
-      if ActiveRecord::Base.connection.adapter_name == "SQLite"
-        @clientes_mes_atual = Cliente.where("strftime('%m', data_nascimento) = ?", Date.today.strftime("%m")).count
-      else
-        @clientes_mes_atual = Cliente.where("DATE_PART('month', data_nascimento) = ?", Date.today.month).count
-      end
+  def index
+    if params[:search].present?
+      @clientes = Cliente.where("nome LIKE ?", "%#{params[:search]}%")
+    else
+      @clientes = Cliente.all
     end
+
+    @quantidade_clientes = @clientes.count
+
+    if ActiveRecord::Base.connection.adapter_name == "SQLite"
+      @clientes_mes_atual = @clientes.where("strftime('%m', data_nascimento) = ?", Date.today.strftime("%m")).count
+    else
+      @clientes_mes_atual = @clientes.where("DATE_PART('month', data_nascimento) = ?", Date.today.month).count
+    end
+  end
 
     def show
       @cliente = Cliente.find(params[:id])
