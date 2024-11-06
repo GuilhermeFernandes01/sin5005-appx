@@ -12,17 +12,17 @@
   <h4 style="margin: 0;">Aniversariantes: <%= @clientes_mes_atual %></h4>
 </div>
 
-<div style="text-align: center; margin-bottom: 20px;">
-  <%= link_to 'Novo cadastro', new_cliente_path, class: 'novo-cliente-link' %>
+<div class="actions-form-box">
+  <%= link_to 'Novo cadastro', new_cliente_path, class: 'new-item-link' %>
 </div>
 
-<div style="text-align: center; margin-bottom: 20px;">
+<div class="actions-form-box">
   <%= form_with(url: clientes_path, method: :get, local: true, style: "display: inline-block;") do |form| %>
     <%= form.label :search, "Buscar por nome:"%>
     <%= form.text_field :search, value: params[:search], style: "width: 150px; margin-left: 10px; padding: 5px;" %>
     <%= form.submit "Buscar", style: "padding: 5px 10px; width: 80px; margin-left: 10px;" %>
 
-    <%= button_tag "Limpar", type: "button", class: 'novo-cliente-link', style: "padding: 5px 10px; width: 80px; margin-left: 10px;", onclick: "document.getElementById('search').value = ''; this.form.submit();" %>
+    <%= button_tag "Limpar", type: "button", class: 'clean-link', style: "padding: 5px 10px; width: 80px; margin-left: 10px;", onclick: "document.getElementById('search').value = ''; this.form.submit();" %>
   <% end %>
 </div>
 

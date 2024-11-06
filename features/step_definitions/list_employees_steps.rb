@@ -36,3 +36,15 @@ Then("I should see the table of employees containing formatted date {string} if 
     expect(page).to have_content(formatted_date)
   end
 end
+
+When('I fill in {string} with {string}') do |field, value|
+  fill_in field, with: value
+end
+
+When('I press {string}') do |button|
+  click_button button
+end
+
+Then('I should not see the table of employees containing {string}') do |text|
+  expect(page).not_to have_content(text)
+end
