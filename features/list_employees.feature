@@ -21,3 +21,24 @@ Feature: List employees
       | name       | salary | position  | admission_date | dismissal_date | birth_date  |
       | John Doe   | 50000  | Developer | 2020-01-01     | 2021-01-01     | 1990-01-01  |
       | Jane Smith | 60000  | Manager   | 2019-01-01     |                | 1985-01-01  |
+
+  Scenario: Searching for an employee
+    Given the following employees exist:
+      | name       | salary | position  | admission_date | dismissal_date | password | password_confirmation | birth_date |
+      | John Doe   | 50000  | Developer | 2020-01-01     | 2021-01-01     | 123456   | 123456                | 1990-01-01 |
+      | Jane Smith | 60000  | Manager   | 2019-01-01     |                | 123456   | 123456                | 1985-01-01 |
+    When I visit the employees page
+    And I fill in "Buscar por nome:" with "John"
+    And I press "Buscar"
+    Then I should see the table of employees containing "John Doe"
+    And I should not see the table of employees containing "Jane Smith"
+
+  Scenario: Clearing the search
+    Given the following employees exist:
+      | name       | salary | position  | admission_date | dismissal_date | password | password_confirmation | birth_date |
+      | John Doe   | 50000  | Developer | 2020-01-01     | 2021-01-01     | 123456   | 123456                | 1990-01-01 |
+      | Jane Smith | 60000  | Manager   | 2019-01-01     |                | 123456   | 123456                | 1985-01-01 |
+    When I visit the employees page
+    And I press "Limpar"
+    Then I should see the table of employees containing "John Doe"
+    And I should see the table of employees containing "Jane Smith"
