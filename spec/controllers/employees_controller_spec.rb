@@ -36,7 +36,7 @@ RSpec.describe EmployeesController, type: :controller do
     context 'without search param' do
       it 'assigns all employees to @employees' do
         get :index
-        expect(assigns(:employees)).to match_array([employee1, employee2])
+        expect(assigns(:employees)).to match_array([ employee1, employee2 ])
       end
 
       it 'renders the index template' do
@@ -48,7 +48,7 @@ RSpec.describe EmployeesController, type: :controller do
     context 'with search param' do
       it 'assigns filtered employees to @employees' do
         get :index, params: { search: 'John' }
-        expect(assigns(:employees)).to match_array([employee1])
+        expect(assigns(:employees)).to match_array([ employee1 ])
       end
 
       it 'renders the index template' do
@@ -58,7 +58,7 @@ RSpec.describe EmployeesController, type: :controller do
 
       it 'assigns filtered employees to @employees with partial match' do
         get :index, params: { search: 'Jane' }
-        expect(assigns(:employees)).to match_array([employee2])
+        expect(assigns(:employees)).to match_array([ employee2 ])
       end
 
       it 'renders the index template with partial match' do
