@@ -19,8 +19,7 @@ RSpec.describe "employees/index.html.erb", type: :view do
         password: "123456",
         password_confirmation: "123456",
         admission_date: Date.new(2019, 1, 1),
-        birth_date: Date.new(1985, 1, 1),
-        dismissal_date: Date.new(2021, 1, 1)
+        birth_date: Date.new(1985, 1, 1)
       )
     ]
     assign(:employees, @employees)
