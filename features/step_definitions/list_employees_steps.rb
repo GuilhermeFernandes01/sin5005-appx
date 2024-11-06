@@ -12,28 +12,26 @@ When("I visit the employees page") do
   visit employees_path
 end
 
-Then("I should see the list of employees containing {string}") do |text|
+Then("I should see the table of employees containing {string}") do |text|
   expect(page).to have_content(text)
 end
 
-Then("I should see the list of employees containing formatted salary {string}") do |salary|
+Then("I should see the table of employees containing formatted salary {string}") do |salary|
   numeric_salary = salary.split(":").last.strip.to_i
-  formatted_salary = "Salário: #{format_salary(numeric_salary)}"
+  formatted_salary = format_salary(numeric_salary)
   expect(page).to have_content(formatted_salary)
 end
 
-Then("I should see the list of employees containing formatted date {string}") do |date|
-  date_text = date.split(":").first.strip
+Then("I should see the table of employees containing formatted date {string}") do |date|
   date_value = date.split(":").last.strip
-  formatted_date = "#{date_text}: #{format_date(Date.parse(date_value))}"
+  formatted_date = format_date(Date.parse(date_value))
   expect(page).to have_content(formatted_date)
 end
 
-Then("I should see the list of employees containing formatted date {string} if {string} is present") do |date, condition|
+Then("I should see the table of employees containing formatted date {string} if {string} is present") do |date, condition|
   if condition.present?
-    date_text = date.split(":").first.strip
     date_value = date.split(":").last.strip
-    formatted_date = "#{date_text}: #{format_date(Date.parse(date_value))}"
+    formatted_date = format_date(Date.parse(date_value))
 
     expect(page).to have_content(formatted_date)
   end
