@@ -33,7 +33,6 @@ Rails.application.routes.draw do
   post "add_product/:product_id", to: "cart#add_product", as: "add_product_cart"
   delete "remove_product/:product_id", to: "cart#remove_product", as: "remove_product_cart"
 
-
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -47,4 +46,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  get "cardapio", to: "cardapio#index"
 end
