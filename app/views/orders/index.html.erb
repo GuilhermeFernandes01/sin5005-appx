@@ -1,0 +1,18 @@
+<h1>Pedidos</h1>
+<% if @orders.empty? %>
+  <p>Não há pedidos cadastrados</p>
+<% else %>
+  <% @orders.each do |order| %>
+    <div>
+      <p><%="Pedido ##{order.id} do #{order.customer_name} - #{number_to_currency(order.total_price)}"%></p>
+      <ul>
+        <% order.products.each do |product| %>
+          <li>
+            <%=product.name%>
+          </li>
+        <% end %>
+      </ul>
+      <%= button_to "Deletar", order_path(order.id), method: :delete %>
+    </div>
+  <% end %>
+<% end %>
