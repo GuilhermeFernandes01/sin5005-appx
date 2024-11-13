@@ -27,8 +27,3 @@ Então('devo Visualizar somente produtos da categoria {string}') do |string|
       expect(page).to have_selector('tr', count: 1)
     end
 end
-
-
-
-
-
