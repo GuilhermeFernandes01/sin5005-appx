@@ -11,4 +11,16 @@
     <% end %>
   </ul>
   <h2>Total: <%= number_to_currency(@cart.total_price) %></h2>
+  <%= form_with(url: orders_path, method: :post, local: true) do |form| %>
+    <div>
+      <%= form.label :customer_name, 'Nome do cliente' %>
+      <%= form.text_field :customer_name, name: 'order[customer_name]' %>
+    </div>
+    
+    <% @cart.items.each do |product| %>
+      <%= form.hidden_field 'product_ids[]', value: product.id %>
+    <% end %>
+
+    <%= form.submit "Finalizar Pedido" %>
+  <% end %>
 <% end %>
