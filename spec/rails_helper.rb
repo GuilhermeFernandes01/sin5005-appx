@@ -2,6 +2,9 @@
 require 'spec_helper'
 require 'capybara/rspec'
 require 'selenium-webdriver'
+require 'webmock/rspec'
+
+WebMock.disable_net_connect!(allow_localhost: true)
 
 Capybara.register_driver :selenium do |app|
   Capybara::Selenium::Driver.new(app, browser: :chrome, options: Selenium::WebDriver::Chrome::Options.new(args: [ 'headless', 'disable-gpu', 'no-sandbox', 'disable-dev-shm-usage' ]))

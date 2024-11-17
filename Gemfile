@@ -63,6 +63,15 @@ end
 
 gem "capybara-screenshot", group: :test
 
+gem "httparty"
+gem "webmock", require: true
+gem "webmock", group: :test
+
+group :test do
+  gem "rspec-mocks"
+end
+
+
 # group :production, :development, :test do
 # Use Postgres as the database for Active Record in production environment
 gem "pg"
