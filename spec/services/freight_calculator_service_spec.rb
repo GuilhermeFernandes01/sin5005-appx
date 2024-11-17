@@ -75,5 +75,17 @@ RSpec.describe FreightCalculatorService do
         expect(distance).to be_nil
       end
     end
+
+    context 'quando a geocodificação não encontra o endereço' do
+      before do
+        # Mock para retornar uma resposta sem resultado
+        stub_request(:get, %r{https://nominatim.openstreetmap.org/search.*})
+          .to_return(status: 200, body: "[]", headers: { 'Content-Type' => 'application/json' })
+      end
+
+      it 'levanta um erro apropriado' do
+        expect { service.calculate_freight }.to raise_error(RuntimeError, /Endereço não encontrado: Rua Alguma Coisa, 120/)
+      end
+    end
   end
 end
