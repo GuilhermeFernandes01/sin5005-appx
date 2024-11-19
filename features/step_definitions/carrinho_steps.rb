@@ -57,7 +57,7 @@ Então("devo ver o preço total do produto {string}") do |produto_nome|
   expect(page).to have_content("#{produto_nome} - #{formatted_price}")
 end
 
-#frete
+# frete
 
 When('eu preencho o campo {string} com {string}') do |field_name, field_value|
   fill_in 'endereco', with: field_value

@@ -4,7 +4,7 @@ class FreightCalculatorService
     @store_coords = "-46.500493,-23.482264" # Coordenadas fixas da loja (EACH)
   end
 
-  #-23.482263954867012, -46.500492719666696
+  # -23.482263954867012, -46.500492719666696
 
   def calculate_freight
     response = get_route_data
