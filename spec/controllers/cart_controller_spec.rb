@@ -1,4 +1,5 @@
 require "rails_helper"
+require 'webmock/rspec'
 
 RSpec.describe CartController, type: :controller do
   let!(:cart) { Cart.new }
@@ -212,4 +213,60 @@ RSpec.describe CartController, type: :controller do
       end
     end
   end
-end
+    describe 'POST #calculate_freight' do
+      let(:client_address) { 'Rua Alguma Coisa, 120' }
+      let(:freight_calculator_service) { instance_double(FreightCalculatorService) }
+
+      context 'quando o cálculo do frete é bem-sucedido' do
+        before do
+          # Stub para simular o comportamento bem-sucedido do serviço
+          allow(FreightCalculatorService).to receive(:new).with(client_address).and_return(freight_calculator_service)
+          allow(freight_calculator_service).to receive(:calculate_freight).and_return(30.0)
+
+          # Enviar requisição POST
+          post :calculate_freight, params: { endereco: client_address }
+        end
+
+        it 'calcula o frete corretamente' do
+          # Verifica se o cálculo do frete foi realizado corretamente
+          expect(freight_calculator_service).to have_received(:calculate_freight)
+        end
+
+        it 'armazena o valor do frete na variável flash' do
+          # Verifica se o valor do frete foi armazenado na variável flash
+          expect(flash[:freight_value]).to eq(30.0)
+        end
+
+        it 'exibe a mensagem de sucesso no flash' do
+          # Verifica se a mensagem de sucesso foi exibida
+          expect(flash[:notice]).to eq('Frete calculado com sucesso.')
+        end
+
+        it 'faz o redirecionamento para o caminho do carrinho' do
+          # Verifica se o redirecionamento foi feito para o caminho correto
+          expect(response).to redirect_to(cart_index_path)
+        end
+      end
+
+      context 'quando ocorre um erro no cálculo do frete' do
+        before do
+          # Stub para simular o erro no serviço
+          allow(FreightCalculatorService).to receive(:new).with(client_address).and_return(freight_calculator_service)
+          allow(freight_calculator_service).to receive(:calculate_freight).and_raise("Erro de cálculo")
+
+          # Enviar requisição POST
+          post :calculate_freight, params: { endereco: client_address }
+        end
+
+        it 'exibe a mensagem de erro no flash' do
+          # Verifica se a mensagem de erro foi exibida
+          expect(flash[:alert]).to eq('Erro ao calcular frete: Erro de cálculo')
+        end
+
+        it 'faz o redirecionamento para o caminho do carrinho' do
+          # Verifica se o redirecionamento foi feito para o caminho correto
+          expect(response).to redirect_to(cart_index_path)
+        end
+      end
+    end
+  end

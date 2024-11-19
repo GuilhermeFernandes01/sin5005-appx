@@ -8,7 +8,15 @@
 require "cucumber/rails"
 require "capybara/cucumber"
 require "selenium-webdriver"
+require 'rspec/rails'
+
 World(Capybara::DSL)
+
+require 'webmock/cucumber'
+WebMock.allow_net_connect!
+
+World(RSpec::Mocks::ExampleMethods)
+
 
 # Configuração do Capybara para usar Selenium com Chrome
 Capybara.register_driver :selenium_chrome do |app|

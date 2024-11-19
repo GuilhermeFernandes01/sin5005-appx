@@ -2,6 +2,9 @@
 require 'spec_helper'
 require 'capybara/rspec'
 require 'selenium-webdriver'
+require 'webmock/rspec'
+
+WebMock.disable_net_connect!(allow_localhost: true)
 
 Capybara.register_driver :selenium do |app|
   Capybara::Selenium::Driver.new(app, browser: :chrome, options: Selenium::WebDriver::Chrome::Options.new(args: [ 'headless', 'disable-gpu', 'no-sandbox', 'disable-dev-shm-usage' ]))
@@ -78,11 +81,13 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
   #
   config.include FactoryBot::Syntax::Methods
-  # Verifica se as factories estão sendo carregadas
-  # FactoryBot
-  # config.before(:suite) do
-  #  FactoryBot.find_definitions
-  # end
+  config.include FactoryBot::Syntax::Methods
+
+  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  config.use_transactional_fixtures = true
+
+  config.infer_spec_type_from_file_location!
+  config.filter_rails_from_backtrace!
 end
 
 RSpec.configure do |config|
