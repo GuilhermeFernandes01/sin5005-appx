@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 
   resources :cart, only: [ :index ]
   post "add_product/:product_id", to: "cart#add_product", as: "add_product_cart"
+  post "calculate_freight", to: "cart#calculate_freight", as: "calculate_freight_cart"
   delete "remove_product/:product_id", to: "cart#remove_product", as: "remove_product_cart"
 
   resources :orders, only: [ :index, :create, :destroy ]

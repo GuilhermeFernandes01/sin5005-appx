@@ -49,18 +49,14 @@ end
 
 def handle_invalid_address
   @error_message = "Erro ao calcular o frete: Erro ao geocodificar o endereço"
-
-  # Simulate an error response from the geocoding service
   stub_request(:get, %r{https://nominatim.openstreetmap.org/search.*})
     .to_return(status: 500, body: @error_message, headers: { 'Content-Type' => 'application/json' })
-
-  # Instantiate the service and attempt to calculate the freight
   service = FreightCalculatorService.new(@client_address)
 
   begin
     @shipping_cost = service.calculate_freight
   rescue StandardError => e
-    @error_message = e.message # Capture the error message
+    @error_message = e.message
   end
 end
 

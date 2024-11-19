@@ -3,7 +3,7 @@ class Order < ApplicationRecord
 
   validates :customer_name, presence: { message: "can't be empty" }
 
-  def total_price
-    products.sum(&:price)
-  end
+    def total_price
+      products.sum(&:price)
+    end
 end

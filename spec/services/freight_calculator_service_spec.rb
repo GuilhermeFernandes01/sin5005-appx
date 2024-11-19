@@ -36,9 +36,9 @@ RSpec.describe FreightCalculatorService do
         .to_return(status: 200, body: route_response_body, headers: { 'Content-Type' => 'application/json' })
     end
 
-    it 'retorna a distância em quilômetros' do
-      distance = service.calculate_freight
-      expect(distance).to eq(15.0) # 15000 metros = 15 km
+    it 'retorna o valor do frete baseado na distância' do
+      freight_value = service.calculate_freight
+      expect(freight_value).to eq(24.0)
     end
 
     context 'quando a API de geocodificação retorna um erro' do
@@ -71,8 +71,8 @@ RSpec.describe FreightCalculatorService do
       end
 
       it 'retorna nil' do
-        distance = service.calculate_freight
-        expect(distance).to be_nil
+        freight_value = service.calculate_freight
+        expect(freight_value).to be_nil
       end
     end
 

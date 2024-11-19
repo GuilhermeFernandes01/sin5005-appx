@@ -71,6 +71,7 @@ group :test do
   gem "rspec-mocks"
 end
 
+gem 'webpacker'
 
 # group :production, :development, :test do
 # Use Postgres as the database for Active Record in production environment

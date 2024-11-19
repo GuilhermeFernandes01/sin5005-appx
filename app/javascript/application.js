@@ -5,4 +5,6 @@ import "controllers"
 import "popper"
 import "bootstrap"
 
+import "../controllers/freight_calculator";
+
 Rails.start()
