@@ -15,11 +15,11 @@ end
 
 Quando ('eu preencho o formulário com:') do |table|
   table.hashes.each do |row|
-    fill_in 'ingredient[name]', with: row['Name']
-    fill_in 'ingredient[unityMeasure]', with: row['Unity Measure']
-    fill_in 'ingredient[quantityStock]', with: row['Quantity Stock']
-    fill_in 'ingredient[quantityStockMin]', with: row['Quantity Stock Min']
-    fill_in 'ingredient[quantityStockMax]', with: row['Quantity Stock Max']
+    fill_in 'ingredient[name]', with: row['Nome']
+    fill_in 'ingredient[unityMeasure]', with: row['Unidade de medição']
+    fill_in 'ingredient[quantityStock]', with: row['Quantidade em estoque']
+    fill_in 'ingredient[quantityStockMin]', with: row['Quantidade mínima em estoque']
+    fill_in 'ingredient[quantityStockMax]', with: row['Quantidade máxima em estoque']
   end
 end
 
@@ -32,7 +32,7 @@ Então ('eu devo ser redirecionado para a página que mostra o ingrediente cadas
 end
 
 Então ('eu devo ver a mensagem de sucesso {string}') do |string|
-  expect(page).to have_content('Ingredient was successfully created.')
+  expect(page).to have_content('Ingrediente foi criado com sucesso.')
 end
 
 Então ('eu devo ver o ingrediente {string} com a unidade {string} a quantidade {string} a quantidade min {string} a quantidade max {string}') do |nome, unidade, quantidade, quantidade_min, quantidade_max|
@@ -46,7 +46,7 @@ end
 # Cenário: Listar todos os ingredientes
 Dado ('que existem os seguintes ingredientes:') do |table|
   table.hashes.each do |row|
-    Ingredient.create(name: row['Name'], unityMeasure: row['Unity Measure'], quantityStock: row['Quantity Stock'], quantityStockMin: row['Quantity Stock Min'], quantityStockMax: row['Quantity Stock Max'])
+    Ingredient.create(name: row['Nome'], unityMeasure: row['Unidade de medição'], quantityStock: row['Quantidade em estoque'], quantityStockMin: row['Quantidade mínima em estoque'], quantityStockMax: row['Quantidade máxima em estoque'])
   end
 end
 
@@ -83,7 +83,7 @@ Quando ('eu altero a quantidade em estoque para "1500"') do
   fill_in 'ingredient[quantityStock]', with: '1500'
 end
 
-Quando ('eu clico no botão "Update Ingredient"') do
+Quando ('eu clico no botão "Atualizar ingrediente"') do
   click_button 'commit'
 end
 
@@ -93,7 +93,7 @@ Então ('eu devo ser redirecionado para a página de ingrediente atualizado') do
 end
 
 Então ('eu devo visualizar a mensagem de sucesso {string}') do |string|
-   expect(page).to have_content('Ingredient was successfully updated.')
+   expect(page).to have_content('Ingrediente foi atualizado com sucesso.')
 end
 
 Então ('eu devo visualizar o ingrediente {string} com a unidade {string} a quantidade {string} a quantidade min {string} a quantidade max {string}') do |nome, unidade, quantidade, quantidade_min, quantidade_max|
@@ -119,8 +119,8 @@ Quando ('pressionado o botão "Destroy this ingredient"') do
   click_button 'destroy_ingredient'
 end
 
-Então ('deve ser mostrada a mensagem de sucesso "Ingredient was successfully destroyed."') do
-  expect(page).to have_content('Ingredient was successfully destroyed.')
+Então ('deve ser mostrada a mensagem de sucesso "Ingrediente foi excluído com sucesso."') do
+  expect(page).to have_content('Ingrediente foi excluído com sucesso.')
 end
 
 Então ('eu não devo ver o ingrediente "Tomate" na lista de ingredientes') do

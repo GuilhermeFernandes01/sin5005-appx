@@ -37,7 +37,7 @@ class IngredientsController < ApplicationController
 
     respond_to do |format|
       if @ingredient.save
-        format.html { redirect_to @ingredient, notice: "Ingredient was successfully created." }
+        format.html { redirect_to @ingredient, notice: "Ingrediente foi criado com sucesso." }
         format.json { render :show, status: :created, location: @ingredient }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -50,11 +50,11 @@ class IngredientsController < ApplicationController
   def update
     respond_to do |format|
       if @ingredient.update(ingredient_params)
-        format.html { redirect_to @ingredient, notice: "Ingredient was successfully updated." }
+        format.html { redirect_to @ingredient, notice: "Ingrediente foi atualizado com sucesso." }
         format.json { render :show, status: :ok, location: @ingredient }
       else
         format.html do
-          flash[:alert] = "Failed to update ingredient."  # Adicione o flash de erro
+          flash[:alert] = "Falha ao atualizar ingrediente."  # Adicione o flash de erro
           render :edit, status: :unprocessable_entity
         end
         format.json { render json: @ingredient.errors, status: :unprocessable_entity }
@@ -67,7 +67,7 @@ class IngredientsController < ApplicationController
     @ingredient.destroy!
 
     respond_to do |format|
-      format.html { redirect_to ingredients_path, status: :see_other, notice: "Ingredient was successfully destroyed." }
+      format.html { redirect_to ingredients_path, status: :see_other, notice: "Ingrediente foi excluído com sucesso." }
       format.json { head :no_content }
     end
   end
