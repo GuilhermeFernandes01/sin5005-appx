@@ -5,7 +5,7 @@ end
 
 Então ('existindo os seguintes ingredientes:') do |table|
   table.hashes.each do |row|
-    Ingredient.create(name: row['Name'], unityMeasure: row['Unity Measure'], quantityStock: row['Quantity Stock'], quantityStockMin: row['Quantity Stock Min'], quantityStockMax: row['Quantity Stock Max'])
+    Ingredient.create(name: row['Nome'], unityMeasure: row['Unidade de medição'], quantityStock: row['Quantidade em estoque'], quantityStockMin: row['Quantidade mínima em estoque'], quantityStockMax: row['Quantidade máxima em estoque'])
   end
 end
 

@@ -43,7 +43,7 @@ Funcionalidade: Editar Produto
     E estou na página do produto "Pizza de Pepperoni"
     Quando clico no botão editar
     E atualizo as informações do produto ("Nome do produto", "Preço", "Categoria") para ("Água", 1.99, "Bebidas") com os ingredientes:
-      | Ingredients |
+      | Ingredientes |
     E clico no botão "Salvar"
     Então devo ver as informações novas do produto ("Água", 1.99, "Bebidas", "false")
     E o produto "Água" deve ter apenas os ingredientes:
@@ -66,6 +66,6 @@ Funcionalidade: Editar Produto
     E estou na página do produto "Pizza de Pepperoni"
     Quando clico no botão editar
     E atualizo as informações do produto ("Nome do produto", "Preço", "Categoria") para ("Água", 0.00, "Bebidas") com os ingredientes:
-      | Ingredients |
+      | Ingredientes |
     E clico no botão "Salvar"
     Então devo ver o erro de edição de produto "Price must be greater than 0"
