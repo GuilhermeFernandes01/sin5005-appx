@@ -50,6 +50,6 @@ Funcionalidade: Gerenciar Ingredientes
   Cenário: Remover um ingrediente
     Dado a existência do ingrediente "Tomate" com a unidade "un" a quantidade "50" a quantidade min "10" a quantidade max "2000"
     Quando eu acesso a página para exclusão do ingrediente "Tomate"
-    E pressionado o botão "Destroy this ingredient"
+    E pressionado o botão "Excluir este ingrediente"
     Então deve ser mostrada a mensagem de sucesso "Ingrediente foi excluído com sucesso."
     E eu não devo ver o ingrediente "Tomate" na lista de ingredientes

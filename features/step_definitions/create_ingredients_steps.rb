@@ -115,7 +115,7 @@ Quando ('eu acesso a página para exclusão do ingrediente "Tomate"') do
   visit ingredient_path(tomate_id)
 end
 
-Quando ('pressionado o botão "Destroy this ingredient"') do
+Quando ('pressionado o botão "Excluir este ingrediente"') do
   click_button 'destroy_ingredient'
 end
 

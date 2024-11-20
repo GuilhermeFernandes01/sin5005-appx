@@ -7,9 +7,9 @@ class IngredientsController < ApplicationController
 
     # Filtros quantidade
     if params[:filter] == "menor_estoque_min"
-      @ingredients = Ingredient.where("quantityStock <= quantityStockMin")
+      @ingredients = Ingredient.where("\"quantityStock\" <= \"quantityStockMin\"")
     elsif params[:filter] == "maior_estoque_min"
-      @ingredients = Ingredient.where("quantityStock > quantityStockMin")
+      @ingredients = Ingredient.where("\"quantityStock\" > \"quantityStockMin\"")
     end
 
     # Filtro pelo nome
