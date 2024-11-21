@@ -139,7 +139,7 @@ RSpec.describe IngredientsController, type: :controller do
 
       it 'sets a flash notice' do
         put :update, params: { id: ingredient.id, ingredient: updated_ingredient_attributes }
-        expect(flash[:notice]).to eq('Ingredient was successfully updated.')
+        expect(flash[:notice]).to eq('Ingrediente foi atualizado com sucesso.')
       end
     end
 

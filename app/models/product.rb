@@ -4,6 +4,7 @@ class Product < ApplicationRecord
   validates :category, presence: { message: "can't be empty" }
 
   has_and_belongs_to_many :ingredients
+  has_and_belongs_to_many :orders
 
   def require_ingredients?
     ingredients.any?

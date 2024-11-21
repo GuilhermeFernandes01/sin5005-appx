@@ -29,6 +29,12 @@ Rails.application.routes.draw do
   # post "/products", to: "products#create"
   resources :products
 
+  resources :cart, only: [ :index ]
+  post "add_product/:product_id", to: "cart#add_product", as: "add_product_cart"
+  post "calculate_freight", to: "cart#calculate_freight", as: "calculate_freight_cart"
+  delete "remove_product/:product_id", to: "cart#remove_product", as: "remove_product_cart"
+
+  resources :orders, only: [ :index, :create, :destroy ]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -43,4 +49,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  get "cardapio", to: "cardapio#index"
 end

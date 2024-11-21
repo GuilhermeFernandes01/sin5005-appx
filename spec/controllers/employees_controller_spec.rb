@@ -33,14 +33,48 @@ RSpec.describe EmployeesController, type: :controller do
     let!(:employee1) { create(:employee, name: "John Doe", salary: 50000, position: "Developer", admission_date: "2020-01-01", birth_date: "1990-01-01") }
     let!(:employee2) { create(:employee, name: "Jane Smith", salary: 60000, position: "Manager", admission_date: "2019-01-01", birth_date: "1985-01-01") }
 
-    it 'assigns all employees to @employees' do
-      get :index
-      expect(assigns(:employees)).to match_array([ employee1, employee2 ])
+    context 'without search param' do
+      it 'assigns all employees to @employees' do
+        get :index
+        expect(assigns(:employees)).to match_array([ employee1, employee2 ])
+      end
+
+      it 'renders the index template' do
+        get :index
+        expect(response).to render_template(:index)
+      end
     end
 
-    it 'renders the index template' do
-      get :index
-      expect(response).to render_template(:index)
+    context 'with search param' do
+      it 'assigns filtered employees to @employees' do
+        get :index, params: { search: 'John' }
+        expect(assigns(:employees)).to match_array([ employee1 ])
+      end
+
+      it 'renders the index template' do
+        get :index, params: { search: 'John' }
+        expect(response).to render_template(:index)
+      end
+
+      it 'assigns filtered employees to @employees with partial match' do
+        get :index, params: { search: 'Jane' }
+        expect(assigns(:employees)).to match_array([ employee2 ])
+      end
+
+      it 'renders the index template with partial match' do
+        get :index, params: { search: 'Jane' }
+        expect(response).to render_template(:index)
+      end
+
+      it 'assigns no employees to @employees with no match' do
+        get :index, params: { search: 'Nonexistent' }
+        expect(assigns(:employees)).to be_empty
+      end
+
+      it 'renders the index template with no match' do
+        get :index, params: { search: 'Nonexistent' }
+        expect(response).to render_template(:index)
+      end
     end
   end
 

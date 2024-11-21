@@ -59,7 +59,7 @@ features_report.html
 ## Heroku link
 
 ```sh
-https://sin5005-appx-71e28691d25d.herokuapp.com/up
+https://sin5005-appx-71e28691d25d.herokuapp.com
 ```
 
 ## Pivotal Tracker link

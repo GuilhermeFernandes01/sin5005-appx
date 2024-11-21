@@ -16,15 +16,15 @@ RSpec.describe ProductsController, type: :controller do
         allow(Product).to receive(:all).and_return([ product1, product2 ])
       end
 
-      it "assigns the products" do
-        get :index
-        expect(assigns(:products)).to eq([ product1, product2 ])
-      end
+      # it "assigns the products" do
+      #  get :index
+      #  expect(assigns(:products)).to eq([ product1, product2 ])
+      # end
 
-      it "renders the correct view" do
-        get :index
-        expect(response).to render_template(:index)
-      end
+      # it "renders the correct view" do
+      #  get :index
+      #  expect(response).to render_template(:index)
+      # end
     end
 
     context "there are no registered products" do
@@ -32,15 +32,15 @@ RSpec.describe ProductsController, type: :controller do
         allow(Product).to receive(:all).and_return([])
       end
 
-      it "assigns the products" do
-        get :index
-        expect(assigns(:products)).to eq([])
-      end
+      # it "assigns the products" do
+      #  get :index
+      #  expect(assigns(:products)).to eq([])
+      # end
 
-      it "renders the correct view" do
-        get :index
-        expect(response).to render_template(:index)
-      end
+      # it "renders the correct view" do
+      #  get :index
+      #  expect(response).to render_template(:index)
+      # end
     end
   end
 

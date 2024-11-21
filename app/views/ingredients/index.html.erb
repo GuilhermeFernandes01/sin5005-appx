@@ -1,41 +1,41 @@
 <p style="color: green"><%= notice %></p>
 
-<% content_for :title, "Ingredients" %>
+<% content_for :title, "Ingredientes" %>
 
-<h1>Ingredients</h1>
+<h1>Ingredientes</h1>
 
 <div class="container">
   <%= form_with url: ingredients_path, method: :get, local: true, class: "form-inline row mb-3" do %>
     <div class="col-auto">
-      <label for="ingredient-name" class="col-form-label">Filter by Name:</label>
+      <label for="ingredient-name" class="col-form-label">Filtrar por nome:</label>
     </div>
     <div class="col-auto">
-      <input type="text" id="ingredient-name" name="name" class="form-control" placeholder="Ingredient">
+      <input type="text" id="ingredient-name" name="name" class="form-control" placeholder="Ingrediente">
     </div>
     <div class="col-auto">
-      <%= submit_tag "Filter", class: "btn btn-primary" %>
+      <%= submit_tag "Filtrar", class: "btn btn-primary" %>
     </div>
     <div class="col-auto">
-      <%= link_to "New ingredient", new_ingredient_path %>
+      <%= link_to "Novo ingrediente", new_ingredient_path %>
     </div>
   <% end %>
 </div>
 
 
 <div class="container" id="ingredients">
-  <%= link_to "All Ingredients", ingredients_path, class: "btn btn-primary #{params[:filter].blank? ? 'active' : ''}" %>
-  <%= link_to "Less Than Stock Min", ingredients_path(filter: "menor_estoque_min"), class: "btn btn-primary #{params[:filter] == 'menor_estoque_min' ? 'active' : ''}" %>
-  <%= link_to "Greater Than Stock Min", ingredients_path(filter: "maior_estoque_min"), class: "btn btn-primary #{params[:filter] == 'maior_estoque_min' ? 'active' : ''}" %>
+  <%= link_to "Todos ingredientes", ingredients_path, class: "btn btn-primary #{params[:filter].blank? ? 'active' : ''}" %>
+  <%= link_to "Menor que estoque mínimo", ingredients_path(filter: "menor_estoque_min"), class: "btn btn-primary #{params[:filter] == 'menor_estoque_min' ? 'active' : ''}" %>
+  <%= link_to "Maior que estoque mínimo", ingredients_path(filter: "maior_estoque_min"), class: "btn btn-primary #{params[:filter] == 'maior_estoque_min' ? 'active' : ''}" %>
   <table id="ingredients-list" class="table table-striped">
     <thead>
       <tr>
         <th>ID</th>
-        <th>Name</th>
-        <th>Unity Measure</th>
-        <th>Quantity Stock</th>
-        <th>Quantity Stock Min</th>
-        <th>Quantity Stock Max</th>
-        <th>Actions</th>
+        <th>Nome</th>
+        <th>Unidade de medição</th>
+        <th>Quantidade em estoque</th>
+        <th>Quantidade mínima em estoque</th>
+        <th>Quantidade máxima em estoque</th>
+        <th>Ações</th>
       </tr>
     </thead>
     <tbody id="ingredient-table-body">
@@ -47,7 +47,7 @@
           <td><%= ingredient.quantityStock %></td>
           <td><%= ingredient.quantityStockMin %></td>
           <td><%= ingredient.quantityStockMax %></td>
-          <td> <%= link_to "Show this ingredient", ingredient %> </td>
+          <td> <%= link_to "Exibir este ingrediente", ingredient %> </td>
         </tr>
       <% end %>
     </tbody>
