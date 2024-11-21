@@ -3,12 +3,12 @@ Given('que possuo alguns itens no carrinho:') do |table|
     product_id = Product.find_by!(name: product[:name]).id
 
     visit "/products/#{product_id}"
-    click_button('Adicionar ao Carrinho')
+    click_button('Adicionar ao carrinho')
   end
 end
 
 Given('clico em {string}') do |string|
-  click_button('Adicionar ao Carrinho')
+  click_button('Adicionar ao carrinho')
 end
 
 Then('devo ver a mensagem {string}') do |message|

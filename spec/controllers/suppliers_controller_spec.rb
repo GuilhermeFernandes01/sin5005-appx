@@ -26,7 +26,7 @@ describe 'POST #create' do
     it 'redirects to the supplier index path' do
       post :create, params: { supplier: supplier_attributes }
       expect(response).to redirect_to(new_supplier_path)
-      expect(flash[:notice]).to eq("Supplier was successfully created.")
+      expect(flash[:notice]).to eq("Fornecedor foi criado com sucesso.")
     end
   end
 
@@ -40,7 +40,7 @@ describe 'POST #create' do
     it 'renders the new template again' do
       post :create, params: { supplier: { name: nil, cnpj: nil } }
       expect(response).to render_template(:new)
-      expect(flash[:alert]).to eq("Supplier not created")
+      expect(flash[:alert]).to eq("Fornecedor não foi criado")
     end
   end
 end
@@ -123,7 +123,7 @@ end
           delete :destroy, params: { id: supplier.id }
         }.to change(Supplier, :count).by(-1)
         expect(response).to redirect_to(suppliers_path)
-        expect(flash[:notice]).to eq("Supplier was successfully deleted.")
+        expect(flash[:notice]).to eq("Fornecedor foi excluído com sucesso.")
       end
 
       it "does not set flash notice if supplier deletion fails" do
@@ -152,7 +152,7 @@ end
 
       it 'sets a flash message' do
         patch :update, params: { id: supplier.id, supplier: { name: 'Updated Supplier' } }
-        expect(flash[:notice]).to eq("Supplier was successfully updated.")
+        expect(flash[:notice]).to eq("Fornecedor foi atualizado com sucesso.")
       end
     end
 
@@ -170,7 +170,7 @@ end
 
       it 'sets a flash message' do
         patch :update, params: { id: supplier.id, supplier: { name: nil } }
-        expect(flash[:alert]).to eq("Supplier could not be updated, please consider the informations sent")
+        expect(flash[:alert]).to eq("Fornecedor não pôde ser atualizado, por favor revise as informações enviadas")
       end
     end
   end

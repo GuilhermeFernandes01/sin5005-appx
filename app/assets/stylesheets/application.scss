@@ -246,3 +246,15 @@ div.formulario input[type="submit"]:hover {
   text-align: center;
   margin-bottom: 20px;
 }
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  margin-left: 0;
+}
+
+.checkbox-container input[type="checkbox"] {
+  margin: 0;
+  width: auto;
+  margin-right: 10px; /* Adjust the spacing as needed */
+}

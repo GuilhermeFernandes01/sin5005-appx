@@ -11,7 +11,7 @@ Funcionalidade: Carrinho
       | Pizza de Pepperoni | 40.99   | Pizza     |
       | Água               | 1.99    | Bebidas   |
     E estou na página do produto "Pizza de Pepperoni"
-    E clico em "Adicionar ao Carrinho"
+    E clico em "Adicionar ao carrinho"
     Então devo ver a mensagem "Pizza de Pepperoni foi adicionado ao carrinho."
     E devo ver o produto "Pizza de Pepperoni" no carrinho
     E a sessão do carrinho deve conter o id do produto "Pizza de Pepperoni"

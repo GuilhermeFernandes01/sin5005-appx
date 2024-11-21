@@ -57,6 +57,7 @@
         <th>Email</th>
         <th>Segmento</th>
         <th>Produtos</th>
+        <th>Ações</th>
       </tr>
     </thead>
     <tbody>
@@ -71,8 +72,6 @@
           <td><%= supplier.products %></td>
           <td>
             <%= button_to 'Excluir', supplier_path(supplier), method: :delete, data: { confirm: 'Você tem certeza que deseja excluir este fornecedor?' }, class: 'btn btn-danger' %>
-          </td>
-          <td>
             <%= link_to 'Ver', supplier_path(supplier), class: 'btn btn-primary' %>
           </td>
         </tr>

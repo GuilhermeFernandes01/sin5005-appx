@@ -8,11 +8,11 @@ Given("I am on the create supplier registration page") do
  end
 
  When("I submit the supplier form") do
-  click_button "Criar Fornecedor"
+  click_button "Criar fornecedor"
  end
 
  Then("I must see a success message") do
-  expect(page).to have_content("Supplier was successfully created.")
+  expect(page).to have_content("Fornecedor foi criado com sucesso.")
  end
  When("I fill in the new supplier form with invalid data or blank") do
   fill_in "supplier[name]", with: ""
@@ -48,7 +48,7 @@ Given("I am on the create supplier registration page") do
   expect(page).to have_css('table')
  end
 
- Then('the table should contain {string}, {string}, {string}, {string}, {string}, {string} and {string}') do |code, name, cnpj, phone, email, segment, products|
+ Then('the table should contain {string}, {string}, {string}, {string}, {string}, {string}, {string} and {string}') do |code, name, cnpj, phone, email, segment, products, actions|
   within 'table' do
     expect(page).to have_content(code)
     expect(page).to have_content(name)
@@ -57,6 +57,7 @@ Given("I am on the create supplier registration page") do
     expect(page).to have_content(email)
     expect(page).to have_content(segment)
     expect(page).to have_content(products)
+    expect(page).to have_content(actions)
   end
 end
 
@@ -81,8 +82,8 @@ end
   expect(page).not_to have_content(supplier_name)
  end
 
- Then('I should see a message saying "Supplier was successfully deleted."') do
-  expect(page).to have_content("Supplier was successfully deleted.")
+ Then('I should see a message saying "Fornecedor foi excluído com sucesso."') do
+  expect(page).to have_content("Fornecedor foi excluído com sucesso.")
 end
 
 Then('I should see {string} in the supplier show page') do |supplier_name|
@@ -150,7 +151,7 @@ Then("I should see the updated details for phone, email, segment, and products")
 end
 
 Then("I should see a link to go back to the suppliers list") do
-  expect(page).to have_link("Retornar para a Lista de Fornecedores", href: suppliers_path)
+  expect(page).to have_link("Retornar para a lista de fornecedores", href: suppliers_path)
 end
 
 # Filter
@@ -184,11 +185,11 @@ Then("I should see {string} on Listing Page") do |string|
 end
 
 When("I clean the search bar") do
-  click_link "Limpar Filtro"
+  click_link "Limpar filtro"
 end
 
 Then("I should see the Listing Page with all Suppliers") do
-  expect(page).to have_content("Fornecedores Cadastrados")
+  expect(page).to have_content("Fornecedores cadastrados")
 end
 
 Given("I am on the suppliers listing page") do

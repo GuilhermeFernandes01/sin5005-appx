@@ -8,7 +8,7 @@ RSpec.describe "suppliers/index.html.erb", type: :view do
   context "when there are no suppliers" do
     it "displays a message indicating no suppliers are registered" do
       render
-      expect(rendered).to have_content("Não há Fornecedores cadastrados")
+      expect(rendered).to have_content("Não há fornecedores cadastrados")
     end
   end
 
@@ -52,29 +52,29 @@ RSpec.describe "suppliers/index.html.erb", type: :view do
 
   it "displays the search form with appropriate fields" do
     render
-    expect(rendered).to have_selector("form.search-form")
-    expect(rendered).to have_selector("input.search-input[placeholder='Digite o código']")
-    expect(rendered).to have_selector("input.search-input[placeholder='Digite o nome']")
-    expect(rendered).to have_selector("input.search-input[placeholder='Digite o segmento']")
-    expect(rendered).to have_selector("input.search-input[placeholder='Digite um produto']")
+    expect(rendered).to have_selector("form")
+    expect(rendered).to have_selector("input.search-form-param[placeholder='Digite o código']")
+    expect(rendered).to have_selector("input.search-form-param[placeholder='Digite o nome']")
+    expect(rendered).to have_selector("input.search-form-param[placeholder='Digite o segmento']")
+    expect(rendered).to have_selector("input.search-form-param[placeholder='Digite um produto']")
     expect(rendered).to have_selector("input[type='submit'][value='Filtrar']")
   end
 
   it "displays the clear filter button" do
     render
-    expect(rendered).to have_link("Limpar Filtro", href: suppliers_path)
-    expect(rendered).to have_css("a.btn.btn-primary", text: "Limpar Filtro")
+    expect(rendered).to have_link("Limpar filtro", href: suppliers_path)
+    expect(rendered).to have_css("a.clean-link", text: "Limpar filtro")
   end
 
   context "when flash messages are present" do
     context "when flash notice is present" do
       before do
-        flash[:notice] = "Supplier was successfully deleted."
+        flash[:notice] = "Fornecedor foi excluído com sucesso."
         render
       end
 
       it "displays the success message" do
-        expect(rendered).to have_selector("div.alert.alert-success", text: "Supplier was successfully deleted.")
+        expect(rendered).to have_selector("div.alert.alert-success", text: "Fornecedor foi excluído com sucesso.")
       end
     end
 

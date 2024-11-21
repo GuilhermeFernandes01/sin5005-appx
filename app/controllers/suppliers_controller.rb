@@ -25,10 +25,10 @@ class SuppliersController < ApplicationController
   def create
     @supplier = Supplier.new(supplier_params)
     if @supplier.save
-      flash[:notice] = "Supplier was successfully created."
+      flash[:notice] = "Fornecedor foi criado com sucesso."
       redirect_to new_supplier_path
     else
-      flash.now[:alert] = "Supplier not created"
+      flash.now[:alert] = "Fornecedor não foi criado"
       render :new, status: :unprocessable_entity
     end
   end
@@ -37,7 +37,7 @@ class SuppliersController < ApplicationController
     @supplier = Supplier.find(params[:id])
 
     if @supplier.destroy
-      flash[:notice] = "Supplier was successfully deleted."
+      flash[:notice] = "Fornecedor foi excluído com sucesso."
     end
 
     redirect_to suppliers_path
@@ -54,10 +54,10 @@ class SuppliersController < ApplicationController
 
   def update
     if @supplier.update(supplier_params)
-      flash[:notice] = "Supplier was successfully updated."
+      flash[:notice] = "Fornecedor foi atualizado com sucesso."
       redirect_to supplier_path(@supplier)
     else
-      flash.now[:alert] = "Supplier could not be updated, please consider the informations sent"
+      flash.now[:alert] = "Fornecedor não pôde ser atualizado, por favor revise as informações enviadas"
       render :edit
     end
   end

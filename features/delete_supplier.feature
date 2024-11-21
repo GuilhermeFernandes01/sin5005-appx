@@ -9,7 +9,7 @@ Feature: Delete a supplier
     And I press the button "Excluir" from "Supplier 1"
     And I confirm the deletion
     Then I should no longer see "Supplier 1" in the suppliers list page
-    And I should see a message saying "Supplier was successfully deleted."
+    And I should see a message saying "Fornecedor foi excluído com sucesso."
 
   Scenario 2: Successfully delete a supplier from show Page
     Given there are registered suppliers
@@ -19,7 +19,7 @@ Feature: Delete a supplier
     Then I click "Excluir"
     And I confirm the deletion
     Then I should no longer see "Supplier 1" in the suppliers show page
-    And I should see a message saying "Supplier was successfully deleted."
+    And I should see a message saying "Fornecedor foi excluído com sucesso."
 
   Scenario 3: Not successfully delete a supplier from List Page
     Given there are registered suppliers

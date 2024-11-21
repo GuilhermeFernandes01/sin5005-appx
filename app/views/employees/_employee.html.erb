@@ -1,31 +1,33 @@
-<p>
-  <strong>Nome:</strong>
-  <%= @employee.name %>
-</p>
-
-<p>
-  <strong>Cargo:</strong>
-  <%= @employee.position %>
-</p>
-
-<p>
-  <strong>Salário:</strong>
-  <%= format_salary(@employee.salary) %>
-</p>
-
-<p>
-  <strong>Data de admissão:</strong>
-  <%= format_date(@employee.admission_date) %>
-</p>
-
-<p>
-  <strong>Data de nascimento:</strong>
-  <%= format_date(@employee.birth_date) %>
-</p>
-
-<% if @employee.dismissal_date.present? %>
+<div class="text-center">
   <p>
-    <strong>Data de demissão:</strong>
-    <%= format_date(@employee.dismissal_date) %>
+    <strong>Nome:</strong>
+    <%= @employee.name %>
   </p>
-<% end %>
+
+  <p>
+    <strong>Cargo:</strong>
+    <%= @employee.position %>
+  </p>
+
+  <p>
+    <strong>Salário:</strong>
+    <%= format_salary(@employee.salary) %>
+  </p>
+
+  <p>
+    <strong>Data de admissão:</strong>
+    <%= format_date(@employee.admission_date) %>
+  </p>
+
+  <p>
+    <strong>Data de nascimento:</strong>
+    <%= format_date(@employee.birth_date) %>
+  </p>
+
+  <% if @employee.dismissal_date.present? %>
+    <p>
+      <strong>Data de demissão:</strong>
+      <%= format_date(@employee.dismissal_date) %>
+    </p>
+  <% end %>
+</div>
