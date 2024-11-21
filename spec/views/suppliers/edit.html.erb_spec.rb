@@ -47,6 +47,6 @@ RSpec.describe "suppliers/edit.html.erb", type: :view do
   end
 
   it "has a link to return to the supplier list" do
-    expect(rendered).to have_link('Retornar para a Lista de Fornecedores', href: suppliers_path)
+    expect(rendered).to have_link('Retornar para a lista de fornecedores', href: suppliers_path)
   end
 end

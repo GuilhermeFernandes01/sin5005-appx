@@ -1,4 +1,4 @@
-<h1 id="page-heading">Novo Produto</h1>
+<h1 id="page-heading">Novo produto</h1>
 
 <div class="formulario">
   <%= form_with model: @product, id: "product-form" do |form| %>
@@ -30,7 +30,7 @@
   <h3>Ingredientes</h3>
   <div>
       <% @ingredients.each do |ingredient| %>
-        <div>
+        <div class="checkbox-container">
           <%= check_box_tag 'ingredient_ids[]', ingredient.id, @product.ingredients.include?(ingredient), id: "ingredient_ids_#{ingredient.id}" %>
           <%= label_tag "ingredient_ids_#{ingredient.id}", ingredient.name %>
         </div>

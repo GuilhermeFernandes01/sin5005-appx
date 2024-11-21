@@ -5,7 +5,7 @@ RSpec.describe "Supplier", type: :request do
    it "renders the new supplier form" do
      get new_supplier_path
      expect(response).to have_http_status(:ok)
-     expect(response.body).to include("Criar Fornecedor")
+     expect(response.body).to include("Criar fornecedor")
    end
  end
 
@@ -15,7 +15,7 @@ RSpec.describe "Supplier", type: :request do
        post suppliers_path, params: { supplier: { name: "Supplier 1", cnpj: "12345678000123", segment: "Segment A", products: "Product A" } }
        expect(response).to redirect_to(new_supplier_path)
        follow_redirect!
-       expect(response.body).to include("Supplier was successfully created.")
+       expect(response.body).to include("Fornecedor foi criado com sucesso.")
      end
    end
 
@@ -23,7 +23,7 @@ RSpec.describe "Supplier", type: :request do
      it "does not create a new supplier and re-renders the form" do
        post suppliers_path, params: { supplier: { name: nil, cnpj: nil } }
        expect(response).to have_http_status(:unprocessable_entity)
-       expect(response.body).to include("Supplier not created")
+       expect(response.body).to include("Fornecedor não foi criado")
      end
    end
  end
@@ -37,7 +37,7 @@ RSpec.describe "Supplier", type: :request do
          delete supplier_path(supplier), params: { confirm: 'true' }
          expect(response).to redirect_to(suppliers_path)
          follow_redirect!
-         expect(response.body).to include("Supplier was successfully deleted.")
+         expect(response.body).to include("Fornecedor foi excluído com sucesso.")
        end
      end
 
@@ -50,7 +50,7 @@ RSpec.describe "Supplier", type: :request do
          delete supplier_path(supplier), params: { confirm: 'true' }
          expect(response).to redirect_to(suppliers_path)
          follow_redirect!
-         expect(response.body).not_to include("Supplier was successfully deleted.")
+         expect(response.body).not_to include("Fornecedor foi excluído com sucesso.")
        end
      end
      context "when deletion is cancelled" do
@@ -63,7 +63,7 @@ RSpec.describe "Supplier", type: :request do
 
         expect(response).to redirect_to(suppliers_path)
         follow_redirect!
-        expect(response.body).not_to include("Supplier was successfully deleted.")
+        expect(response.body).not_to include("Fornecedor foi excluído com sucesso.")
       end
     end
    end
@@ -80,7 +80,7 @@ RSpec.describe "Supplier", type: :request do
       expect(supplier.reload.name).to eq('Updated Supplier')
       expect(response).to redirect_to(supplier_path(supplier))
       follow_redirect!
-      expect(response.body).to include("Supplier was successfully updated.")
+      expect(response.body).to include("Fornecedor foi atualizado com sucesso.")
     end
   end
 

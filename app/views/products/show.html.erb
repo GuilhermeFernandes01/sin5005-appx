@@ -1,8 +1,12 @@
 <h1><%= @product.name%></h1>
-<p>Preço: <%= @product.price%></p>
-<p>Categoria: <%= @product.category%></p>
-<p>Requer ingredientes: <%= @product.require_ingredients? ? "Sim" : "Não" %></p>
-<ul>
-<%= button_to "Adicionar ao Carrinho", add_product_cart_path(@product.id), method: :post %>
-<%= button_to "Editar", edit_product_path(@product), method: :get%>
-<%= button_to "Deletar", product_path(@product), method: :delete%>
+<div class="text-center" style="">
+  <p><strong>Preço:</strong> <%= @product.price%></p>
+  <p><strong>Categoria:</strong> <%= @product.category%></p>
+  <p><strong>Requer ingredientes:</strong> <%= @product.require_ingredients? ? "Sim" : "Não" %></p>
+
+  <div class="d-grid gap-2">
+    <%= button_to "Adicionar ao carrinho", add_product_cart_path(@product.id), method: :post, class: 'btn btn-success' %>
+    <%= button_to "Editar", edit_product_path(@product), method: :get, class: 'btn btn-primary'%>
+    <%= button_to "Deletar", product_path(@product), method: :delete, class: 'btn btn-danger'%>
+  </div>
+</div>

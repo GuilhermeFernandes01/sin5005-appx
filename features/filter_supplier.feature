@@ -11,4 +11,4 @@ Feature: Filter Supplier on Listing Page
     And I clean the search bar
     Then I should see the Listing Page with all Suppliers
     And I search with "SUP001, Supplier One, Segment A, Product B"
-    Then I should see the message "Não há Fornecedores cadastrados"
+    Then I should see the message "Não há fornecedores cadastrados"

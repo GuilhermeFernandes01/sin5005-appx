@@ -31,7 +31,7 @@ RSpec.describe "products/new.html.erb", type: :view do
       it "displays the correct heading" do
         render
 
-        expect(rendered).to have_selector('h1#page-heading', text: 'Novo Produto')
+        expect(rendered).to have_selector('h1#page-heading', text: 'Novo produto')
       end
 
       it "displays the new product form" do

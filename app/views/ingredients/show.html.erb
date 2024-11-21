@@ -2,9 +2,9 @@
 
 <%= render @ingredient %>
 
-<div>
-  <%= link_to "Edit this ingredient", edit_ingredient_path(@ingredient) %> |
+<div class="text-center">
+  <%= link_to "Editar este ingrediente", edit_ingredient_path(@ingredient) %> |
   <%= link_to "Voltar para ingredientes", ingredients_path %>
 
-  <%= button_to "Excluir este ingrediente", @ingredient, method: :delete, name: "destroy_ingredient" %>
+  <%= button_to "Excluir este ingrediente", @ingredient, method: :delete, name: "destroy_ingredient", class: 'btn btn-danger' %>
 </div>

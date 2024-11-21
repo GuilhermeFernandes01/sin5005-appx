@@ -17,9 +17,9 @@ RSpec.describe "suppliers/new.html.erb", type: :view do
   end
 
   it "displays a success flash message" do
-    flash[:notice] = "Supplier was successfully created."
+    flash[:notice] = "Fornecedor foi criado com sucesso."
     render
-    expect(rendered).to have_css('.alert-success', text: 'Supplier was successfully created.')
+    expect(rendered).to have_css('.alert-success', text: 'Fornecedor foi criado com sucesso.')
   end
 
   it "displays an alert flash message" do
@@ -30,6 +30,6 @@ RSpec.describe "suppliers/new.html.erb", type: :view do
 
   it "has a link to return to the suppliers index" do
     render
-    expect(rendered).to have_link('Retornar para a Lista de Fornecedores', href: suppliers_path)
+    expect(rendered).to have_link('Retornar para a lista de fornecedores', href: suppliers_path)
   end
 end

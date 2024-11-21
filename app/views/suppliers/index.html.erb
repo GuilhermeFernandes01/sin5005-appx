@@ -1,38 +1,53 @@
-<h1>Fornecedores Cadastrados</h1>
-<div class="col-auto">
-  <%= link_to "Novo Fornecedor", new_supplier_path, class: "btn btn-success" %>
+<h1>Fornecedores cadastrados</h1>
+
+<div class="actions-form-box">
+  <%= link_to "Novo fornecedor", new_supplier_path, class: 'new-item-link' %>
 </div>
+
 <% if flash[:notice] %>
   <div class="alert alert-success"><%= flash[:notice] %></div>
 <% elsif flash[:alert] %>
   <div class="alert alert-danger"><%= flash[:alert] %></div>
 <% end %>
-<br>
-<%= form_tag suppliers_path, method: :get, class: "search-form" do %>
-<br>
-  <%= label_tag :search_by_code, "Buscar por código" %>
-  <%= text_field_tag :search_by_code, params[:search_by_code], placeholder: "Digite o código", class: "search-input" %>
 
-  <%= label_tag :search_by_name, "Buscar por Nome" %>
-  <%= text_field_tag :search_by_name, params[:search_by_name], placeholder: "Digite o nome", class: "search-input" %>
+<div class="actions-form-box">
+  <%= form_tag suppliers_path, method: :get do %>
 
-  <%= label_tag :search_by_segment, "Buscar por Segmento" %>
-  <%= text_field_tag :search_by_segment, params[:search_by_segment], placeholder: "Digite o segmento", class: "search-input" %>
+  <div class="actions-form-box">
+    <%= label_tag :search_by_code, "Buscar por código" %>
+    <%= text_field_tag :search_by_code, params[:search_by_code], placeholder: "Digite o código", class: 'search-form-param' %>
+  </div>
 
-    <%= label_tag :search_by_products, "Buscar por Produtos" %>
-  <%= text_field_tag :search_by_products, params[:search_by_products], placeholder: "Digite um produto", class: "search-input" %>
+  <div class="actions-form-box">
+    <%= label_tag :search_by_name, "Buscar por nome" %>
+    <%= text_field_tag :search_by_name, params[:search_by_name], placeholder: "Digite o nome", class: 'search-form-param' %>
+  </div>
 
-  <%= submit_tag "Filtrar", class: "search-button" %>
-  <br>
-<%= link_to "Limpar Filtro", suppliers_path, class: 'btn btn-primary' %>
-  <br>
-<% end %>
+  <div class="actions-form-box">
+    <%= label_tag :search_by_segment, "Buscar por segmento" %>
+    <%= text_field_tag :search_by_segment, params[:search_by_segment], placeholder: "Digite o segmento", class: 'search-form-param' %>
+  </div>
+
+  <div class="actions-form-box">
+    <%= label_tag :search_by_products, "Buscar por produtos" %>
+    <%= text_field_tag :search_by_products, params[:search_by_products], placeholder: "Digite um produto", class: 'search-form-param' %>
+  </div>
+
+  <div class="actions-form-box">
+    <div class="d-inline-block">
+      <%= submit_tag "Filtrar", class: "btn btn-primary" %>
+    </div>
+    <%= link_to "Limpar filtro", suppliers_path, class: 'clean-link' %>
+  </div>
+  <% end %>
+</div>
+
 <br>
-<br>
+
 <% if @suppliers.empty? %>
-  <p>Não há Fornecedores cadastrados</p>
+  <p class="text-center">Não há fornecedores cadastrados</p>
 <% else %>
-  <table>
+  <table class="general-table">
     <thead>
       <tr>
         <th>Código</th>
@@ -42,6 +57,7 @@
         <th>Email</th>
         <th>Segmento</th>
         <th>Produtos</th>
+        <th>Ações</th>
       </tr>
     </thead>
     <tbody>
@@ -56,8 +72,6 @@
           <td><%= supplier.products %></td>
           <td>
             <%= button_to 'Excluir', supplier_path(supplier), method: :delete, data: { confirm: 'Você tem certeza que deseja excluir este fornecedor?' }, class: 'btn btn-danger' %>
-          </td>
-          <td>
             <%= link_to 'Ver', supplier_path(supplier), class: 'btn btn-primary' %>
           </td>
         </tr>
