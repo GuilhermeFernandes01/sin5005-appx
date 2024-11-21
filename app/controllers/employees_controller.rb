@@ -2,7 +2,11 @@ class EmployeesController < ApplicationController
   before_action :set_employee, only: [ :show, :edit, :update, :fire ]
 
   def index
-    @employees = Employee.all
+    if params[:search].present?
+      @employees = Employee.where("name LIKE ?", "%#{params[:search]}%")
+    else
+      @employees = Employee.all
+    end
   end
 
   def show

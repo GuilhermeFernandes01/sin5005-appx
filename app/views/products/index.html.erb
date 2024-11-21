@@ -1,4 +1,7 @@
 <h1>Produtos</h1>
+<div class="col-auto">
+  <%= link_to "Novo Produto", new_product_path, class: "btn btn-success" %>
+</div>
 <%if @products.empty?%>
   <p>Não há produtos cadastrados</p>
 <%else%>

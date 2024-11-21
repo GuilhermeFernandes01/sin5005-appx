@@ -1,6 +1,14 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.all
+    if params[:category].present?
+      @products = Product.where(category: params[:category])
+    else
+      @products = Product.all
+    end
+
+    # @categories = Product.select(:category).distinct.pluck(:category)
+
+    @categories = @products.distinct.pluck(:category)
   end
 
   def show

@@ -74,28 +74,28 @@ div.formulario input[type="submit"]:hover {
   cursor: pointer;
 }
 
-.clientes-table {
+.general-table {
   width: 100%;
   border-collapse: collapse;
   margin: 20px auto;
   max-width: 800px;
 }
 
-.clientes-table th, .clientes-table td {
+.general-table th, .general-table td {
   border: 1px solid #675f5f;
   text-align: left;
   padding: 4px;
 }
 
-.clientes-table th {
+.general-table th {
   background-color: #f2f2f2;
 }
 
-.clientes-table tr:nth-child(even) {
+.general-table tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
-.clientes-table tr:hover {
+.general-table tr:hover {
   background-color: #f1f1f1;
 }
 
@@ -116,7 +116,7 @@ div.formulario input[type="submit"]:hover {
   margin: 20px 0;
 }
 
-.novo-cliente-link {
+.new-item-link {
   display: inline-block; /* Para que a centralização funcione com text-align */
   margin: 5px 0; /* Adiciona um espaço acima e abaixo do link */
   padding: 10px 20px; /* Tamanho do botão */
@@ -129,7 +129,7 @@ div.formulario input[type="submit"]:hover {
   cursor: pointer; /* Muda o cursor para indicar que é um botão */
 }
 
-.novo-cliente-link:hover {
+.new-item-link:hover {
   background-color: #45a049; /* Cor de fundo ao passar o mouse */
 }
 
@@ -179,18 +179,18 @@ div.formulario input[type="submit"]:hover {
   text-decoration: none; /* Garante que o sublinhado não apareça */
 }
 
-.clientes-table {
+.general-table {
   width: 100%; /* Largura total da tabela */
   border-collapse: collapse; /* Colapsa as bordas da tabela */
 }
 
-.clientes-table th {
+.general-table th {
   text-align: center; /* Centraliza o texto nos cabeçalhos */
   background-color: #f2f2f2; /* Cor de fundo opcional para cabeçalhos */
   padding: 5px; /* Preenchimento opcional */
 }
 
-.clientes-table td {
+.general-table td {
   text-align: center; /* Centraliza o texto nas células da tabela */
   padding: 5px; /* Preenchimento opcional */
   border: 1px solid #ddd; /* Borda para as células */
@@ -209,4 +209,40 @@ div.formulario input[type="submit"]:hover {
 
 .input-endereco {
   width: 800px; /* Largura específica para o campo de endereço */
+}
+
+.search-form-param {
+  width: 150px;
+  margin-left: 10px;
+  padding: 5px;
+}
+
+.search-form-button {
+  padding: 5px 10px;
+  width: 80px;
+  margin-left: 10px;
+}
+
+.clean-link {
+  display: inline-block; /* Para que a centralização funcione com text-align */
+  margin: 5px 0; /* Adiciona um espaço acima e abaixo do link */
+  padding: 5px 10px;
+  width: 80px;
+  margin-left: 10px;
+  background-color: #4CAF50; /* Cor de fundo verde */
+  color: white; /* Cor do texto */
+  text-decoration: none; /* Remove o sublinhado */
+  border-radius: 5px; /* Bordas arredondadas */
+  text-align: center; /* Centraliza o texto */
+  border: none; /* Remove borda padrão */
+  cursor: pointer; /* Muda o cursor para indicar que é um botão */
+}
+
+.clean-link:hover {
+  background-color: #45a049; /* Cor de fundo ao passar o mouse */
+}
+
+.actions-form-box {
+  text-align: center;
+  margin-bottom: 20px;
 }

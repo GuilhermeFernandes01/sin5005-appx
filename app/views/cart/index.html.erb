@@ -1,0 +1,56 @@
+<h1>Seu Carrinho</h1>
+
+<% if @cart.items.empty? %>
+  <p>Seu carrinho está vazio.</p>
+<% else %>
+  <ul>
+    <% @cart.items.each do |product| %>
+      <li>
+        <%= product.name %> - <%= format_price(product.price) %>
+        <%= link_to 'Remover', remove_product_cart_path(product_id: product.id), method: :delete %>
+      </li>
+    <% end %>
+  </ul>
+
+  <!-- Exibição do Total (Produto) -->
+  <h2>Total: <%= format_price(@cart.total_price) %></h2>
+
+  <!-- Formulário para Calcular o Frete -->
+  <%= form_with(url: calculate_freight_cart_path, method: :post, id: 'freight-form') do |form| %>
+    <div class="freight-form">
+      <%= form.label :address, 'Endereço de entrega' %>
+      <%= form.text_field :address, name: 'endereco', id: 'freight-address' %>
+      <%= form.submit "Calcular Frete", class: 'calculate-freight-button' %>
+    </div>
+  <% end %>
+
+<% if flash[:alert] %> <!-- Exibe a mensagem de erro -->
+  <p class="alert-error"><%= flash[:alert] %></p>
+<% elsif flash[:freight_value] %> <!-- Exibe o valor do frete se não houver erro -->
+  <p>Valor do frete: <%= format_price(flash[:freight_value]) %></p>
+<% end %>
+
+  <!-- Exibição do Total (Produto + Frete) -->
+  <div id="total-value">
+    <% if flash[:freight_value] %>
+      <p>Total (Produto + Frete): <%= format_price(@cart.total_price + flash[:freight_value].to_f) %></p>
+    <% end %>
+  </div>
+
+<% end %>
+
+<!-- Formulário para Finalizar o Pedido -->
+<%= form_with(url: orders_path, method: :post, local: true) do |form| %>
+  <div>
+    <br>
+    <%= form.label :customer_name, 'Nome do cliente' %>
+    <%= form.text_field :customer_name, name: 'order[customer_name]' %>
+    <br>
+  </div>
+
+  <% @cart.items.each do |product| %>
+    <%= form.hidden_field 'product_ids[]', value: product.id %>
+  <% end %>
+
+  <%= form.submit "Finalizar Pedido" %>
+<% end %>

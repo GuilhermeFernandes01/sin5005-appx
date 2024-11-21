@@ -1,17 +1,55 @@
 <h1>Funcionários</h1>
-<ul>
-  <% @employees.each do |employee| %>
-    <li>
-      Nome: <%= employee.name %><br>
-      Salário: <%= format_salary(employee.salary) %><br>
-      Cargo: <%= employee.position %><br>
-      Data de admissão: <%= format_date(employee.admission_date) %><br>
-      <% if employee.dismissal_date.present? %>
-        Data de demissão: <%= format_date(employee.dismissal_date) %><br>
-      <% end %>
-      Data de nascimento: <%= format_date(employee.birth_date) %>
-      <%= link_to "Exibir funcionário", employee %>
-    </li>
-    <br />
+
+<div class="actions-form-box">
+  <%= link_to 'Novo cadastro', new_employee_path, class: 'new-item-link' %>
+</div>
+
+<div class="actions-form-box">
+  <%= form_with(url: employees_path, method: :get, local: true) do |form| %>
+    <%= form.label :search, "Buscar por nome:"%>
+    <%= form.text_field :search, value: params[:search], class: 'search-form-param' %>
+    <%= form.submit "Buscar", class: 'search-form-button' %>
+
+    <%= button_tag "Limpar", type: "button", class: 'clean-link', onclick: "document.getElementById('search').value = ''; this.form.submit();" %>
   <% end %>
-</ul>
+</div>
+
+<table class="general-table">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Salário</th>
+      <th>Cargo</th>
+      <th>Data de admissão</th>
+      <th>Data de demissão</th>
+      <th>Data de nascimento</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @employees.each do |employee| %>
+      <tr>
+        <td><%= employee.name %></td>
+        <td><%= format_salary(employee.salary) %></td>
+        <td><%= employee.position %></td>
+        <td><%= format_date(employee.admission_date) %></td>
+        <td>
+          <% if employee.dismissal_date.present? %>
+            <%= format_date(employee.dismissal_date) %><br>
+          <% end %>
+        </td>
+        <td><%= format_date(employee.birth_date) %></td>
+        <td>
+          <%= link_to 'Exibir', employee %>
+          <%= link_to 'Editar', edit_employee_path(employee) %>
+          <%=
+            button_to 'Demitir',
+            fire_employee_path(employee),
+            data: { confirm: 'Tem certeza que deseja demitir o funcionário?' },
+            class: 'btn btn-danger'
+          %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

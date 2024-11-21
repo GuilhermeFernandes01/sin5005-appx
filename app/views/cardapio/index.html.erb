@@ -1,0 +1,21 @@
+<h1>Cardápio</h1>
+
+<div class="d-flex flex-wrap mb-3">
+  <%= link_to "Todas as Categorias", products_path, class: "btn btn-primary m-2 #{params[:category].blank? ? 'active' : ''}" %>
+
+  <% @categories.each do |category| %>
+    <%= link_to category, products_path(category: category), class: "btn btn-primary m-2 #{params[:category] == category ? 'active' : ''}" %>
+  <% end %>
+</div>
+
+<div>
+  <% if @products.any? %>
+    <ul>
+      <% @products.each do |product| %>
+        <li><%= product.name %> - <%= product.category %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>Nenhum produto encontrado.</p>
+  <% end %>
+</div>
