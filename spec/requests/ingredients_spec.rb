@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Ingredients", type: :request do
+RSpec.describe "Ingredientes", type: :request do
   describe "GET #new" do
     it "returns http success" do
       get "/ingredients/new"
